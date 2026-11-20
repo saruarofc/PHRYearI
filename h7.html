@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thermodynamics Master Guide — Chapters 7, 8 & 9 + Written QB</title>
+
+  <!-- KaTeX for fast, crisp LaTeX math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface-alt: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --primary: #2563eb;
+      --primary-soft: #eff6ff;
+      --primary-border: #bfdbfe;
+      --emerald: #059669;
+      --emerald-soft: #ecfdf5;
+      --emerald-border: #a7f3d0;
+      --amber: #d97706;
+      --amber-soft: #fffbeb;
+      --amber-border: #fde68a;
+      --violet: #7c3aed;
+      --violet-soft: #f5f3ff;
+      --violet-border: #ddd6fe;
+      --rose: #e11d48;
+      --rose-soft: #fff1f2;
+      --rose-border: #fecdd3;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.07);
+      --sidebar-w: 290px;
+      --header-h: 64px;
+      --radius: 12px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0b1120;
+      --surface: #111827;
+      --surface-alt: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary: #60a5fa;
+      --primary-soft: rgba(37, 99, 235, 0.16);
+      --primary-border: rgba(96, 165, 250, 0.35);
+      --emerald: #34d399;
+      --emerald-soft: rgba(5, 150, 105, 0.15);
+      --emerald-border: rgba(52, 211, 153, 0.35);
+      --amber: #fbbf24;
+      --amber-soft: rgba(217, 119, 6, 0.15);
+      --amber-border: rgba(251, 191, 36, 0.35);
+      --violet: #a78bfa;
+      --violet-soft: rgba(124, 58, 237, 0.16);
+      --violet-border: rgba(167, 139, 250, 0.35);
+      --rose: #fb7185;
+      --rose-soft: rgba(225, 29, 72, 0.15);
+      --rose-border: rgba(251, 113, 133, 0.35);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 15.5px;
+    }
+
+    /* Top Header */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 1000;
+      gap: 0.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .brand span { color: var(--text); font-weight: 600; }
+    .menu-btn {
+      display: none;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.45rem 0.65rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-input {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.42rem 0.75rem;
+      font-size: 0.88rem;
+      width: 210px;
+      outline: none;
+      transition: border-color 0.15s, width 0.2s;
+    }
+    .search-input:focus { border-color: var(--primary); width: 250px; }
+    .btn {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.42rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { border-color: var(--primary); color: var(--primary); }
+    .btn-primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: 0.92; color: #fff; }
+
+    /* Layout */
+    .layout {
+      display: flex;
+      padding-top: var(--header-h);
+      min-height: 100vh;
+    }
+
+    /* Sidebar TOC */
+    .sidebar {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 1rem 0.85rem 2.5rem;
+      z-index: 900;
+      transition: transform 0.25s ease;
+    }
+    .sidebar-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin: 0.75rem 0.5rem 0.4rem;
+    }
+    .toc-link {
+      display: block;
+      padding: 0.36rem 0.6rem;
+      margin: 0.1rem 0;
+      border-radius: 7px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.855rem;
+      font-weight: 500;
+      line-height: 1.35;
+      transition: background 0.12s, color 0.12s;
+    }
+    .toc-link:hover {
+      background: var(--surface-alt);
+      color: var(--text);
+    }
+    .toc-link.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .toc-sub {
+      padding-left: 1.15rem;
+      font-size: 0.81rem;
+    }
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      z-index: 850;
+    }
+
+    /* Main Content */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 1.5rem 1.5rem 4rem;
+      min-width: 0;
+    }
+    .container {
+      max-width: 940px;
+      margin: 0 auto;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb 60%, #4f46e5);
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.75rem;
+      box-shadow: var(--shadow-md);
+    }
+    .hero h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.65rem;
+      line-height: 1.25;
+    }
+    .hero p {
+      margin: 0 0 1rem;
+      opacity: 0.92;
+      font-size: 0.95rem;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .hero-badge {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Chapter Banner */
+    .chapter-header {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.4rem;
+      margin: 2.25rem 0 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .chapter-tag {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 0.18rem 0.55rem;
+      border-radius: 6px;
+      margin-bottom: 0.35rem;
+    }
+    .chapter-header h2 {
+      margin: 0.15rem 0 0.35rem;
+      font-size: 1.4rem;
+    }
+    .chapter-header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Section Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.3rem 1.45rem;
+      margin-bottom: 1.15rem;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: calc(var(--header-h) + 16px);
+    }
+    .card h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1.14rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .card h4 {
+      margin: 1rem 0 0.45rem;
+      font-size: 0.98rem;
+      color: var(--primary);
+    }
+    .card p { margin: 0.45rem 0; }
+    .card ul, .card ol {
+      margin: 0.4rem 0 0.65rem;
+      padding-left: 1.3rem;
+    }
+    .card li { margin-bottom: 0.3rem; }
+
+    .qb-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: var(--amber-soft);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    /* Callout Boxes */
+    .box {
+      border-radius: 10px;
+      padding: 0.85rem 1.05rem;
+      margin: 0.75rem 0;
+      border: 1px solid;
+      font-size: 0.93rem;
+    }
+    .box-title {
+      font-weight: 700;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+    .box-def {
+      background: var(--emerald-soft);
+      border-color: var(--emerald-border);
+    }
+    .box-def .box-title { color: var(--emerald); }
+
+    .box-formula {
+      background: var(--violet-soft);
+      border-color: var(--violet-border);
+    }
+    .box-formula .box-title { color: var(--violet); }
+
+    .box-exam {
+      background: var(--amber-soft);
+      border-color: var(--amber-border);
+    }
+    .box-exam .box-title { color: var(--amber); }
+
+    .box-note {
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+    }
+    .box-note .box-title { color: var(--primary); }
+
+    .box-warn {
+      background: var(--rose-soft);
+      border-color: var(--rose-border);
+    }
+    .box-warn .box-title { color: var(--rose); }
+
+    /* Tables */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 0.8rem 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 480px;
+    }
+    th, td {
+      padding: 0.62rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--surface-alt);
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: var(--text);
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* Collapsible Details */
+    details {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 0.7rem 0;
+      overflow: hidden;
+    }
+    summary {
+      padding: 0.7rem 1rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      user-select: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "▾";
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+    details[open] summary::after { transform: rotate(180deg); }
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+    .details-body {
+      padding: 0.85rem 1.05rem;
+      background: var(--surface);
+      font-size: 0.92rem;
+    }
+
+    /* Grid utilities */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin: 0.65rem 0;
+    }
+
+    /* Diagrams */
+    .diagram-box {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem;
+      margin: 0.85rem 0;
+      text-align: center;
+    }
+    .diagram-box svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .diagram-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.45rem;
+      font-weight: 500;
+    }
+
+    /* KaTeX Overflow Safety */
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      padding: 0.35rem 0.2rem;
+      margin: 0.5rem 0 !important;
+    }
+
+    /* MCQ Quiz Section */
+    .quiz-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .quiz-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tab-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .score-pill {
+      font-weight: 700;
+      font-size: 0.88rem;
+      background: var(--emerald-soft);
+      color: var(--emerald);
+      border: 1px solid var(--emerald-border);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+    }
+    .mcq-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.85rem;
+      background: var(--surface);
+    }
+    .mcq-q {
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+      font-size: 0.95rem;
+    }
+    .mcq-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 0.12rem 0.45rem;
+      border-radius: 5px;
+      margin-right: 0.45rem;
+    }
+    .mcq-opts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+    .mcq-opt {
+      text-align: left;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .mcq-opt:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .mcq-opt.correct {
+      background: var(--emerald-soft);
+      border-color: var(--emerald);
+      color: var(--emerald);
+      font-weight: 700;
+    }
+    .mcq-opt.wrong {
+      background: var(--rose-soft);
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+    .mcq-exp {
+      margin-top: 0.55rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: var(--surface-alt);
+      padding: 0.5rem 0.75rem;
+      border-radius: 7px;
+      display: none;
+    }
+    .mcq-exp.show { display: block; }
+
+    /* Search Highlight */
+    .search-hidden { display: none !important; }
+    .search-empty {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    /* Back to top */
+    .btt {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      font-size: 1.15rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 800;
+    }
+    .btt.show { display: flex; }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .menu-btn { display: inline-flex; }
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .sidebar-overlay.open {
+        display: block;
+      }
+      .main {
+        margin-left: 0;
+        padding: 1.1rem 0.9rem 3.5rem;
+      }
+      .search-input { width: 135px; }
+      .search-input:focus { width: 170px; }
+    }
+    @media (max-width: 640px) {
+      .grid-2, .mcq-opts { grid-template-columns: 1fr; }
+      .brand span { display: none; }
+      .hero { padding: 1.25rem 1.15rem; }
+      .hero h1 { font-size: 1.32rem; }
+      .card { padding: 1.05rem 1rem; }
+      .hide-sm { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">☰</button>
+      <div class="brand">ThermoMaster <span>| Ch. 7, 8 & 9 + QB</span></div>
+    </div>
+    <div class="topbar-actions">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search topic, formula, QB..." />
+      </div>
+      <button class="btn hide-sm" id="toggleAllBtn">Expand All</button>
+      <button class="btn" id="themeBtn" aria-label="Toggle Dark Mode">🌙</button>
+    </div>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="layout">
+    <!-- Sidebar TOC -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-title">Exam Prep & Written QB</div>
+      <a href="#qb-section" class="toc-link">Written QB Solutions (Q1–Q17)</a>
+
+      <div class="sidebar-title">Ch 7: First Law — Basics</div>
+      <a href="#ch7-intro" class="toc-link">7.1 Scope & Limitations</a>
+      <a href="#ch7-terms" class="toc-link">7.2 Systems, Phase & Properties</a>
+      <a href="#ch7-state" class="toc-link">7.3 State, Equilibrium & Processes</a>
+      <a href="#ch7-rev" class="toc-link">7.4 Reversible vs Irreversible</a>
+      <a href="#ch7-work" class="toc-link">7.5 Heat, PV Work & Max Work</a>
+      <a href="#ch7-firstlaw" class="toc-link">7.6 Internal Energy & First Law</a>
+      <a href="#ch7-enthalpy" class="toc-link">7.7 Enthalpy & \(\Delta H\) vs \(\Delta E\)</a>
+      <a href="#ch7-heatcap" class="toc-link">7.8 \(C_p\), \(C_v\) & \(C_p - C_v = R\)</a>
+      <a href="#ch7-jt" class="toc-link">7.9 Joule–Thomson Effect</a>
+      <a href="#ch7-adiabatic" class="toc-link">7.10 Adiabatic Expansion & Work</a>
+
+      <div class="sidebar-title">Ch 8: Thermochemistry</div>
+      <a href="#ch8-intro" class="toc-link">8.1 Laws & Enthalpy of Reaction</a>
+      <a href="#ch8-kirchhoff" class="toc-link">8.2 Thermochemical Eq & Kirchhoff</a>
+      <a href="#ch8-types" class="toc-link">8.3 Formation, Combustion, Solution, Neut.</a>
+      <a href="#ch8-phase" class="toc-link">8.4 Phase Transitions & Sublimation</a>
+      <a href="#ch8-hess" class="toc-link">8.5 Hess's Law & Applications</a>
+      <a href="#ch8-bond" class="toc-link">8.6 Bond Energy & Calorimetry</a>
+
+      <div class="sidebar-title">Ch 9: Second Law</div>
+      <a href="#ch9-spont" class="toc-link">9.1 Spontaneity & Entropy</a>
+      <a href="#ch9-laws" class="toc-link">9.2 Second & Third Laws</a>
+      <a href="#ch9-carnot" class="toc-link">9.3 Heat Engines & Carnot Cycle</a>
+      <a href="#ch9-entropycalc" class="toc-link">9.4 Entropy of Ideal Gas & Phases</a>
+      <a href="#ch9-free" class="toc-link">9.5 Free Energy (\(G\)) & Work (\(A\))</a>
+      <a href="#ch9-gh" class="toc-link">9.6 Gibbs–Helmholtz & Equilibrium</a>
+      <a href="#ch9-clap" class="toc-link">9.7 Clapeyron & Clausius–Clapeyron</a>
+      <a href="#ch9-vanthoff" class="toc-link">9.8 van't Hoff Isotherm & Isochore</a>
+      <a href="#ch9-fugacity" class="toc-link">9.9 Fugacity, Activity & Chem. Potential</a>
+      <a href="#ch9-zeroth" class="toc-link">9.10 Time's Arrow & Zeroth Law</a>
+
+      <div class="sidebar-title">Revision & Practice</div>
+      <a href="#formula-sheet" class="toc-link">Master Formula Sheet</a>
+      <a href="#mcq-section" class="toc-link">Interactive MCQ Bank (45 Qs)</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="container" id="contentRoot">
+
+        <!-- Hero -->
+        <section class="hero">
+          <h1>Thermodynamics & Thermochemistry Master Guide</h1>
+          <p>Complete, exam-ready single-page resource covering Chapter 7 (First Law), Chapter 8 (Thermochemistry), Chapter 9 (Second & Third Laws), and every question from the Written Question Bank (2015–2025).</p>
+          <div class="hero-badges">
+            <span class="hero-badge">All 17 Written QB Solved</span>
+            <span class="hero-badge">Derivations & Proofs</span>
+            <span class="hero-badge">SVG Diagrams</span>
+            <span class="hero-badge">45 Interactive MCQs</span>
+          </div>
+        </section>
+
+        <div id="searchEmpty" class="search-empty">No matching topics found. Try clearing your search filter.</div>
+
+        <!-- ======================================================= -->
+        <!-- WRITTEN QUESTION BANK (Q1 - Q17)                        -->
+        <!-- ======================================================= -->
+        <section class="card" id="qb-section">
+          <h3>Written Question Bank (QB) — Quick Index & Complete Solutions <span class="qb-badge">2015–2025 Exams</span></h3>
+          <p>Every question from your Written QB is mapped to its full theory section below, and all numerical / short-justification problems are fully solved right here.</p>
+
+          <details>
+            <summary>Q1–Q6: Hess's Law, Lavoisier–Laplace, Adiabatic \(TV^{\gamma-1}=\text{const}\), \(\Delta H = q_p\), \(C_p-C_v=R\), Scope</summary>
+            <div class="details-body">
+              <ul>
+                <li><strong>Q1 (P.F 2022):</strong> (a) Hess's Law with example (<a href="#ch8-hess">Jump to 8.5</a>). (b) <strong>Lavoisier & Laplace's Law:</strong> The heat evolved in a chemical reaction is equal in magnitude to the heat absorbed in the reverse reaction (\(\Delta H_{\text{forward}} = -\Delta H_{\text{reverse}}\)) (<a href="#ch8-intro">Jump to 8.1</a>).</li>
+                <li><strong>Q2 (P.F 2022):</strong> (a) Adiabatic system (<a href="#ch7-terms">Jump to 7.2</a>). (b) Proof of \(TV^{\gamma-1} = \text{Constant}\) (<a href="#ch7-adiabatic">Jump to 7.10</a>).</li>
+                <li><strong>Q3 (I.C 2022):</strong> Show \(\Delta H = q_p\) (<a href="#ch7-enthalpy">Jump to 7.7</a>) & derive \(C_v = (\partial E / \partial T)_V\) (<a href="#ch7-heatcap">Jump to 7.8</a>).</li>
+                <li><strong>Q4 (I.C 2022):</strong> Heat of transition & heat of sublimation (<a href="#ch8-phase">Jump to 8.4</a>). Why increase in entropy tends to make a process spontaneous (<a href="#ch9-spont">Jump to 9.1</a>).</li>
+                <li><strong>Q5 (P.F 2021):</strong> What is Thermodynamics? Scope & limitations (<a href="#ch7-intro">Jump to 7.1</a>).</li>
+                <li><strong>Q6 (P.F 2017, 2018, 2021, 2025):</strong> Define \(C_v\) & \(C_p\) and show \(C_p - C_v = R\) (<a href="#ch7-heatcap">Jump to 7.8</a>).</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary>Q7–Q12: Second Law, Max Reversible Work, Comparisons, \(\Delta H\) vs \(\Delta E\), Adiabatic System</summary>
+            <div class="details-body">
+              <ul>
+                <li><strong>Q7 (P.F 2016):</strong> State the Second Law of Thermodynamics & its significance (<a href="#ch9-laws">Jump to 9.2</a>).</li>
+                <li><strong>Q8 (P.F 2016) & Q10 (I.C 2023):</strong> Define molar heat capacity & isothermal process; prove work of expansion is maximum for a reversible process (<a href="#ch7-work">Jump to 7.5</a>).</li>
+                <li><strong>Q9 (P.F 2015) & Q16 (P.F 2025):</strong> Differentiate: (a) Reversible vs Irreversible (<a href="#ch7-rev">7.4</a>), (b) Adiabatic vs Isothermal (<a href="#ch7-state">7.3</a> / <a href="#ch7-adiabatic">7.10</a>), (c) Open vs Closed system (<a href="#ch7-terms">7.2</a>).</li>
+                <li><strong>Q11 (I.C 2023, 2024):</strong> Relation between \(\Delta H\) and \(\Delta E\): \(\Delta H = \Delta E + \Delta n_g RT\) (<a href="#ch7-enthalpy">7.7</a>) & derive molar heat capacity (<a href="#ch7-heatcap">7.8</a>).</li>
+                <li><strong>Q12 (P.F 2025):</strong> Define adiabatic system (<a href="#ch7-terms">Jump to 7.2</a>).</li>
+              </ul>
+            </div>
+          </details>
+
+          <details open>
+            <summary>Q13, Q14, Q15 & Q17: Complete Worked Solutions for QB Numericals & Conceptuals</summary>
+            <div class="details-body">
+              <div class="box box-exam">
+                <span class="box-title">QB Q13 (I.C 2025) — Enthalpy & Isothermal Reversible Work</span>
+                <p><strong>Definition:</strong> Enthalpy (\(H\)) is the total heat content of a system at constant pressure, defined as \(H = E + PV\).</p>
+                <p><strong>Problem:</strong> \(n = 1\text{ mol}\), \(T = 25^\circ\text{C} = 298\text{ K}\), \(V_1 = 10\text{ L}\), \(V_2 = 20\text{ L}\).</p>
+                \[W_{\text{rev}} = 2.303 \, nRT \log_{10}\left(\frac{V_2}{V_1}\right)\]
+                <ul>
+                  <li><strong>In Joules</strong> (\(R = 8.314\text{ J K}^{-1}\text{mol}^{-1}\)):
+                    \(W_{\text{rev}} = 2.303 \times 1 \times 8.314 \times 298 \times \log_{10}\left(\frac{20}{10}\right) = 5705.85 \times 0.30103 = \mathbf{1717.6\text{ J}}\) (or \(-1717.6\text{ J}\) in IUPAC sign convention since work is done <em>by</em> the gas).</li>
+                  <li><strong>In Calories</strong> (\(R = 1.987\text{ cal K}^{-1}\text{mol}^{-1}\), or \(1\text{ cal} = 4.184\text{ J}\)):
+                    \(W_{\text{rev}} = \frac{1717.6}{4.184} = \mathbf{410.5\text{ cal}}\) (using \(R = 1.987\): \(2.303 \times 1 \times 1.987 \times 298 \times 0.30103 = \mathbf{410.5\text{ cal}}\)).</li>
+                </ul>
+              </div>
+
+              <div class="box box-exam">
+                <span class="box-title">QB Q14 (I.C 2024) — Vaporization of Water: Q, W, and \(\Delta E\)</span>
+                <p><strong>Given:</strong> \(n = 1\text{ mol H}_2\text{O}(l) \to \text{H}_2\text{O}(g)\) at \(T = 100^\circ\text{C} = 373\text{ K}\), \(P = 1\text{ atm}\), \(Q = +9720\text{ cal/mol}\), \(V_{\text{liq}} = 0.018\text{ L/mol}\).</p>
+                <ul>
+                  <li><strong>Heat absorbed:</strong> \(Q = \mathbf{+9720\text{ cal/mol}}\).</li>
+                  <li><strong>Volume of 1 mol steam</strong> (ideal gas): \(V_{\text{gas}} = \frac{nRT}{P} = \frac{1 \times 0.08206 \times 373}{1} = 30.61\text{ L/mol}\).</li>
+                  <li><strong>Change in volume:</strong> \(\Delta V = V_{\text{gas}} - V_{\text{liq}} = 30.61 - 0.018 = 30.59\text{ L/mol}\).</li>
+                  <li><strong>Work done by gas:</strong> \(W = P\Delta V = 1\text{ atm} \times 30.59\text{ L} = 30.59\text{ L}\cdot\text{atm}\).<br>
+                  Since \(1\text{ L}\cdot\text{atm} = \frac{1.987}{0.08206} = 24.214\text{ cal}\):
+                  \(W = 30.59 \times 24.214 = \mathbf{740.7\text{ cal/mol}}\) (work done <em>by</em> the system; \(-740.7\text{ cal/mol}\) in IUPAC convention).</li>
+                  <li><strong>Internal Energy change (\(\Delta E\)):</strong> Using First Law (\(\Delta E = Q - W_{\text{by system}}\)):
+                  \(\Delta E = 9720 - 740.7 = \mathbf{8979.3\text{ cal/mol}}\).</li>
+                </ul>
+              </div>
+
+              <div class="box box-exam">
+                <span class="box-title">QB Q15 (I.C 2024) — Free Expansion of an Ideal Gas in an Insulated Box</span>
+                <p><strong>Answer:</strong> The entropy of the gas <strong>increases</strong> (\(\Delta S > 0\)).</p>
+                <p><strong>Justification:</strong></p>
+                <ol>
+                  <li>In free expansion into a vacuum inside an insulated box, \(q = 0\) and \(P_{\text{ext}} = 0 \implies w = 0\), so \(\Delta E = 0\). For an ideal gas, \(\Delta T = 0\) (temperature stays constant).</li>
+                  <li>Although \(q = 0\), this process is <strong>spontaneous and irreversible</strong>, so we <em>cannot</em> set \(\Delta S = q_{\text{irrev}}/T = 0\).</li>
+                  <li>Because entropy \(S\) is a <strong>state function</strong>, we calculate \(\Delta S\) along a reversible isothermal path connecting the same initial \((V_1, T)\) and final \((V_2, T)\) states:
+                  \[\Delta S = nR \ln\left(\frac{V_2}{V_1}\right) > 0 \quad (\text{since } V_2 > V_1)\]
+                  Physically, the molecules now occupy a larger volume, increasing spatial randomness/disorder.</li>
+                </ol>
+                <p><strong>Heat of Transition:</strong> The enthalpy change (\(\Delta H\)) when one mole of an element changes from one allotropic form to another (e.g., \(\text{C}_{\text{diamond}} \to \text{C}_{\text{amorphous}}\), \(\Delta H = +13.82\text{ kJ}\)).</p>
+              </div>
+
+              <div class="box box-exam">
+                <span class="box-title">QB Q17 (P.F 2025) — Reversible Isothermal Expansion from 5 atm to 1 atm</span>
+                <p><strong>Given:</strong> \(n = 1\text{ mol}\), \(P_1 = 5\text{ atm}\), \(P_2 = 1\text{ atm}\), \(T = 25^\circ\text{C} = 298\text{ K}\).</p>
+                \[W_{\text{rev}} = 2.303 \, nRT \log_{10}\left(\frac{P_1}{P_2}\right)\]
+                \[W_{\text{rev}} = 2.303 \times 1 \times 8.314 \times 298 \times \log_{10}\left(\frac{5}{1}\right) = 5705.85 \times 0.69897 = \mathbf{3988.2\text{ J}}\]
+                <p><em>(Magnitude of work done by the gas \(= 3988.2\text{ J}\) or \(953.2\text{ cal}\); in IUPAC convention \(w = -3988.2\text{ J}\).)</em></p>
+              </div>
+            </div>
+          </details>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- CHAPTER 7: FIRST LAW OF THERMODYNAMICS — BASIC CONCEPTS -->
+        <!-- ======================================================= -->
+        <div class="chapter-header" id="ch7">
+          <span class="chapter-tag">Chapter 7</span>
+          <h2>First Law of Thermodynamics — Basic Concepts</h2>
+          <p>Energy flow, thermodynamic systems, state functions, reversible work, internal energy, enthalpy, heat capacities, Joule–Thomson effect, and adiabatic expansion.</p>
+        </div>
+
+        <!-- 7.1 -->
+        <section class="card" id="ch7-intro">
+          <h3>7.1 Definition, Empirical Laws, Scope & Limitations <span class="qb-badge">QB Q5</span></h3>
+          <div class="box box-def">
+            <span class="box-title">Definition — Thermodynamics</span>
+            The study of the flow of heat or any other form of energy into or out of a system as it undergoes a physical or chemical transformation is called <strong>Thermodynamics</strong>.
+          </div>
+          <p>Thermodynamics is built on <strong>three empirical laws</strong> (First, Second, and Third Laws), derived directly from experimental observations and independent of atomic/molecular theories (plus the Zeroth Law defining thermal equilibrium).</p>
+          <div class="grid-2">
+            <div class="box box-note">
+              <span class="box-title">Scope (Importance)</span>
+              <ol>
+                <li><strong>Derives key laws:</strong> van't Hoff law of vapor pressure lowering, Phase Rule, Distribution Law, etc.</li>
+                <li><strong>Predicts feasibility:</strong> Tells whether a physical or chemical change can occur under given \(T, P,\) and concentration.</li>
+                <li><strong>Predicts extent:</strong> Helps determine how far a reaction proceeds before reaching equilibrium.</li>
+              </ol>
+            </div>
+            <div class="box box-warn">
+              <span class="box-title">Limitations</span>
+              <ol>
+                <li><strong>Macroscopic only:</strong> Applies to bulk matter, not individual atoms/molecules; ignores internal atomic/molecular structure.</li>
+                <li><strong>No time factor:</strong> Tells nothing about reaction rate/speed. Concerned only with initial and final states.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7.2 -->
+        <section class="card" id="ch7-terms">
+          <h3>7.2 Thermodynamic Terms, Types of Systems & Properties <span class="qb-badge">QB Q2a, Q9c, Q12</span></h3>
+          <ul>
+            <li><strong>System:</strong> Part of the universe under thermodynamic study (e.g., water in a beaker, gas in a cylinder).</li>
+            <li><strong>Surroundings:</strong> Rest of the universe outside the system.</li>
+            <li><strong>Boundary:</strong> Real or imaginary surface separating the system from its surroundings.</li>
+            <li><strong>Homogeneous System:</strong> Uniform throughout; consists of a single <strong>phase</strong> (a homogeneous, physically distinct, mechanically separable portion). Examples: pure gas, gas mixture, true salt solution.</li>
+            <li><strong>Heterogeneous System:</strong> Not uniform throughout; consists of two or more phases. Examples: ice + water, ice + water vapor.</li>
+          </ul>
+
+          <h4>Types of Thermodynamic Systems</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>System Type</th>
+                  <th>Matter Transfer</th>
+                  <th>Energy (Heat/Work) Transfer</th>
+                  <th>Boundary Nature & Examples</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Isolated System</strong></td>
+                  <td>No</td>
+                  <td>No</td>
+                  <td>Sealed & insulated. Ex: Boiling water in a thermos flask; water + vapor in a closed insulated vessel.</td>
+                </tr>
+                <tr>
+                  <td><strong>Closed System</strong></td>
+                  <td>No</td>
+                  <td>Yes (heat, work, radiation)</td>
+                  <td>Sealed, uninsulated. Ex: Hot water in a sealed tube; gas in a cylinder fitted with a movable piston.</td>
+                </tr>
+                <tr>
+                  <td><strong>Open System</strong></td>
+                  <td>Yes</td>
+                  <td>Yes</td>
+                  <td>Open & uninsulated. Ex: Hot water in an open beaker; Zn granules reacting with dil. HCl in a beaker.</td>
+                </tr>
+                <tr>
+                  <td><strong>Adiabatic System</strong></td>
+                  <td>No (if closed)</td>
+                  <td><strong>No thermal energy (heat)</strong> enters or leaves (\(dq = 0\))</td>
+                  <td>Thermally insulated walls (work may still be done).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SVG: Types of Systems -->
+          <div class="diagram-box">
+            <svg viewBox="0 0 680 175" width="660" height="170" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+                </marker>
+                <marker id="arr2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+                </marker>
+              </defs>
+              <!-- Isolated -->
+              <rect x="20" y="25" width="135" height="110" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="5" stroke-dasharray="6,3"/>
+              <rect x="30" y="35" width="115" height="90" rx="4" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+              <text x="87" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Isolated</text>
+              <text x="87" y="95" text-anchor="middle" font-size="10.5" fill="#475569">No Matter</text>
+              <text x="87" y="110" text-anchor="middle" font-size="10.5" fill="#475569">No Energy</text>
+              <text x="87" y="158" text-anchor="middle" font-size="11" font-weight="600" fill="#d97706">Sealed + Insulated</text>
+
+              <!-- Closed -->
+              <rect x="195" y="35" width="120" height="90" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+              <text x="255" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Closed</text>
+              <text x="255" y="95" text-anchor="middle" font-size="10.5" fill="#475569">Energy Only</text>
+              <line x1="255" y1="10" x2="255" y2="33" stroke="#2563eb" stroke-width="2" marker-start="url(#arr)" marker-end="url(#arr)"/>
+              <text x="255" y="158" text-anchor="middle" font-size="11" font-weight="600" fill="#2563eb">Sealed, Conductive</text>
+
+              <!-- Open -->
+              <path d="M 375 35 L 375 125 L 495 125 L 495 35" fill="#ecfdf5" stroke="#059669" stroke-width="2.5"/>
+              <line x1="375" y1="35" x2="495" y2="35" stroke="#059669" stroke-width="1.5" stroke-dasharray="4,4"/>
+              <text x="435" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Open</text>
+              <text x="435" y="98" text-anchor="middle" font-size="10.5" fill="#475569">Matter + Energy</text>
+              <line x1="415" y1="10" x2="415" y2="33" stroke="#059669" stroke-width="2" marker-start="url(#arr2)" marker-end="url(#arr2)"/>
+              <line x1="455" y1="10" x2="455" y2="33" stroke="#2563eb" stroke-width="2" marker-start="url(#arr)" marker-end="url(#arr)"/>
+              <text x="435" y="158" text-anchor="middle" font-size="11" font-weight="600" fill="#059669">Open Boundary</text>
+
+              <!-- Adiabatic -->
+              <rect x="535" y="30" width="125" height="100" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="4"/>
+              <text x="597" y="73" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Adiabatic</text>
+              <text x="597" y="93" text-anchor="middle" font-size="10.5" fill="#475569">q = 0 (No Heat)</text>
+              <text x="597" y="109" text-anchor="middle" font-size="10.5" fill="#475569">Work Possible</text>
+              <text x="597" y="158" text-anchor="middle" font-size="11" font-weight="600" fill="#7c3aed">Thermal Insulation</text>
+            </svg>
+            <div class="diagram-caption">Figure 7.1 — Classification of thermodynamic systems by boundary exchange.</div>
+          </div>
+
+          <h4>Intensive vs Extensive Properties</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Intensive Properties (Independent of mass/amount, NOT additive)</th>
+                  <th>Extensive Properties (Depend on quantity of matter, ADDITIVE)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Temperature (\(T\)), Pressure (\(P\)), Density (\(\rho\)), Concentration, Boiling/Freezing point, Surface tension, Viscosity, Refractive index, Molar heat capacity.</td>
+                  <td>Mass (\(m\)), Volume (\(V\)), Number of moles (\(n\)), Internal energy (\(E\)), Enthalpy (\(H\)), Entropy (\(S\)), Gibbs free energy (\(G\)), Heat capacity.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 7.3 -->
+        <section class="card" id="ch7-state">
+          <h3>7.3 State of a System, Equilibrium & Thermodynamic Processes <span class="qb-badge">QB Q8, Q9b</span></h3>
+          <ul>
+            <li><strong>State of a System:</strong> Fixed when all macroscopic properties (\(P, T, V\), mass, composition) are fixed. These are <strong>state variables / state functions</strong>—their changes depend <em>only</em> on initial and final states, never the path taken.</li>
+            <li><strong>Equation of State:</strong> Algebraic link between state variables, e.g., \(PV = nRT\) (with \(P, T\) as independent and \(V\) as dependent state variables).</li>
+            <li><strong>Path Functions:</strong> Quantities like <strong>heat (\(q\))</strong> and <strong>work (\(w\))</strong> that depend on the path/method of change, not just endpoints.</li>
+            <li><strong>Equilibrium vs Non-Equilibrium:</strong> In equilibrium, state variables are uniform and constant throughout the system. Thermodynamics deals strictly with equilibrium states.
+              <ul>
+                <li><strong>3 Criteria for Equilibrium:</strong> (1) <em>Thermal equilibrium</em> (uniform \(T = T_{\text{surr}}\)), (2) <em>Mechanical equilibrium</em> (no unbalanced forces/work within system), (3) <em>Chemical equilibrium</em> (uniform composition, no net reaction).</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h4>Types of Thermodynamic Processes</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Process</th>
+                  <th>Condition</th>
+                  <th>Key Feature / Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Isothermal</strong></td><td>\(T = \text{constant}\; (dT = 0)\)</td><td>Carried out in a thermostat; for ideal gas, \(\Delta E = 0, q = w\).</td></tr>
+                <tr><td><strong>Adiabatic</strong></td><td>No heat exchange (\(dq = 0\))</td><td>Insulated vessel (thermos); temperature changes during expansion/compression.</td></tr>
+                <tr><td><strong>Isobaric</strong></td><td>\(P = \text{constant}\; (dP = 0)\)</td><td>Open-vessel boiling or chemical reactions at atmospheric pressure (\(q_p = \Delta H\)).</td></tr>
+                <tr><td><strong>Isochoric</strong></td><td>\(V = \text{constant}\; (dV = 0)\)</td><td>Heating in a sealed rigid vessel / bomb calorimeter (\(w = 0, q_v = \Delta E\)).</td></tr>
+                <tr><td><strong>Cyclic</strong></td><td>Returns to initial state</td><td>Overall \(\Delta E = 0, \Delta H = 0, \Delta S = 0\).</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="box box-exam">
+            <span class="box-title">Differentiate: Isothermal vs Adiabatic Process (QB Q9b)</span>
+            <ul>
+              <li><strong>Temperature:</strong> Constant (\(dT = 0\)) in isothermal; changes (\(dT \neq 0\)) in adiabatic.</li>
+              <li><strong>Heat exchange:</strong> Heat flows freely (\(q \neq 0\)) in isothermal; strictly no heat flows (\(q = 0\)) in adiabatic.</li>
+              <li><strong>Internal energy (ideal gas):</strong> \(\Delta E = 0\) in isothermal; \(\Delta E = -w \neq 0\) in adiabatic.</li>
+              <li><strong>PV Law & Curve:</strong> Follows \(PV = \text{const}\) in isothermal vs steeper \(PV^\gamma = \text{const}\) in adiabatic.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 7.4 -->
+        <section class="card" id="ch7-rev">
+          <h3>7.4 Reversible vs Irreversible Processes <span class="qb-badge">QB Q9a, Q16</span></h3>
+          <ul>
+            <li><strong>Reversible Process:</strong> Proceeds infinitesimally slowly through an infinite series of equilibrium states; direction can be reversed at any point by an infinitesimal change (\(dP\)) in external conditions.</li>
+            <li><strong>Irreversible Process:</strong> Proceeds rapidly in a single step (or finite steps) and cannot be reversed spontaneously; system is in equilibrium only at initial and final states.</li>
+          </ul>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Reversible Process</th>
+                  <th>Irreversible Process</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Steps & Time</strong></td><td>Infinite infinitesimally small steps; takes infinite time.</td><td>Single or finite steps; occurs in <strong>finite time</strong>.</td></tr>
+                <tr><td><strong>Realism</strong></td><td>Ideal / imaginary (assumes frictionless, weightless piston).</td><td>Real; actually occurs in nature.</td></tr>
+                <tr><td><strong>Equilibrium</strong></td><td>In equilibrium at <strong>all intermediate stages</strong>.</td><td>In equilibrium <strong>only at initial and final states</strong>.</td></tr>
+                <tr><td><strong>Reversibility</strong></td><td>All changes can be completely reversed.</td><td>Does not return to initial state by itself.</td></tr>
+                <tr><td><strong>Speed</strong></td><td>Extremely slow.</td><td>Proceeds at measurable speed.</td></tr>
+                <tr><td><strong>Work Output</strong></td><td>Work of expansion is <strong>maximum</strong>.</td><td>Work of expansion is <strong>smaller</strong> than reversible work.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 7.5 -->
+        <section class="card" id="ch7-work">
+          <h3>7.5 Nature of Heat, PV Work & Maximum Work Proof <span class="qb-badge">QB Q8, Q10, Q13, Q17</span></h3>
+          <div class="box box-warn">
+            <span class="box-title">Important Note on Sign Conventions</span>
+            <ul>
+              <li><strong>Heat (\(q\)):</strong> Absorbed by system \(= +q\); released by system \(= -q\).</li>
+              <li><strong>Work (\(w\)):</strong> The textbook writes First Law as \(\Delta E = q - w\) (where \(w = +P_{\text{ext}}\Delta V\) is work done <em>by</em> the system), whereas modern IUPAC writes \(\Delta E = q + w\) (where \(w = -P_{\text{ext}}\Delta V\) is negative when work is done <em>by</em> the system, and positive when done <em>on</em> the system). <strong>In both conventions, \(\Delta E\) is identical!</strong></li>
+            </ul>
+          </div>
+
+          <h4>Pressure–Volume (PV) Work</h4>
+          <p>Mechanical work is force \(\times\) distance. When a gas expands against external pressure \(P_{\text{ext}}\), moving a piston of area \(A\) by distance \(l\) (\(\Delta V = A \cdot l\)):</p>
+          <div class="box box-formula">
+            <span class="box-title">Key Work Formulas</span>
+            <ul>
+              <li><strong>Irreversible Isothermal Expansion</strong> (against constant \(P_{\text{ext}} = P_2\)):
+                \[|W_{\text{irrev}}| = P_{\text{ext}}(V_2 - V_1) = P_2(V_2 - V_1)\]</li>
+              <li><strong>Reversible Isothermal Expansion of \(n\) mol Ideal Gas</strong> (\(P_{\text{ext}} \approx P_{\text{gas}} = \frac{nRT}{V}\)):
+                \[|W_{\text{rev}}| = \int_{V_1}^{V_2} P\, dV = \int_{V_1}^{V_2} \frac{nRT}{V}\, dV = nRT \ln\frac{V_2}{V_1} = 2.303\,nRT\log_{10}\frac{V_2}{V_1} = 2.303\,nRT\log_{10}\frac{P_1}{P_2}\]
+                <em>(For work done by system under IUPAC sign: \(w_{\text{rev}} = -2.303\,nRT\log_{10}(V_2/V_1)\).)</em></li>
+            </ul>
+          </div>
+
+          <h4>Proof: Work of Expansion is Maximum in a Reversible Process (QB Q8, Q10)</h4>
+          <ol>
+            <li>Expansion work done by a gas depends directly on the opposing external pressure: \(dw = P_{\text{ext}}\, dV\). The larger the \(P_{\text{ext}}\), the greater the work done by the gas.</li>
+            <li>However, \(P_{\text{ext}}\) cannot exceed \(P_{\text{gas}}\), otherwise compression would occur instead of expansion.</li>
+            <li>Therefore, the maximum possible value of \(P_{\text{ext}}\) during expansion is \(P_{\text{ext}} = P_{\text{gas}} - dP \approx P_{\text{gas}}\), which is precisely the condition for a <strong>reversible expansion</strong>.</li>
+            <li>Graphically (Fig. 7.2), the area under the reversible \(P\)–\(V\) curve \(\int P\,dV\) is strictly larger than the rectangular area \(P_2(V_2 - V_1)\) of a single-step irreversible expansion. Hence \(W_{\text{rev}} > W_{\text{irrev}}\).</li>
+          </ol>
+
+          <!-- SVG: Reversible vs Irreversible Work -->
+          <div class="diagram-box">
+            <svg viewBox="0 0 640 205" width="620" height="200" xmlns="http://www.w3.org/2000/svg">
+              <!-- Left plot: Reversible -->
+              <line x1="50" y1="20" x2="50" y2="165" stroke="#475569" stroke-width="2"/>
+              <line x1="50" y1="165" x2="275" y2="165" stroke="#475569" stroke-width="2"/>
+              <path d="M 85 45 Q 140 115 245 135 L 245 165 L 85 165 Z" fill="#dbeafe" stroke="none"/>
+              <path d="M 85 45 Q 140 115 245 135" fill="none" stroke="#2563eb" stroke-width="3"/>
+              <line x1="85" y1="45" x2="85" y2="165" stroke="#94a3b8" stroke-dasharray="4,3"/>
+              <line x1="245" y1="135" x2="245" y2="165" stroke="#94a3b8" stroke-dasharray="4,3"/>
+              <text x="165" y="145" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1d4ed8">W_rev (Max Area)</text>
+              <text x="85" y="180" text-anchor="middle" font-size="11" fill="#475569">V₁</text>
+              <text x="245" y="180" text-anchor="middle" font-size="11" fill="#475569">V₂</text>
+              <text x="35" y="49" text-anchor="end" font-size="11" fill="#475569">P₁</text>
+              <text x="35" y="138" text-anchor="end" font-size="11" fill="#475569">P₂</text>
+              <text x="162" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">(a) Reversible Expansion</text>
+
+              <!-- Right plot: Irreversible -->
+              <line x1="365" y1="20" x2="365" y2="165" stroke="#475569" stroke-width="2"/>
+              <line x1="365" y1="165" x2="590" y2="165" stroke="#475569" stroke-width="2"/>
+              <rect x="400" y="135" width="160" height="30" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+              <path d="M 400 45 Q 455 115 560 135" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4"/>
+              <text x="480" y="154" text-anchor="middle" font-size="11" font-weight="700" fill="#047857">W_irrev = P₂(V₂−V₁)</text>
+              <text x="400" y="180" text-anchor="middle" font-size="11" fill="#475569">V₁</text>
+              <text x="560" y="180" text-anchor="middle" font-size="11" fill="#475569">V₂</text>
+              <text x="350" y="49" text-anchor="end" font-size="11" fill="#475569">P₁</text>
+              <text x="350" y="138" text-anchor="end" font-size="11" fill="#475569">P₂</text>
+              <text x="477" y="198" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">(b) Irreversible Expansion</text>
+            </svg>
+            <div class="diagram-caption">Figure 7.2 — Shaded area under the curve proves \(W_{\text{rev}} > W_{\text{irrev}}\) between the same states.</div>
+          </div>
+
+          <details>
+            <summary>Solved Example: Work Done at Constant Pressure & Reversible Pressure Change</summary>
+            <div class="details-body">
+              <p><strong>Ex 1 (Constant Pressure):</strong> Gas expands from \(0.001\text{ m}^3\) to \(0.002\text{ m}^3\) against \(P_{\text{ext}} = 1013250\text{ Pa}\) (\(10\text{ atm}\)).<br>
+              \(|W| = P_{\text{ext}}\Delta V = 1013250 \times (0.002 - 0.001) = \mathbf{1013.25\text{ J}} = \mathbf{242.17\text{ cal}}\).</p>
+              <p><strong>Ex 2 (Reversible, 2 mol \(\text{H}_2\) at \(323\text{ K}\) from \(3\text{ atm}\) to \(1\text{ atm}\)):</strong><br>
+              \(\Delta E = 0\) (isothermal ideal gas), so \(q = W_{\text{by gas}} = 2.303 \times 2 \times 8.314 \times 323 \times \log_{10}(3/1) = \mathbf{5903.4\text{ J}}\).</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- 7.6 -->
+        <section class="card" id="ch7-firstlaw">
+          <h3>7.6 Internal Energy & First Law of Thermodynamics</h3>
+          <div class="box box-def">
+            <span class="box-title">Internal Energy (\(E\) or \(U\))</span>
+            The total of all possible kinds of energy within a system (translational, rotational, vibrational kinetic energy, plus nuclear & electronic kinetic/potential energies). It is an <strong>extensive property</strong> and a <strong>state function</strong> (\(\Delta E = E_f - E_i\)). SI unit: <strong>Joule (J)</strong>; \(1\text{ cal} = 4.184\text{ J}\).
+          </div>
+          <h4>Statements of the First Law (Law of Conservation of Energy)</h4>
+          <ol>
+            <li>The total energy of an isolated system (or universe) remains constant, though it may change from one form to another.</li>
+            <li>Whenever energy of one kind disappears, an equivalent amount of another kind must be produced.</li>
+            <li>It is impossible to construct a perpetual motion machine of the first kind (producing work without spending energy).</li>
+          </ol>
+          <div class="box box-formula">
+            <span class="box-title">Mathematical Form & 4 Special Cases</span>
+            \[\Delta E = q - w \quad (\text{where } w = P_{\text{ext}}\Delta V \text{ is work done by system}) \quad \Longleftrightarrow \quad \Delta E = q + w_{\text{on sys}}\]
+            <ul>
+              <li><strong>Case 1 (Cyclic / Isothermal Ideal Gas):</strong> \(\Delta E = 0 \implies q = w\).</li>
+              <li><strong>Case 2 (Isochoric, \(dV = 0\)):</strong> \(w = 0 \implies \Delta E = q_v\).</li>
+              <li><strong>Case 3 (Adiabatic, \(q = 0\)):</strong> \(\Delta E = -w_{\text{by sys}}\) (expansion cools the gas by lowering internal energy).</li>
+              <li><strong>Case 4 (Isobaric, \(P = \text{const}\)):</strong> \(\Delta E = q_p - P\Delta V\).</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 7.7 -->
+        <section class="card" id="ch7-enthalpy">
+          <h3>7.7 Enthalpy (\(H\)), Proof of \(\Delta H = q_p\), and \(\Delta H\) vs \(\Delta E\) <span class="qb-badge">QB Q3, Q11, Q13</span></h3>
+          <div class="box box-def">
+            <span class="box-title">Enthalpy (\(H\))</span>
+            Total heat content of a system at constant pressure: \(H = E + PV\). Since \(E, P, V\) are state functions, \(H\) is also a <strong>state function</strong> and an <strong>extensive property</strong>.
+          </div>
+
+          <h4>Proof: Change in Enthalpy equals Heat Absorbed/Released at Constant Pressure (QB Q3)</h4>
+          <ol>
+            <li>Let a system change from state 1 \((H_1, E_1, V_1)\) to state 2 \((H_2, E_2, V_2)\) at constant pressure \(P\):
+              \[H_1 = E_1 + PV_1, \qquad H_2 = E_2 + PV_2\]</li>
+            <li>Subtracting:
+              \[\Delta H = H_2 - H_1 = (E_2 - E_1) + P(V_2 - V_1) = \Delta E + P\Delta V\]</li>
+            <li>From the First Law at constant pressure (considering only \(PV\) work): \(\Delta E = q_p - P\Delta V\), so \(q_p = \Delta E + P\Delta V\).</li>
+            <li>Comparing the two expressions:
+              \[\Delta H = q_p\]
+              Thus, the enthalpy change equals the heat absorbed or evolved at constant pressure. (Endothermic: \(\Delta H > 0\); Exothermic: \(\Delta H < 0\).)</li>
+          </ol>
+
+          <h4>Relation Between \(\Delta H\) and \(\Delta E\) (QB Q11)</h4>
+          <p>For chemical reactions involving ideal gases at constant \(T\) and \(P\), solids and liquids have negligible volume compared to gases. Let \(n_1\) = moles of gaseous reactants and \(n_2\) = moles of gaseous products, with \(\Delta n_g = n_2 - n_1\):</p>
+          \[PV_1 = n_1 RT, \quad PV_2 = n_2 RT \implies P\Delta V = P(V_2 - V_1) = (n_2 - n_1)RT = \Delta n_g RT\]
+          <div class="box box-formula">
+            <span class="box-title">Enthalpy–Internal Energy Relation</span>
+            \[\Delta H = \Delta E + \Delta n_g RT\]
+            <p style="margin:0.25rem 0 0;"><em>Note:</em> If \(\Delta n_g = 0\) (e.g., \(\text{H}_2(g) + \text{I}_2(g) \rightleftharpoons 2\text{HI}(g)\)), then \(\Delta H = \Delta E\).</p>
+          </div>
+          <details>
+            <summary>Solved Example: Calculating \(\Delta H\) from \(\Delta E\)</summary>
+            <div class="details-body">
+              <p>For \(\text{C}_6\text{H}_6(l) + 7.5\,\text{O}_2(g) \to 6\text{CO}_2(g) + 3\text{H}_2\text{O}(l)\) at \(298\text{ K}\), \(\Delta H = -3269.81\text{ kJ}\). Find \(\Delta E\).<br>
+              \(\Delta n_g = 6 - 7.5 = -1.5\). Using \(R = 8.314 \times 10^{-3}\text{ kJ K}^{-1}\text{mol}^{-1}\):<br>
+              \(\Delta E = \Delta H - \Delta n_g RT = -3269.81 - (-1.5)(8.314 \times 10^{-3})(298) = -3269.81 + 3.72 = \mathbf{-3266.09\text{ kJ}}\).</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- 7.8 -->
+        <section class="card" id="ch7-heatcap">
+          <h3>7.8 Molar Heat Capacities & Proof of \(C_p - C_v = R\) <span class="qb-badge">QB Q3, Q6, Q11</span></h3>
+          <div class="box box-def">
+            <span class="box-title">Molar Heat Capacity (\(C\))</span>
+            The amount of heat required to raise the temperature of <strong>1 mole</strong> of a substance by \(1\text{ K}\) (or \(1^\circ\text{C}\)): \(C = \frac{dq}{dT}\) (units: \(\text{J K}^{-1}\text{mol}^{-1}\) or \(\text{cal K}^{-1}\text{mol}^{-1}\)). Because \(q\) is a path function, \(C\) must be specified at constant volume (\(C_v\)) or constant pressure (\(C_p\)).
+          </div>
+
+          <h4>Mathematical Derivation of \(C_v\) and \(C_p\) (QB Q3, Q11)</h4>
+          <p>From the First Law for 1 mole (assuming only \(PV\) work): \(dq = dE + PdV\). Dividing by \(dT\):</p>
+          \[\frac{dq}{dT} = \frac{dE}{dT} + P\frac{dV}{dT}\]
+          <ul>
+            <li><strong>At Constant Volume (\(dV = 0\)):</strong>
+              \[C_v = \left(\frac{\partial E}{\partial T}\right)_V \implies dE = C_v\,dT \quad (\text{1 mol}), \qquad \Delta E = nC_v\Delta T\]
+              <em>Definition:</em> Rate of change of internal energy with temperature at constant volume.</li>
+            <li><strong>At Constant Pressure (\(dP = 0\)):</strong> Since \(H = E + PV\), differentiating w.r.t. \(T\) at constant \(P\) gives \(\left(\frac{\partial H}{\partial T}\right)_P = \left(\frac{\partial E}{\partial T}\right)_P + P\left(\frac{\partial V}{\partial T}\right)_P = \left(\frac{dq}{dT}\right)_P\):
+              \[C_p = \left(\frac{\partial H}{\partial T}\right)_P \implies dH = C_p\,dT \quad (\text{1 mol}), \qquad \Delta H = nC_p\Delta T\]
+              <em>Definition:</em> Rate of change of enthalpy with temperature at constant pressure.</li>
+          </ul>
+
+          <h4>Proof: \(C_p - C_v = R\) for 1 Mole of an Ideal Gas (QB Q6)</h4>
+          <ol>
+            <li>By definition, \(C_p = \frac{dH}{dT}\) and \(C_v = \frac{dE}{dT}\) (for an ideal gas, \(E\) depends only on \(T\)).</li>
+            <li>Since \(H = E + PV\) and for 1 mole of an ideal gas \(PV = RT\):
+              \[H = E + RT\]</li>
+            <li>Differentiating both sides with respect to \(T\):
+              \[\frac{dH}{dT} = \frac{dE}{dT} + R \implies C_p = C_v + R \implies \mathbf{C_p - C_v = R}\]</li>
+          </ol>
+          <p><strong>Why is \(C_p > C_v\)?</strong> At constant volume, all absorbed heat goes into raising internal energy (and temperature). At constant pressure, part of the absorbed heat is spent doing external expansion work (\(P\Delta V\)), so more heat is required to achieve the same \(1\text{ K}\) temperature rise.</p>
+        </section>
+
+        <!-- 7.9 -->
+        <section class="card" id="ch7-jt">
+          <h3>7.9 Joule–Thomson Effect</h3>
+          <div class="box box-def">
+            <span class="box-title">Joule–Thomson (Joule–Kelvin) Effect</span>
+            The phenomenon of temperature change (usually cooling) when a compressed real gas expands adiabatically through a porous plug from a region of high pressure to a region of low pressure.
+          </div>
+          <p><strong>Proof of Constant Enthalpy (Isenthalpic):</strong> Net work done by gas \(= P_2 V_2 - P_1 V_1\). Since expansion is adiabatic (\(q = 0\)), \(\Delta E = E_2 - E_1 = -(P_2 V_2 - P_1 V_1) \implies E_2 + P_2 V_2 = E_1 + P_1 V_1 \implies \mathbf{H_2 = H_1}\) (\(\Delta H = 0\)).</p>
+          <ul>
+            <li><strong>Joule–Thomson Coefficient:</strong> \(\mu_{\text{JT}} = \left(\frac{\partial T}{\partial P}\right)_H\).
+              <ul>
+                <li>\(\mu_{\text{JT}} > 0\): Gas cools on expansion (most gases at room temperature).</li>
+                <li>\(\mu_{\text{JT}} < 0\): Gas warms on expansion (e.g., \(\text{H}_2\) and \(\text{He}\) at room temp).</li>
+                <li>\(\mu_{\text{JT}} = 0\): For an <strong>ideal gas</strong>, or at the <strong>Inversion Temperature (\(T_i\))</strong> where the sign reverses. (\(\text{H}_2\) must be pre-cooled below its inversion temp before liquefaction.)</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="diagram-box">
+            <svg viewBox="0 0 600 120" width="580" height="115" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="20" width="520" height="70" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="4"/>
+              <rect x="285" y="22" width="30" height="66" fill="#cbd5e1" stroke="#475569" stroke-width="1.5" stroke-dasharray="3,3"/>
+              <rect x="95" y="24" width="12" height="62" fill="#2563eb"/>
+              <line x1="50" y1="55" x2="95" y2="55" stroke="#2563eb" stroke-width="3"/>
+              <rect x="485" y="24" width="12" height="62" fill="#059669"/>
+              <line x1="497" y1="55" x2="545" y2="55" stroke="#059669" stroke-width="3"/>
+              <text x="195" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">P₁, V₁, T₁</text>
+              <text x="195" y="70" text-anchor="middle" font-size="10.5" fill="#475569">High Pressure</text>
+              <text x="400" y="52" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">P₂, V₂, T₂</text>
+              <text x="400" y="70" text-anchor="middle" font-size="10.5" fill="#475569">Low Pressure (H = const)</text>
+              <text x="300" y="108" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">Insulated Tube with Porous Plug (q = 0, ΔH = 0)</text>
+            </svg>
+            <div class="diagram-caption">Figure 7.3 — Joule–Thomson porous plug apparatus.</div>
+          </div>
+        </section>
+
+        <!-- 7.10 -->
+        <section class="card" id="ch7-adiabatic">
+          <h3>7.10 Adiabatic Expansion of an Ideal Gas & Work Done <span class="qb-badge">QB Q2b</span></h3>
+          <h4>Proof: \(TV^{\gamma-1} = \text{Constant}\) in Adiabatic Expansion (QB Q2b)</h4>
+          <ol>
+            <li>In an adiabatic process, \(dq = 0\). By the First Law for 1 mole of an ideal gas undergoing reversible expansion:
+              \[dE = -dw = -P\,dV\]</li>
+            <li>Since \(dE = C_v\,dT\) and \(P = \frac{RT}{V}\):
+              \[C_v\,dT = -\frac{RT}{V}\,dV \implies C_v\frac{dT}{T} + R\frac{dV}{V} = 0\]</li>
+            <li>Integrating between \((T_1, V_1)\) and \((T_2, V_2)\) assuming constant \(C_v\):
+              \[C_v \ln\frac{T_2}{T_1} + R \ln\frac{V_2}{V_1} = 0 \implies \ln\frac{T_2}{T_1} + \frac{R}{C_v}\ln\frac{V_2}{V_1} = 0\]</li>
+            <li>Using \(R = C_p - C_v\) and \(\gamma = \frac{C_p}{C_v}\), we have \(\frac{R}{C_v} = \gamma - 1\):
+              \[\ln\frac{T_2}{T_1} + (\gamma - 1)\ln\frac{V_2}{V_1} = 0 \implies \ln\left(\frac{T_2 V_2^{\gamma - 1}}{T_1 V_1^{\gamma - 1}}\right) = 0\]</li>
+            <li>Taking antilog:
+              \[T_1 V_1^{\gamma - 1} = T_2 V_2^{\gamma - 1} \implies \mathbf{TV^{\gamma - 1} = \text{Constant}}\]</li>
+            <li>Substituting \(T = \frac{PV}{R}\) also yields \(\mathbf{PV^\gamma = \text{Constant}}\) and \(\mathbf{T^\gamma P^{1-\gamma} = \text{Constant}}\).</li>
+          </ol>
+
+          <div class="box box-formula">
+            <span class="box-title">Work Done in Adiabatic Reversible Expansion (\(n\) moles)</span>
+            \[|W_{\text{adiab}}| = -\Delta E = nC_v(T_1 - T_2) = \frac{nR(T_1 - T_2)}{\gamma - 1} = \frac{P_1 V_1 - P_2 V_2}{\gamma - 1}\]
+            <p style="margin:0.2rem 0 0;">During adiabatic expansion, work is done at the expense of internal energy, so \(T_2 < T_1\) (cooling occurs), making the adiabatic \(P\)–\(V\) curve steeper than the isothermal curve (\(\gamma = 1.67\) monoatomic, \(1.40\) diatomic).</p>
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- CHAPTER 8: THERMOCHEMISTRY                              -->
+        <!-- ======================================================= -->
+        <div class="chapter-header" id="ch8">
+          <span class="chapter-tag">Chapter 8</span>
+          <h2>Thermochemistry</h2>
+          <p>Heat changes in chemical reactions, Lavoisier–Laplace law, Kirchhoff's equations, standard enthalpies, phase transitions, Hess's law, bond energy, and calorimetry.</p>
+        </div>
+
+        <!-- 8.1 -->
+        <section class="card" id="ch8-intro">
+          <h3>8.1 Thermochemistry, Lavoisier–Laplace Law & Reaction Enthalpy <span class="qb-badge">QB Q1b</span></h3>
+          <div class="box box-def">
+            <span class="box-title">Thermochemistry & Lavoisier–Laplace Law (1782)</span>
+            <ul>
+              <li><strong>Thermochemistry:</strong> Branch of physical chemistry dealing with thermal (heat) changes accompanying chemical reactions.</li>
+              <li><strong>Lavoisier and Laplace's Law (QB Q1b):</strong> The quantity of heat evolved in a chemical reaction is equal to the quantity of heat absorbed when the reaction is reversed under identical conditions: \(\Delta H_{\text{forward}} = -\Delta H_{\text{reverse}}\).</li>
+            </ul>
+          </div>
+          <ul>
+            <li><strong>Exothermic Reaction:</strong> Heat is evolved (\(H_p < H_r\)); \(\Delta H < 0\) (negative). Examples: combustion, neutralization, condensation, rusting.</li>
+            <li><strong>Endothermic Reaction:</strong> Heat is absorbed (\(H_p > H_r\)); \(\Delta H > 0\) (positive). Examples: melting ice, evaporation, photosynthesis, dissolving \(\text{NH}_4\text{NO}_3\) in water (cold packs).</li>
+            <li><strong>Relation between \(\Delta H\) and \(\Delta E\):</strong> \(\Delta H = \Delta E + \Delta n_g RT\). For reactions involving only solids/liquids, \(\Delta V \approx 0 \implies \Delta H \approx \Delta E\).</li>
+          </ul>
+          <div class="diagram-box">
+            <svg viewBox="0 0 600 175" width="580" height="170" xmlns="http://www.w3.org/2000/svg">
+              <!-- Exothermic -->
+              <text x="150" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#e11d48">Exothermic (ΔH &lt; 0)</text>
+              <line x1="60" y1="55" x2="140" y2="55" stroke="#1e293b" stroke-width="3"/>
+              <text x="100" y="47" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Reactants (H_r)</text>
+              <line x1="160" y1="125" x2="240" y2="125" stroke="#1e293b" stroke-width="3"/>
+              <text x="200" y="143" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Products (H_p)</text>
+              <line x1="150" y1="58" x2="150" y2="122" stroke="#e11d48" stroke-width="2" marker-end="url(#arr)"/>
+              <text x="195" y="92" font-size="11" font-weight="700" fill="#e11d48">Heat Released</text>
+
+              <!-- Endothermic -->
+              <text x="450" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#2563eb">Endothermic (ΔH &gt; 0)</text>
+              <line x1="360" y1="125" x2="440" y2="125" stroke="#1e293b" stroke-width="3"/>
+              <text x="400" y="143" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Reactants (H_r)</text>
+              <line x1="460" y1="55" x2="540" y2="55" stroke="#1e293b" stroke-width="3"/>
+              <text x="500" y="47" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Products (H_p)</text>
+              <line x1="450" y1="122" x2="450" y2="58" stroke="#2563eb" stroke-width="2" marker-end="url(#arr)"/>
+              <text x="495" y="92" font-size="11" font-weight="700" fill="#2563eb">Heat Absorbed</text>
+            </svg>
+            <div class="diagram-caption">Figure 8.1 — Enthalpy diagrams for exothermic and endothermic reactions.</div>
+          </div>
+        </section>
+
+        <!-- 8.2 -->
+        <section class="card" id="ch8-kirchhoff">
+          <h3>8.2 Thermochemical Equations & Kirchhoff's Equations</h3>
+          <p>A complete <strong>thermochemical equation</strong> must: (a) be balanced, (b) specify \(\Delta H\) or \(\Delta E\), and (c) state physical states \((s), (l), (g), (aq)\). Standard state is \(298\text{ K}\) and \(1\text{ atm}\) (\(101325\text{ Pa}\)), denoted \(\Delta H^\circ\).</p>
+
+          <h4>Variation of Heat of Reaction with Temperature (Kirchhoff's Equations)</h4>
+          <p>Since \(\Delta H = H_{\text{products}} - H_{\text{reactants}}\), differentiating with respect to \(T\) at constant pressure gives:</p>
+          \[\left(\frac{\partial \Delta H}{\partial T}\right)_P = \left(\frac{\partial H_p}{\partial T}\right)_P - \left(\frac{\partial H_r}{\partial T}\right)_P = (C_p)_{\text{products}} - (C_p)_{\text{reactants}} = \Delta C_p\]
+          <div class="box box-formula">
+            <span class="box-title">Kirchhoff's Equations (Integrated Form for Constant \(\Delta C_p, \Delta C_v\))</span>
+            \[\Delta H_2 - \Delta H_1 = \Delta C_p (T_2 - T_1) \qquad \text{and} \qquad \Delta E_2 - \Delta E_1 = \Delta C_v (T_2 - T_1)\]
+            <p style="margin:0.2rem 0 0;"><em>If \(C_p\) depends on \(T\):</em> \(\Delta H_2 - \Delta H_1 = \int_{T_1}^{T_2} \Delta C_p\,dT\).</p>
+          </div>
+        </section>
+
+        <!-- 8.3 -->
+        <section class="card" id="ch8-types">
+          <h3>8.3 Types of Heat (Enthalpy) of Reaction</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Enthalpy Type</th>
+                  <th>Definition & Key Rule</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Heat of Formation (\(\Delta H_f^\circ\))</strong></td>
+                  <td>Enthalpy change when <strong>1 mole</strong> of a compound is formed from its constituent elements in their standard states (\(298\text{ K}, 1\text{ atm}\)). <em>By convention, \(\Delta H_f^\circ\) of all free elements in standard states = 0.</em><br>
+                  \(\Delta H^\circ_{\text{rxn}} = \sum \Delta H_f^\circ(\text{products}) - \sum \Delta H_f^\circ(\text{reactants})\).</td>
+                </tr>
+                <tr>
+                  <td><strong>Heat of Combustion (\(\Delta H_c\))</strong></td>
+                  <td>Enthalpy change when <strong>1 mole</strong> of a substance is <strong>completely burnt</strong> in excess \(\text{O}_2\). Always negative (\(\Delta H_c < 0\)).<br>
+                  <strong>Applications:</strong> Finding \(\Delta H_f\), fuel efficiency/calorific value (heat per gram, e.g., \(\text{CH}_4\) produces more heat/g than \(\text{C}_2\text{H}_6\)), and deciding molecular structure.</td>
+                </tr>
+                <tr>
+                  <td><strong>Heat of Solution</strong></td>
+                  <td>Enthalpy change when <strong>1 mole</strong> of a solute dissolves in a specified solvent (or at infinite dilution where further dilution produces zero thermal effect).</td>
+                </tr>
+                <tr>
+                  <td><strong>Heat of Neutralization</strong></td>
+                  <td>Enthalpy change when <strong>1 gram equivalent</strong> of an acid is neutralized by <strong>1 gram equivalent</strong> of a base in dilute solution.<br>
+                  • Strong acid + Strong base \(\approx \mathbf{-57.36\text{ kJ}}\) (\(\text{H}^+ + \text{OH}^- \to \text{H}_2\text{O}\)).<br>
+                  • Weak acid/base gives a smaller magnitude (e.g., \(-51.50\text{ kJ}\)) because part of the heat is absorbed as <strong>heat of dissociation/ionization</strong> of the weak electrolyte.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 8.4 -->
+        <section class="card" id="ch8-phase">
+          <h3>8.4 Phase Changes: Fusion, Vaporization, Sublimation & Transition <span class="qb-badge">QB Q4, Q15</span></h3>
+          <ul>
+            <li><strong>Heat of Fusion (\(\Delta H_{\text{fus}}\)):</strong> Enthalpy change when 1 mole of a solid converts to liquid at its melting point (e.g., ice \(\to\) water at \(273\text{ K}\): \(+5.98\text{ kJ/mol}\)). Higher \(\Delta H_{\text{fus}}\) indicates stronger intermolecular forces.</li>
+            <li><strong>Heat of Vaporization (\(\Delta H_{\text{vap}}\)):</strong> Enthalpy change when 1 mole of a liquid converts to vapor at its boiling point (e.g., water \(\to\) steam at \(373\text{ K}\): \(+40.65\text{ kJ/mol}\)).</li>
+            <li><strong>Heat of Sublimation (\(\Delta H_{\text{sub}}\)) (QB Q4):</strong> Enthalpy change when 1 mole of a solid converts directly into the gaseous state at a temperature <em>below</em> its melting point (e.g., \(\text{I}_2(s) \to \text{I}_2(g)\): \(+62.47\text{ kJ/mol}\)). Note: \(\Delta H_{\text{sub}} = \Delta H_{\text{fus}} + \Delta H_{\text{vap}}\).</li>
+            <li><strong>Heat of Transition (\(\Delta H_{\text{trans}}\)) (QB Q4, Q15):</strong> Enthalpy change when 1 mole of an element changes from one allotropic form to another (e.g., \(\text{C}_{\text{diamond}} \to \text{C}_{\text{amorphous}}, \Delta H = +13.82\text{ kJ}\); \(\text{S}_{\text{monoclinic}} \to \text{S}_{\text{rhombic}}, \Delta H = -0.067\text{ kJ}\); \(\text{P}_{\text{white}} \to \text{P}_{\text{red}}, \Delta H = -4.30\text{ kJ}\)).</li>
+          </ul>
+        </section>
+
+        <!-- 8.5 -->
+        <section class="card" id="ch8-hess">
+          <h3>8.5 Hess's Law of Constant Heat Summation <span class="qb-badge">QB Q1a</span></h3>
+          <div class="box box-def">
+            <span class="box-title">Statement — Hess's Law (1840)</span>
+            If a chemical change is made to take place in two or more different ways—whether in a single step or in several intermediate steps—the total amount of heat evolved or absorbed (at constant \(P\) or \(V\)) is the <strong>same</strong>, regardless of the path by which the change is brought about.
+          </div>
+          <p><strong>Thermodynamic Proof:</strong> \(\Delta H\) and \(\Delta E\) are state functions depending only on initial and final states. If going \(A \to Z\) in 1 step released \(Q_1\) and via \(A \to B \to C \to Z\) released \(Q_2 > Q_1\), reversing \(Z \to A\) directly would create net energy \((Q_2 - Q_1)\) per cycle in an isolated system—violating the <strong>First Law of Thermodynamics</strong>. Hence \(Q_1 = Q_2\).</p>
+
+          <h4>Example: Combustion of Carbon to \(\text{CO}_2\)</h4>
+          <ul>
+            <li><strong>Path 1 (Direct):</strong> \(\text{C}(s) + \text{O}_2(g) \to \text{CO}_2(g)\), \(\Delta H_1 = \mathbf{-393.5\text{ kJ}}\).</li>
+            <li><strong>Path 2 (Two-Step):</strong>
+              <ol>
+                <li>\(\text{C}(s) + \frac{1}{2}\text{O}_2(g) \to \text{CO}(g)\), \(\Delta H_a = -110.5\text{ kJ}\)</li>
+                <li>\(\text{CO}(g) + \frac{1}{2}\text{O}_2(g) \to \text{CO}_2(g)\), \(\Delta H_b = -283.0\text{ kJ}\)</li>
+              </ol>
+              Total heat: \(\Delta H_a + \Delta H_b = -110.5 + (-283.0) = \mathbf{-393.5\text{ kJ}} = \Delta H_1\).</li>
+          </ul>
+
+          <div class="diagram-box">
+            <svg viewBox="0 0 560 140" width="540" height="135" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="45" width="130" height="44" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+              <text x="85" y="72" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e293b">C(s) + O₂(g)</text>
+              <rect x="410" y="45" width="130" height="44" rx="8" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+              <text x="475" y="72" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1e293b">CO₂(g)</text>
+              <rect x="215" y="92" width="130" height="40" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+              <text x="280" y="117" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">CO(g) + ½O₂(g)</text>
+              <!-- Direct arrow -->
+              <line x1="152" y1="67" x2="405" y2="67" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arr)"/>
+              <text x="280" y="55" text-anchor="middle" font-size="11.5" font-weight="700" fill="#2563eb">Direct: ΔH = −393.5 kJ</text>
+              <!-- Two step arrows -->
+              <line x1="120" y1="89" x2="212" y2="112" stroke="#d97706" stroke-width="2" marker-end="url(#arr)"/>
+              <text x="140" y="118" text-anchor="middle" font-size="10.5" font-weight="600" fill="#d97706">−110.5 kJ</text>
+              <line x1="347" y1="112" x2="440" y2="89" stroke="#d97706" stroke-width="2" marker-end="url(#arr)"/>
+              <text x="418" y="118" text-anchor="middle" font-size="10.5" font-weight="600" fill="#d97706">−283.0 kJ</text>
+            </svg>
+            <div class="diagram-caption">Figure 8.2 — Hess's Law cycle showing path independence of \(\Delta H\).</div>
+          </div>
+
+          <p><strong>Applications of Hess's Law:</strong> Thermochemical equations can be added, subtracted, and multiplied algebraically to find: (1) heats of formation of compounds that cannot be synthesized directly (\(\text{CH}_4, \text{CO}, \text{C}_6\text{H}_6\)), (2) heats of transition between allotropes, and (3) heats of slow/intermediate reactions (e.g., dimerization of \(\text{NO}_2\)).</p>
+        </section>
+
+        <!-- 8.6 -->
+        <section class="card" id="ch8-bond">
+          <h3>8.6 Bond Energy & Calorimetry</h3>
+          <ul>
+            <li><strong>Bond Energy:</strong> Average energy required to break 1 mole of a specific bond type in the gaseous state. Depends on atomic size, electronegativity, and bond length.</li>
+            <li><strong>Sign Rule:</strong> Breaking bonds absorbs heat (\(+\)); forming bonds releases heat (\(-\)).
+              \[\Delta H_{\text{rxn}} = \sum \text{B.E.(bonds broken)} - \sum \text{B.E.(bonds formed)}\]</li>
+            <li><strong>Calorimetry:</strong>
+              <ul>
+                <li><em>Water Calorimeter:</em> Measures heat of reactions in solution at constant pressure (\(q_p = \Delta H\)).</li>
+                <li><em>Bomb Calorimeter:</em> Sealed steel vessel with excess \(\text{O}_2\) immersed in water; measures heat of combustion at <strong>constant volume</strong> (\(q_v = \Delta E\)), convertible to \(\Delta H\) via \(\Delta H = \Delta E + \Delta n_g RT\).</li>
+              </ul>
+            </li>
+          </ul>
+          <details>
+            <summary>Solved Example: Bond Energy & Hess's Law Calculation</summary>
+            <div class="details-body">
+              <p><strong>1. Hess's Law — Heat of formation of \(\text{C}_3\text{H}_8(g)\):</strong><br>
+              Given \(\Delta H_c(\text{C}_3\text{H}_8) = -2220.2\text{ kJ}\), \(\Delta H_f(\text{CO}_2) = -393.5\text{ kJ}\), \(\Delta H_f(\text{H}_2\text{O}) = -285.8\text{ kJ}\):<br>
+              \(\Delta H_f(\text{C}_3\text{H}_8) = [3(-393.5) + 4(-285.8)] - (-2220.2) = -2323.7 + 2220.2 = \mathbf{-103.5\text{ kJ/mol}}\).</p>
+              <p><strong>2. Bond Energy — \(\text{H}_2(g) + \frac{1}{2}\text{O}_2(g) \to \text{H}_2\text{O}(g)\):</strong><br>
+              Given \(\text{B.E.(H–H)} = 435.4\text{ kJ}\), \(\text{B.E.(O=O)} = 494.0\text{ kJ}\), \(\text{B.E.(O–H)} = 464.7\text{ kJ}\):<br>
+              \(\Delta H = [435.4 + \frac{1}{2}(494.0)] - [2(464.7)] = 682.4 - 929.4 = \mathbf{-247.0\text{ kJ/mol}}\).</p>
+            </div>
+          </details>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- CHAPTER 9: SECOND LAW OF THERMODYNAMICS                 -->
+        <!-- ======================================================= -->
+        <div class="chapter-header" id="ch9">
+          <span class="chapter-tag">Chapter 9</span>
+          <h2>Second Law of Thermodynamics</h2>
+          <p>Spontaneity, entropy, Third Law, Carnot cycle, Gibbs & Helmholtz free energies, Gibbs–Helmholtz, Clausius–Clapeyron, van't Hoff isotherm/isochore, fugacity, chemical potential, and Zeroth Law.</p>
+        </div>
+
+        <!-- 9.1 -->
+        <section class="card" id="ch9-spont">
+          <h3>9.1 Spontaneous Processes & Entropy <span class="qb-badge">QB Q4</span></h3>
+          <ul>
+            <li><strong>Spontaneous Process:</strong> Proceeds of its own accord without outside assistance (unidirectional; e.g., heat flowing hot \(\to\) cold, gas expanding into vacuum, ice melting on a warm day).</li>
+            <li><strong>Non-spontaneous Process:</strong> Does not occur on its own; requires external work.</li>
+            <li><strong>Criteria of Spontaneity:</strong> (1) Unidirectional, (2) time is not a factor, (3) unstable non-equilibrium systems change spontaneously until equilibrium, (4) equilibrium systems do not change spontaneously, (5) exothermic processes (\(\Delta H < 0\)) tend to be spontaneous, <em>but</em> endothermic processes like melting ice and evaporation are also spontaneous—proving a second driving factor: <strong>Entropy (\(S\))</strong>.</li>
+          </ul>
+
+          <div class="box box-def">
+            <span class="box-title">Entropy (\(S\))</span>
+            A thermodynamic state function that measures the <strong>randomness or molecular disorder</strong> of a system (\(\Delta S = S_{\text{final}} - S_{\text{initial}}\)).<br>
+            Order of entropy: \(\text{Solid} < \text{Liquid} \ll \text{Gas}\). Units: \(\text{J K}^{-1}\text{mol}^{-1}\) or \(\text{cal K}^{-1}\text{mol}^{-1}\) (entropy unit, <em>eu</em>).
+          </div>
+
+          <h4>Explain: "A process accompanied by an increase in entropy tends to be spontaneous" (QB Q4)</h4>
+          <ol>
+            <li>Consider a molecular system changing from an ordered, low-entropy State \(A\) to a disordered, high-entropy State \(B\) (like tossing ordered playing cards into a random pile).</li>
+            <li>By probability (the law of chance), there are vastly more microstates/arrangements corresponding to the disordered State \(B\) than to the ordered State \(A\).</li>
+            <li>Therefore, State \(B\) is thermodynamically much more probable than State \(A\), so nature spontaneously evolves from lower probability/order (\(A\)) to higher probability/disorder (\(B\)), accompanied by \(\Delta S > 0\).</li>
+          </ol>
+        </section>
+
+        <!-- 9.2 -->
+        <section class="card" id="ch9-laws">
+          <h3>9.2 Second Law & Third Law of Thermodynamics <span class="qb-badge">QB Q7</span></h3>
+          <div class="box box-def">
+            <span class="box-title">Statements of the Second Law of Thermodynamics (QB Q7)</span>
+            <ol>
+              <li><strong>Entropy Statement:</strong> Whenever a spontaneous (irreversible) process takes place, it is accompanied by an increase in the total entropy of the universe:
+                \[\Delta S_{\text{univ}} = \Delta S_{\text{sys}} + \Delta S_{\text{surr}} > 0 \quad (\text{reversible: } \Delta S_{\text{univ}} = 0)\]</li>
+              <li><strong>Kelvin–Planck Statement:</strong> It is impossible to take heat from a hot reservoir and convert it completely into work in a cyclic process without rejecting part of the heat to a cooler reservoir (no heat engine can be 100% efficient).</li>
+              <li><strong>Clausius Statement:</strong> It is impossible for a cyclic process to transfer heat from a colder body to a hotter body without supplying external work.</li>
+            </ol>
+          </div>
+
+          <div class="box box-note">
+            <span class="box-title">Significance of the Second Law (QB Q7)</span>
+            <ul>
+              <li>Predicts the <strong>direction and spontaneity</strong> of physical, chemical, and biochemical processes (which the First Law cannot).</li>
+              <li>Establishes the upper limit on the efficiency of heat engines and power plants (\(\eta < 1\)).</li>
+              <li>Defines the arrow of time and introduces key state functions: <strong>Entropy (\(S\))</strong> and <strong>Gibbs Free Energy (\(G\))</strong>, linking thermodynamics to chemical equilibrium.</li>
+            </ul>
+          </div>
+
+          <div class="box box-def">
+            <span class="box-title">Third Law of Thermodynamics & Standard Entropy</span>
+            <ul>
+              <li><strong>Statement:</strong> At absolute zero (\(0\text{ K}\)), all molecular vibrations cease in perfect order, so the entropy of a <strong>pure perfect crystal is zero</strong> (\(S = 0\) at \(T = 0\text{ K}\)).</li>
+              <li><strong>Standard (Absolute) Entropy (\(S^\circ\)):</strong> Entropy of 1 mole of a substance at \(298\text{ K}\) and \(1\text{ atm}\) (always positive for \(T > 0\)).</li>
+              <li><strong>Standard Entropy Change:</strong> \(\Delta S^\circ_{\text{rxn}} = \sum S^\circ(\text{products}) - \sum S^\circ(\text{reactants})\).</li>
+            </ul>
+          </div>
+          <p><strong>Numerical Definition of Entropy (Clausius, 1850):</strong> For a reversible process at fixed temperature \(T\), \(\Delta S = \frac{q_{\text{rev}}}{T}\) (or infinitesimally, \(dS = \frac{dq_{\text{rev}}}{T}\)).</p>
+        </section>
+
+        <!-- 9.3 -->
+        <section class="card" id="ch9-carnot">
+          <h3>9.3 Heat Engines, Carnot Cycle & Derivation of Entropy</h3>
+          <p>A <strong>heat engine</strong> operates in a cycle, absorbing heat \(q_2\) from a hot source (\(T_2\)), converting part into work \(w\), and rejecting \(q_1\) to a cold sink (\(T_1\)).</p>
+          <p><strong>Carnot Cycle (1824):</strong> An ideal reversible cycle using 1 mol ideal gas through 4 stages:</p>
+          <ol>
+            <li><strong>Isothermal Reversible Expansion (\(A \to B\) at \(T_2\)):</strong> \(V_1 \to V_2\); heat absorbed \(q_2 = w_1 = RT_2 \ln\frac{V_2}{V_1}\).</li>
+            <li><strong>Adiabatic Reversible Expansion (\(B \to C\)):</strong> \(V_2 \to V_3\), \(T_2 \to T_1\); \(q = 0\), \(w_2 = C_v(T_2 - T_1)\).</li>
+            <li><strong>Isothermal Reversible Compression (\(C \to D\) at \(T_1\)):</strong> \(V_3 \to V_4\); heat rejected \(|q_1| = |w_3| = RT_1 \ln\frac{V_3}{V_4}\).</li>
+            <li><strong>Adiabatic Reversible Compression (\(D \to A\)):</strong> \(V_4 \to V_1\), \(T_1 \to T_2\); \(q = 0\), \(w_4 = -C_v(T_2 - T_1)\).</li>
+          </ol>
+
+          <div class="diagram-box">
+            <svg viewBox="0 0 560 210" width="540" height="205" xmlns="http://www.w3.org/2000/svg">
+              <line x1="65" y1="15" x2="65" y2="180" stroke="#475569" stroke-width="2"/>
+              <line x1="65" y1="180" x2="500" y2="180" stroke="#475569" stroke-width="2"/>
+              <text x="45" y="25" font-size="12" font-weight="700" fill="#475569">P</text>
+              <text x="505" y="185" font-size="12" font-weight="700" fill="#475569">V</text>
+              <!-- Cycle path -->
+              <path d="M 120 40 Q 200 72 285 88" fill="none" stroke="#e11d48" stroke-width="2.5"/>
+              <path d="M 285 88 Q 330 125 385 150" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+              <path d="M 385 150 Q 290 135 215 112" fill="none" stroke="#e11d48" stroke-width="2.5"/>
+              <path d="M 215 112 Q 160 80 120 40" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+              <!-- Points -->
+              <circle cx="120" cy="40" r="4" fill="#1e293b"/>
+              <circle cx="285" cy="88" r="4" fill="#1e293b"/>
+              <circle cx="385" cy="150" r="4" fill="#1e293b"/>
+              <circle cx="215" cy="112" r="4" fill="#1e293b"/>
+              <text x="108" y="34" font-size="11.5" font-weight="700" fill="#1e293b">A (P₁,V₁)</text>
+              <text x="292" y="83" font-size="11.5" font-weight="700" fill="#1e293b">B (P₂,V₂)</text>
+              <text x="392" y="155" font-size="11.5" font-weight="700" fill="#1e293b">C (P₃,V₃)</text>
+              <text x="155" y="125" font-size="11.5" font-weight="700" fill="#1e293b">D (P₄,V₄)</text>
+              <text x="215" y="55" font-size="10.5" font-weight="600" fill="#e11d48">Isothermal (T₂, q₂)</text>
+              <text x="345" y="114" font-size="10.5" font-weight="600" fill="#2563eb">Adiabatic</text>
+              <text x="290" y="155" font-size="10.5" font-weight="600" fill="#e11d48">Isothermal (T₁, q₁)</text>
+              <text x="102" y="88" font-size="10.5" font-weight="600" fill="#2563eb">Adiabatic</text>
+            </svg>
+            <div class="diagram-caption">Figure 9.1 — Carnot Cycle \(P\)–\(V\) indicator diagram.</div>
+          </div>
+
+          <div class="box box-formula">
+            <span class="box-title">Carnot Efficiency & Entropy Derivation</span>
+            <p>Since \(w_2 + w_4 = 0\) and \(\frac{V_2}{V_1} = \frac{V_3}{V_4}\) (from adiabatic \(TV^{\gamma-1} = \text{const}\)):</p>
+            \[\eta = \frac{w}{q_2} = \frac{q_2 - |q_1|}{q_2} = \frac{T_2 - T_1}{T_2} = 1 - \frac{T_1}{T_2}\]
+            <ul>
+              <li><strong>Carnot Theorem:</strong> Every reversible engine operating between the same \(T_2\) and \(T_1\) has the exact same efficiency, independent of working substance.</li>
+              <li><strong>Derivation of Entropy:</strong> From \(\frac{q_2}{T_2} + \frac{q_1}{T_1} = 0\) (with signed heats) and breaking any reversible cycle into infinite Carnot cycles:
+                \[\oint \frac{dq_{\text{rev}}}{T} = 0 \implies dS = \frac{dq_{\text{rev}}}{T} \text{ is an exact differential (state function).}\]</li>
+              <li><strong>Irreversible Cycle:</strong> Efficiency is lower, so \(\oint \frac{dq}{T} < 0\) and \(\Delta S_{\text{univ}} > 0\) ("Entropy of the universe tends to a maximum").</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 9.4 -->
+        <section class="card" id="ch9-entropycalc">
+          <h3>9.4 Entropy Changes for an Ideal Gas & Phase Transitions</h3>
+          <div class="box box-formula">
+            <span class="box-title">Ideal Gas Entropy Formulas (\(n\) moles)</span>
+            <ul>
+              <li><strong>In terms of \(T\) and \(V\):</strong> \(\Delta S = nC_v \ln\frac{T_2}{T_1} + nR \ln\frac{V_2}{V_1} = 2.303\,n\left(C_v\log_{10}\frac{T_2}{T_1} + R\log_{10}\frac{V_2}{V_1}\right)\)</li>
+              <li><strong>In terms of \(T\) and \(P\):</strong> \(\Delta S = nC_p \ln\frac{T_2}{T_1} - nR \ln\frac{P_2}{P_1}\)</li>
+              <li><strong>Special Cases:</strong>
+                <ul>
+                  <li><em>Isothermal (\(T_1 = T_2\)):</em> \(\Delta S_T = 2.303\,nR\log_{10}\frac{V_2}{V_1} = 2.303\,nR\log_{10}\frac{P_1}{P_2}\)</li>
+                  <li><em>Isobaric (\(P_1 = P_2\)):</em> \(\Delta S_P = 2.303\,nC_p\log_{10}\frac{T_2}{T_1}\)</li>
+                  <li><em>Isochoric (\(V_1 = V_2\)):</em> \(\Delta S_V = 2.303\,nC_v\log_{10}\frac{T_2}{T_1}\)</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <h4>Entropy Change Accompanying Phase Changes</h4>
+          <p>\(\Delta S_{\text{fus}} = \frac{\Delta H_{\text{fus}}}{T_f}\), \(\quad \Delta S_{\text{vap}} = \frac{\Delta H_{\text{vap}}}{T_b}\), \(\quad \Delta S_{\text{trans}} = \frac{\Delta H_{\text{trans}}}{T_t}\).</p>
+        </section>
+
+        <!-- 9.5 -->
+        <section class="card" id="ch9-free">
+          <h3>9.5 Gibbs Free Energy (\(G\)) & Helmholtz Work Function (\(A\))</h3>
+          <ul>
+            <li><strong>Gibbs Free Energy (\(G\)):</strong> \(G = H - TS\). At constant \(T, P\): \(\Delta G = \Delta H - T\Delta S\).
+              <br>Decrease in \(G\) (\(-\Delta G\)) equals the <strong>maximum useful non-expansion (net) work</strong> obtainable at constant \(T, P\): \(-\Delta G = w_{\text{max}} - P\Delta V\).</li>
+            <li><strong>Helmholtz Work Function (\(A\)):</strong> \(A = E - TS\). At constant \(T\): \(\Delta A = \Delta E - T\Delta S\).
+              <br>Decrease in \(A\) (\(-\Delta A\)) equals the <strong>maximum total reversible work</strong>: \(-\Delta A = w_{\text{rev}}\). Note: \(\Delta G = \Delta A + \Delta(PV)\).</li>
+            <li><strong>Variation of \(G\) with \(T\) and \(P\):</strong> Since \(dG = VdP - SdT\):
+              \[\left(\frac{\partial G}{\partial T}\right)_P = -S, \qquad \left(\frac{\partial G}{\partial P}\right)_T = V\]</li>
+            <li><strong>Isothermal Change in \(G\) (Ideal Gas, \(n\) moles):</strong>
+              \[\Delta G = nRT\ln\frac{P_2}{P_1} = 2.303\,nRT\log_{10}\frac{P_2}{P_1} = 2.303\,nRT\log_{10}\frac{V_1}{V_2}\]</li>
+          </ul>
+        </section>
+
+        <!-- 9.6 -->
+        <section class="card" id="ch9-gh">
+          <h3>9.6 Gibbs–Helmholtz Equations & Spontaneity Criteria</h3>
+          <div class="box box-formula">
+            <span class="box-title">Gibbs–Helmholtz Equations</span>
+            <ul>
+              <li><strong>In terms of \(G\) and \(H\) (constant \(P\), closed system):</strong>
+                \[\Delta G = \Delta H + T\left[\frac{\partial(\Delta G)}{\partial T}\right]_P \quad \Longleftrightarrow \quad \left[\frac{\partial(\Delta G/T)}{\partial T}\right]_P = -\frac{\Delta H}{T^2}\]</li>
+              <li><strong>In terms of \(A\) and \(E\) (constant \(V\)):</strong>
+                \[\Delta A = \Delta E + T\left[\frac{\partial(\Delta A)}{\partial T}\right]_V \quad \Longleftrightarrow \quad \left[\frac{\partial(\Delta A/T)}{\partial T}\right]_V = -\frac{\Delta E}{T^2}\]</li>
+            </ul>
+            <p style="margin:0.2rem 0 0;"><em>Importance:</em> Used to calculate \(\Delta H\) or \(\Delta E\) from \(\Delta G\) or \(\Delta A\) measured at two temperatures.</p>
+          </div>
+
+          <h4>Conditions for Spontaneity & Equilibrium</h4>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Constraints</th>
+                  <th>Spontaneous (Irreversible)</th>
+                  <th>Equilibrium (Reversible)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Constant \(E, V\)</td><td>\(dS > 0\)</td><td>\(dS = 0\)</td></tr>
+                <tr><td>Constant \(S, V\)</td><td>\(dE < 0\)</td><td>\(dE = 0\)</td></tr>
+                <tr><td>Constant \(S, P\)</td><td>\(dH < 0\)</td><td>\(dH = 0\)</td></tr>
+                <tr><td><strong>Constant \(T, P\)</strong></td><td><strong>\(dG < 0\) (or \(\Delta G < 0\))</strong></td><td><strong>\(dG = 0\) (or \(\Delta G = 0\))</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Temperature Rule for \(\Delta G = \Delta H - T\Delta S\):</strong> Always spontaneous if \(\Delta H < 0, \Delta S > 0\); never spontaneous if \(\Delta H > 0, \Delta S < 0\); spontaneous at low \(T\) if both negative; spontaneous at high \(T\) if both positive.</p>
+        </section>
+
+        <!-- 9.7 -->
+        <section class="card" id="ch9-clap">
+          <h3>9.7 Clapeyron & Clausius–Clapeyron Equations</h3>
+          <ul>
+            <li><strong>Clapeyron Equation (Phase Equilibrium):</strong>
+              \[\frac{dP}{dT} = \frac{\Delta H}{T(V_2 - V_1)}\]
+              where \(\Delta H\) is latent heat of transition and \(V_1, V_2\) are molar volumes of the two phases.</li>
+            <li><strong>Clausius–Clapeyron Equation (Liquid \(\rightleftharpoons\) Vapor or Solid \(\rightleftharpoons\) Vapor):</strong> Neglecting \(V_{\text{liq}} \ll V_{\text{vap}}\) and assuming ideal vapor (\(V_{\text{vap}} = RT/P\)):
+              \[\frac{d \ln P}{dT} = \frac{\Delta H_v}{RT^2} \implies \log_{10}\left(\frac{P_2}{P_1}\right) = \frac{\Delta H_v}{2.303\,R}\left(\frac{1}{T_1} - \frac{1}{T_2}\right) = \frac{\Delta H_v}{2.303\,R}\left(\frac{T_2 - T_1}{T_1 T_2}\right)\]</li>
+            <li><strong>5 Applications:</strong> (1) Calculate latent heat of vaporization/fusion, (2) boiling/freezing point at another pressure, (3) vapor pressure at another temperature, (4) molal boiling-point elevation constant \(K_b = \frac{RT_b^2}{1000\,l_v}\), (5) molal freezing-point depression constant \(K_f = \frac{RT_f^2}{1000\,l_f}\) (where \(l_v, l_f\) are latent heats per gram).</li>
+          </ul>
+        </section>
+
+        <!-- 9.8 -->
+        <section class="card" id="ch9-vanthoff">
+          <h3>9.8 van't Hoff Isotherm & van't Hoff Isochore</h3>
+          <div class="box box-formula">
+            <span class="box-title">van't Hoff Equations for Chemical Equilibrium</span>
+            <ul>
+              <li><strong>van't Hoff Isotherm</strong> (derived via equilibrium box):
+                \[-\Delta G = RT \ln K_p - RT \ln Q_p \quad \text{and at standard conditions (1 atm):} \quad -\Delta G^\circ = RT \ln K_p = 2.303\,RT\log_{10} K_p\]
+                <em>(\(K_p > 1 \implies \Delta G^\circ < 0\); \(K_p < 1 \implies \Delta G^\circ > 0\); \(K_p = 1 \implies \Delta G^\circ = 0\).)</em></li>
+              <li><strong>van't Hoff Isochore</strong> (combining isotherm with Gibbs–Helmholtz):
+                \[\frac{d(\ln K_p)}{dT} = \frac{\Delta H^\circ}{RT^2} \implies \log_{10}\left(\frac{K_{p2}}{K_{p1}}\right) = \frac{\Delta H^\circ}{2.303\,R}\left(\frac{T_2 - T_1}{T_1 T_2}\right)\]</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 9.9 -->
+        <section class="card" id="ch9-fugacity">
+          <h3>9.9 Fugacity, Activity & Chemical Potential</h3>
+          <ul>
+            <li><strong>Fugacity (\(f\)):</strong> Introduced by G.N. Lewis for real gases; represents the "escaping tendency" of a substance from a phase:
+              \[G = RT\ln f + B, \qquad G - G^\circ = RT\ln\left(\frac{f}{f^\circ}\right)\]
+              For an ideal gas, \(f = P\); for real gases, \(f \to P\) as \(P \to 0\).</li>
+            <li><strong>Activity (\(a\)) & Activity Coefficient (\(\gamma\)):</strong> \(a = \frac{f}{f^\circ}\) (at standard state \(a = 1\)); \(\gamma = \frac{f}{P}\) measures deviation from ideality.</li>
+            <li><strong>Partial Molar Property (\(\bar{X}_i\)):</strong> \(\bar{X}_i = \left(\frac{\partial X}{\partial n_i}\right)_{T,P,n_{j\neq i}}\) (contribution of 1 mole of component \(i\) to extensive property \(X\)).</li>
+            <li><strong>Chemical Potential (\(\mu_i\)):</strong> Partial molar free energy:
+              \[\mu_i = \bar{G}_i = \left(\frac{\partial G}{\partial n_i}\right)_{T,P,n_{j\neq i}}\]
+              Matter flows spontaneously from higher \(\mu\) to lower \(\mu\); at equilibrium, \(\mu_i\) is uniform across all phases.</li>
+            <li><strong>Gibbs–Duhem Equation (constant \(T, P\)):</strong>
+              \[\sum n_i\,d\mu_i = 0 \quad (\text{from } G = \sum n_i\mu_i \text{ and } dG_{T,P} = \sum \mu_i\,dn_i)\]</li>
+            <li><strong>Variation of \(\mu_i\) with \(T\) and \(P\):</strong>
+              \[\left(\frac{\partial \mu_i}{\partial T}\right)_{P,n} = -\bar{S}_i, \qquad \left(\frac{\partial \mu_i}{\partial P}\right)_{T,n} = \bar{V}_i\]</li>
+          </ul>
+        </section>
+
+        <!-- 9.10 -->
+        <section class="card" id="ch9-zeroth">
+          <h3>9.10 Time's Arrow & Zeroth Law of Thermodynamics</h3>
+          <ul>
+            <li><strong>Time's Arrow:</strong> Because entropy of macroscopic systems increases spontaneously in irreversible processes, the Second Law defines the forward direction of time.</li>
+            <li><strong>Zeroth Law of Thermodynamics (R.H. Fowler):</strong> If two thermodynamic systems are separately in thermal equilibrium with a third system, they are also in thermal equilibrium with each other (forms the basis of temperature & thermometry).</li>
+          </ul>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- MASTER FORMULA SHEET                                    -->
+        <!-- ======================================================= -->
+        <section class="card" id="formula-sheet">
+          <h3>Master Formula Cheat Sheet (Chapters 7, 8 & 9)</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Key Equations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>First Law & Enthalpy</strong></td><td>\(\Delta E = q - w_{\text{by sys}} = q + w_{\text{on sys}}\); \(\quad H = E + PV\); \(\quad \Delta H = \Delta E + \Delta n_g RT\)</td></tr>
+                <tr><td><strong>PV Work (Isothermal)</strong></td><td>\(|W_{\text{irrev}}| = P_{\text{ext}}\Delta V\); \(\quad |W_{\text{rev}}| = 2.303\,nRT\log_{10}\frac{V_2}{V_1} = 2.303\,nRT\log_{10}\frac{P_1}{P_2}\)</td></tr>
+                <tr><td><strong>Heat Capacities</strong></td><td>\(C_v = \left(\frac{\partial E}{\partial T}\right)_V\); \(\quad C_p = \left(\frac{\partial H}{\partial T}\right)_P\); \(\quad C_p - C_v = R\); \(\quad \gamma = \frac{C_p}{C_v}\)</td></tr>
+                <tr><td><strong>Adiabatic Ideal Gas</strong></td><td>\(TV^{\gamma-1} = \text{const}\); \(\quad PV^\gamma = \text{const}\); \(\quad |W_{\text{adiab}}| = nC_v(T_1 - T_2) = \frac{nR(T_1-T_2)}{\gamma-1}\)</td></tr>
+                <tr><td><strong>Kirchhoff & Hess</strong></td><td>\(\Delta H_2 - \Delta H_1 = \Delta C_p(T_2 - T_1)\); \(\quad \Delta H^\circ_{\text{rxn}} = \sum\Delta H_f^\circ(\text{prod}) - \sum\Delta H_f^\circ(\text{react})\)</td></tr>
+                <tr><td><strong>Carnot & Entropy</strong></td><td>\(\eta = \frac{T_2 - T_1}{T_2}\); \(\quad dS = \frac{dq_{\text{rev}}}{T}\); \(\quad \Delta S_{\text{gas}} = nC_v\ln\frac{T_2}{T_1} + nR\ln\frac{V_2}{V_1} = nC_p\ln\frac{T_2}{T_1} - nR\ln\frac{P_2}{P_1}\)</td></tr>
+                <tr><td><strong>Free Energy & G–H</strong></td><td>\(G = H - TS\); \(\quad A = E - TS\); \(\quad \Delta G = \Delta H + T\left(\frac{\partial\Delta G}{\partial T}\right)_P\)</td></tr>
+                <tr><td><strong>Phase & Equilibria</strong></td><td>\(\log_{10}\frac{P_2}{P_1} = \frac{\Delta H_v}{2.303 R}\left(\frac{T_2-T_1}{T_1 T_2}\right)\); \(\quad -\Delta G^\circ = RT\ln K_p\); \(\quad \log_{10}\frac{K_{p2}}{K_{p1}} = \frac{\Delta H^\circ}{2.303 R}\left(\frac{T_2-T_1}{T_1 T_2}\right)\)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- INTERACTIVE MCQ BANK (45 QUESTIONS)                     -->
+        <!-- ======================================================= -->
+        <section class="card" id="mcq-section">
+          <h3>Interactive MCQ Practice Bank (45 Exam Questions)</h3>
+          <div class="quiz-controls">
+            <div class="quiz-tabs" id="quizTabs">
+              <button class="tab-btn active" data-filter="all">All (45)</button>
+              <button class="tab-btn" data-filter="7">Ch 7: First Law (15)</button>
+              <button class="tab-btn" data-filter="8">Ch 8: Thermochem (15)</button>
+              <button class="tab-btn" data-filter="9">Ch 9: Second Law (15)</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="score-pill" id="scorePill">Score: 0 / 0</span>
+              <button class="btn" id="resetQuizBtn">Reset</button>
+            </div>
+          </div>
+          <div id="quizContainer"></div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <button class="btt" id="bttBtn" aria-label="Back to top">↑</button>
+
+  <script>
+    // ==============================
+    // 1. THEME TOGGLE
+    // ==============================
+    const themeBtn = document.getElementById('themeBtn');
+    const savedTheme = localStorage.getItem('thermo-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('thermo-theme', next);
+      themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+
+    // ==============================
+    // 2. MOBILE SIDEBAR DRAWER
+    // ==============================
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+    overlay.addEventListener('click', closeSidebar);
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 960) closeSidebar();
+      });
+    });
+
+    // ==============================
+    // 3. EXPAND / COLLAPSE ALL
+    // ==============================
+    const toggleAllBtn = document.getElementById('toggleAllBtn');
+    let allExpanded = false;
+    toggleAllBtn.addEventListener('click', () => {
+      allExpanded = !allExpanded;
+      document.querySelectorAll('details').forEach(d => {
+        d.open = allExpanded;
+      });
+      toggleAllBtn.textContent = allExpanded ? 'Collapse All' : 'Expand All';
+    });
+
+    // ==============================
+    // 4. LIVE SEARCH FILTER
+    // ==============================
+    const searchInput = document.getElementById('searchInput');
+    const cards = Array.from(document.querySelectorAll('#contentRoot .card'));
+    const searchEmpty = document.getElementById('searchEmpty');
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach(card => {
+        if (!q || card.textContent.toLowerCase().includes(q)) {
+          card.classList.remove('search-hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('search-hidden');
+        }
+      });
+      searchEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+
+    // ==============================
+    // 5. SCROLLSPY & BACK TO TOP
+    // ==============================
+    const bttBtn = document.getElementById('bttBtn');
+    const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+    const sections = tocLinks
+      .map(l => document.querySelector(l.getAttribute('href')))
+      .filter(Boolean);
+
+    window.addEventListener('scroll', () => {
+      bttBtn.classList.toggle('show', window.scrollY > 400);
+      const scrollPos = window.scrollY + 110;
+      let activeIndex = 0;
+      sections.forEach((sec, idx) => {
+        if (sec.offsetTop <= scrollPos) activeIndex = idx;
+      });
+      tocLinks.forEach((l, idx) => l.classList.toggle('active', idx === activeIndex));
+    }, { passive: true });
+
+    bttBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ==============================
+    // 6. INTERACTIVE MCQ QUIZ (45 Qs)
+    // ==============================
+    const mcqData = [
+      // Chapter 7 (15)
+      { ch: 7, q: "Thermodynamics is applicable strictly to:", opts: ["Microscopic atoms only", "Macroscopic bulk systems", "Individual molecules", "Reaction kinetics"], ans: 1, exp: "Thermodynamics deals with bulk macroscopic matter and ignores internal atomic structure and time/rates." },
+      { ch: 7, q: "A thermos flask containing boiling water is the classic example of:", opts: ["Open system", "Closed system", "Isolated system", "Heterogeneous system"], ans: 2, exp: "Both matter and energy (heat) cannot cross the sealed, insulated boundary." },
+      { ch: 7, q: "A gas enclosed in a cylinder fitted with a movable piston is:", opts: ["Isolated system", "Open system", "Closed system", "None of these"], ans: 2, exp: "Matter cannot escape, while energy can be exchanged as heat or PV work." },
+      { ch: 7, q: "Which of the following is NOT an intensive property?", opts: ["Temperature", "Density", "Pressure", "Volume"], ans: 3, exp: "Volume depends on the quantity of matter present, making it an extensive property." },
+      { ch: 7, q: "Which set consists solely of intensive properties?", opts: ["Temp, pressure, volume", "Mass, density, volume", "Density, pressure, temp", "Internal energy, density, pressure"], ans: 2, exp: "Density, pressure, and temperature are all independent of system mass." },
+      { ch: 7, q: "For an adiabatic process, which condition always holds?", opts: ["dT = 0", "dP = 0", "dq = 0", "dV = 0"], ans: 2, exp: "No thermal energy (heat) enters or leaves an adiabatic system, so dq = 0." },
+      { ch: 7, q: "For a cyclic process, the net change in internal energy ΔE is:", opts: ["Positive", "Negative", "Zero", "Infinite"], ans: 2, exp: "Internal energy is a state function; returning to the initial state makes ΔE = 0." },
+      { ch: 7, q: "The work done in the reversible expansion of an ideal gas between states A and B is:", opts: ["Minimum", "Maximum", "Zero", "Equal to irreversible work"], ans: 1, exp: "P_ext stays infinitesimally close to P_gas throughout, maximizing the area under the P-V curve." },
+      { ch: 7, q: "For an isochoric process (constant volume), the First Law gives:", opts: ["ΔE = q_v", "ΔE = -w", "ΔE = 0", "ΔE = q - PΔV"], ans: 0, exp: "Since dV = 0, PV work w = 0, so ΔE = q_v." },
+      { ch: 7, q: "Which of the following is NOT a state function?", opts: ["Internal energy (E)", "Enthalpy (H)", "Entropy (S)", "Work (w)"], ans: 3, exp: "Both heat (q) and work (w) are path functions, not state functions." },
+      { ch: 7, q: "Heat capacity at constant pressure (C_p) is defined as:", opts: ["(∂E/∂T)_V", "(∂H/∂T)_P", "(∂E/∂T)_P", "(∂H/∂T)_V"], ans: 1, exp: "At constant pressure dq_p = dH, so C_p = (∂H/∂T)_P." },
+      { ch: 7, q: "For 1 mole of an ideal gas, C_p and C_v are related by:", opts: ["C_p - C_v = R", "C_v - C_p = R", "C_p + C_v = R", "C_p / C_v = R"], ans: 0, exp: "From H = E + RT, differentiating w.r.t. T gives C_p - C_v = R." },
+      { ch: 7, q: "The Joule–Thomson expansion of a gas through a porous plug takes place at constant:", opts: ["Temperature", "Entropy", "Enthalpy", "Volume"], ans: 2, exp: "Because q = 0 and ΔE = -(P2V2 - P1V1), we get H2 = H1 (isenthalpic)." },
+      { ch: 7, q: "Which relation holds for reversible adiabatic expansion of an ideal gas?", opts: ["T1 V1^(γ-1) = T2 V2^(γ-1)", "P1 V1^γ = P2 V2^γ", "Both (a) and (b)", "P1 V1 = P2 V2"], ans: 2, exp: "Both TV^(γ-1) = const and PV^γ = const govern reversible adiabatic processes." },
+      { ch: 7, q: "For H2(g) + I2(g) ⇌ 2HI(g), ΔH is equal to:", opts: ["ΔE + 2RT", "ΔE - 2RT", "ΔE", "ΔE + RT"], ans: 2, exp: "Here Δn_g = 2 - (1 + 1) = 0, so ΔH = ΔE + 0 = ΔE." },
+
+      // Chapter 8 (15)
+      { ch: 8, q: "In an endothermic reaction, the internal energy/enthalpy of products is:", opts: ["Less than reactants", "Greater than reactants", "Equal to reactants", "Zero"], ans: 1, exp: "Endothermic processes absorb heat, so H_products > H_reactants and ΔH > 0." },
+      { ch: 8, q: "For N2(g) + 3H2(g) ⇌ 2NH3(g), ΔH equals:", opts: ["ΔE - 2RT", "ΔE + 2RT", "ΔE + 3RT", "ΔE + RT"], ans: 0, exp: "Δn_g = 2 - (1 + 3) = -2, so ΔH = ΔE - 2RT." },
+      { ch: 8, q: "Kirchhoff's equation relates variation of ΔH with temperature via:", opts: ["ΔH2 - ΔH1 = ΔC_p (T2 - T1)", "ΔH2 - ΔH1 = ΔC_v (T2 - T1)", "ΔH = ΔE + Δn RT", "ΔG = ΔH - TΔS"], ans: 0, exp: "(∂ΔH/∂T)_P = ΔC_p, which integrates to ΔH2 - ΔH1 = ΔC_p (T2 - T1)." },
+      { ch: 8, q: "By convention, the standard enthalpy of formation (ΔH_f°) of all elements in their standard states is:", opts: ["1 kJ/mol", "Negative", "Zero", "Infinite"], ans: 2, exp: "Elements in their most stable reference state at 298 K and 1 atm have ΔH_f° = 0." },
+      { ch: 8, q: "Which thermodynamic quantity is ALWAYS negative?", opts: ["Heat of formation", "Heat of solution", "Heat of combustion", "Heat of fusion"], ans: 2, exp: "Combustion always evolves heat, so ΔH_c is negative." },
+      { ch: 8, q: "Calorific value is the heat produced when _______ of a substance is completely burnt.", opts: ["1 mole", "1 gram", "100 grams", "1 kg-mole"], ans: 1, exp: "Calorific value is heat liberated per gram (cal/g or kJ/g)." },
+      { ch: 8, q: "The heat of neutralization of any strong acid with any strong base in dilute solution is approximately:", opts: ["-57.36 kJ", "+57.36 kJ", "-28.68 kJ", "-114.72 kJ"], ans: 0, exp: "It corresponds to H+(aq) + OH-(aq) → H2O(l), ΔH ≈ -57.36 kJ." },
+      { ch: 8, q: "The heat of neutralization of a weak acid by a strong base is _______ that of a strong acid.", opts: ["Greater in magnitude than", "Lesser in magnitude than", "Equal to", "Double"], ans: 1, exp: "Part of the evolved heat is consumed in ionizing/dissociating the weak acid." },
+      { ch: 8, q: "The enthalpy change when 1 mole of a solid converts directly into vapor below its melting point is:", opts: ["Heat of fusion", "Heat of vaporization", "Heat of sublimation", "Heat of transition"], ans: 2, exp: "Direct solid-to-gas phase change is sublimation." },
+      { ch: 8, q: "The enthalpy change when 1 mole of an element changes from one allotropic form to another is:", opts: ["Heat of sublimation", "Heat of transition", "Heat of fusion", "Heat of atomization"], ans: 1, exp: "Allotropic conversion (e.g., diamond → graphite) involves heat of transition." },
+      { ch: 8, q: "The total heat change in a reaction is the same whether done in one step or multiple steps. This is:", opts: ["Kirchhoff's Law", "Hess's Law", "Lavoisier–Laplace Law", "Carnot Theorem"], ans: 1, exp: "Hess's Law of Constant Heat Summation reflects that ΔH is a state function." },
+      { ch: 8, q: "When a chemical bond is broken, the enthalpy change is positive because heat is:", opts: ["Evolved", "Absorbed", "Unchanged", "Zero"], ans: 1, exp: "Energy must be supplied to overcome bonding attraction and separate atoms." },
+      { ch: 8, q: "For CaCO3(s) → CaO(s) + CO2(g), which relation is true?", opts: ["ΔH = ΔE", "ΔH > ΔE", "ΔH < ΔE", "ΔH = 0"], ans: 1, exp: "Δn_g = +1, so ΔH = ΔE + RT > ΔE." },
+      { ch: 8, q: "The apparatus used to measure heat of combustion at constant volume is:", opts: ["Water calorimeter", "Bomb calorimeter", "Porous plug", "Equilibrium box"], ans: 1, exp: "A bomb calorimeter operates at rigid constant volume, giving q_v = ΔE." },
+      { ch: 8, q: "For A2(g) + B2(g) → 2AB(g), ΔH = x kcal. The enthalpy of formation of AB(g) is:", opts: ["x kcal", "-x kcal", "x/2 kcal", "-x/2 kcal"], ans: 2, exp: "Heat of formation is defined per 1 mole of product formed, so x/2 kcal." },
+
+      // Chapter 9 (15)
+      { ch: 9, q: "Entropy is a thermodynamic measure of:", opts: ["Concentration", "Molecular velocity", "Randomness or disorder", "Internal pressure"], ans: 2, exp: "Entropy S quantifies the degree of randomness or disorder of molecules." },
+      { ch: 9, q: "According to the Third Law of Thermodynamics, at absolute zero (0 K) the entropy of a pure perfect crystal is:", opts: ["Infinite", "Maximum", "Zero", "Negative"], ans: 2, exp: "At 0 K all thermal motion ceases in perfect crystalline order, giving S = 0." },
+      { ch: 9, q: "The entropy of a substance generally increases in the order:", opts: ["Gas < Liquid < Solid", "Solid < Liquid < Gas", "Gas < Solid < Liquid", "Liquid < Solid < Gas"], ans: 1, exp: "Disorder and molecular freedom increase markedly from solid → liquid → gas." },
+      { ch: 9, q: "The efficiency of a reversible Carnot engine operating between 400 K and 300 K is:", opts: ["1.0", "0.75", "0.50", "0.25"], ans: 3, exp: "η = (T2 - T1)/T2 = (400 - 300)/400 = 100/400 = 0.25 (25%)." },
+      { ch: 9, q: "The efficiency of an irreversible Carnot cycle compared to a reversible one between the same temperatures is:", opts: ["Less than", "Greater than", "Equal to", "Infinite"], ans: 0, exp: "By Carnot's theorem, no engine can exceed the efficiency of a reversible Carnot engine." },
+      { ch: 9, q: "Gibbs free energy (G) is defined as:", opts: ["G = H + TS", "G = H - TS", "G = E - TS", "G = TS - H"], ans: 1, exp: "G = H - TS, whereas Helmholtz work function is A = E - TS." },
+      { ch: 9, q: "At constant temperature and pressure, a process is spontaneous when:", opts: ["ΔG > 0", "ΔG < 0", "ΔG = 0", "ΔS_univ < 0"], ans: 1, exp: "Spontaneous processes at constant T, P always proceed with a decrease in Gibbs free energy (ΔG < 0)." },
+      { ch: 9, q: "Which equation calculates ΔH of a reaction when ΔG is known at two temperatures?", opts: ["Gibbs–Helmholtz equation", "Clausius–Clapeyron equation", "Kirchhoff's equation", "Gibbs–Duhem equation"], ans: 0, exp: "ΔG = ΔH + T(∂ΔG/∂T)_P links ΔH directly to the temperature derivative of ΔG." },
+      { ch: 9, q: "The equation dP/dT = ΔH / [T(V2 - V1)] is known as:", opts: ["Gibbs–Helmholtz equation", "Clapeyron equation", "van't Hoff isochore", "Kirchhoff's equation"], ans: 1, exp: "This is the exact Clapeyron equation for phase equilibrium." },
+      { ch: 9, q: "The equation for the van't Hoff isotherm at standard states is:", opts: ["-ΔG° = 2.303 RT log K_p", "ΔG° = 2.303 RT log K_p", "-ΔG° = 2.303 RT² log K_p", "ΔG° = RT / K_p"], ans: 0, exp: "At equilibrium, ΔG° = -RT ln K_p = -2.303 RT log10 K_p." },
+      { ch: 9, q: "The escaping tendency of a substance from a given state, introduced by Lewis, is called:", opts: ["Spontaneity", "Fugacity", "Enthalpy", "Viscosity"], ans: 1, exp: "Fugacity (f) represents escaping tendency; for ideal gases f = P." },
+      { ch: 9, q: "In which reaction is the increase in entropy maximum?", opts: ["CaCO3(s) → CaO(s) + CO2(g)", "CO(g) + ½O2(g) → CO2(g)", "N2(g) + 3H2(g) → 2NH3(g)", "H2(g) + I2(g) → 2HI(g)"], ans: 0, exp: "CaCO3 decomposition has Δn_g = +1 (generates gas from a solid), giving maximum +ΔS." },
+      { ch: 9, q: "If ΔH = 100 kJ and ΔS = 100 J K⁻¹ at 400 K, the value of ΔG is:", opts: ["0 kJ", "100 kJ", "60 kJ", "-60 kJ"], ans: 2, exp: "ΔG = ΔH - TΔS = 100 kJ - (400 K × 0.100 kJ/K) = 100 - 40 = 60 kJ." },
+      { ch: 9, q: "What is the correct SI unit for molar entropy?", opts: ["kJ mol", "J K⁻¹ mol", "J K⁻¹ mol⁻¹", "kJ K"], ans: 2, exp: "Entropy = heat / (temp × moles), so SI unit is J K⁻¹ mol⁻¹." },
+      { ch: 9, q: "Which condition guarantees a reaction is NEVER spontaneous at any temperature?", opts: ["ΔH < 0, ΔS > 0", "ΔH > 0, ΔS > 0", "ΔH > 0, ΔS < 0", "ΔH < 0, ΔS < 0"], ans: 2, exp: "When ΔH > 0 and ΔS < 0, ΔG = ΔH - TΔS is positive at all T." }
+    ];
+
+    const quizContainer = document.getElementById('quizContainer');
+    const scorePill = document.getElementById('scorePill');
+    const quizTabs = document.getElementById('quizTabs');
+    const resetQuizBtn = document.getElementById('resetQuizBtn');
+
+    let currentFilter = 'all';
+    let userAnswers = {}; // index -> chosen option index
+
+    function updateScore() {
+      const answeredKeys = Object.keys(userAnswers);
+      let correct = 0;
+      answeredKeys.forEach(idx => {
+        if (userAnswers[idx] === mcqData[idx].ans) correct++;
+      });
+      scorePill.textContent = `Score: ${correct} / ${answeredKeys.length}`;
+    }
+
+    function renderQuiz() {
+      quizContainer.innerHTML = '';
+      mcqData.forEach((item, idx) => {
+        if (currentFilter !== 'all' && String(item.ch) !== currentFilter) return;
+
+        const div = document.createElement('div');
+        div.className = 'mcq-item';
+
+        const qEl = document.createElement('div');
+        qEl.className = 'mcq-q';
+        qEl.innerHTML = `<span class="mcq-tag">Ch ${item.ch}</span> Q${idx + 1}. ${item.q}`;
+        div.appendChild(qEl);
+
+        const optsWrap = document.createElement('div');
+        optsWrap.className = 'mcq-opts';
+
+        const expEl = document.createElement('div');
+        expEl.className = 'mcq-exp';
+        expEl.textContent = 'Explanation: ' + item.exp;
+
+        const answered = userAnswers[idx] !== undefined;
+
+        item.opts.forEach((optText, oIdx) => {
+          const btn = document.createElement('button');
+          btn.className = 'mcq-opt';
+          btn.textContent = `${String.fromCharCode(97 + oIdx)}) ${optText}`;
+          if (answered) {
+            btn.disabled = true;
+            if (oIdx === item.ans) btn.classList.add('correct');
+            else if (oIdx === userAnswers[idx]) btn.classList.add('wrong');
+          }
+          btn.addEventListener('click', () => {
+            if (userAnswers[idx] !== undefined) return;
+            userAnswers[idx] = oIdx;
+            updateScore();
+            renderQuiz();
+          });
+          optsWrap.appendChild(btn);
+        });
+
+        if (answered) expEl.classList.add('show');
+        div.appendChild(optsWrap);
+        div.appendChild(expEl);
+        quizContainer.appendChild(div);
+      });
+    }
+
+    quizTabs.addEventListener('click', e => {
+      if (!e.target.classList.contains('tab-btn')) return;
+      quizTabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      currentFilter = e.target.dataset.filter;
+      renderQuiz();
+    });
+
+    resetQuizBtn.addEventListener('click', () => {
+      userAnswers = {};
+      updateScore();
+      renderQuiz();
+    });
+
+    renderQuiz();
+    updateScore();
+
+    // ==============================
+    // 7. KATEX AUTO-RENDER
+    // ==============================
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
+</body>
+</html>
