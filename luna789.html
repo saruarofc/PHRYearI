@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A complete, student-friendly study guide to thermodynamics, thermochemistry, entropy, and free energy.">
+<title>Thermodynamics — Complete Study Guide</title>
+<style>
+  :root{
+    --ink:#192b3a;
+    --muted:#536779;
+    --navy:#14324b;
+    --blue:#176b87;
+    --teal:#138477;
+    --pale:#eef6f8;
+    --line:#d7e3e9;
+    --paper:#ffffff;
+    --bg:#f3f7f9;
+    --orange:#a65a19;
+    --orange-bg:#fff5e9;
+    --green:#247052;
+    --green-bg:#eef8f1;
+    --red:#a63d39;
+    --red-bg:#fff1ef;
+    --shadow:0 8px 24px rgba(18,48,67,.07);
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:80px}
+  body{
+    margin:0;
+    color:var(--ink);
+    background:var(--bg);
+    font:16px/1.62 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  button{font:inherit}
+  .topbar{
+    position:sticky;top:0;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:.7rem clamp(1rem,3vw,2rem);
+    color:#fff;background:var(--navy);
+    box-shadow:0 2px 10px rgba(0,0,0,.12);
+  }
+  .brand{font-weight:750;letter-spacing:.02em}
+  .top-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+  .top-actions button{
+    border:1px solid rgba(255,255,255,.45);border-radius:7px;
+    background:transparent;color:#fff;padding:.35rem .65rem;cursor:pointer;
+  }
+  .top-actions button:hover{background:rgba(255,255,255,.12)}
+  .hero{
+    color:#fff;background:linear-gradient(120deg,#153b55,#176b87 62%,#138477);
+    padding:clamp(2rem,5vw,4rem) clamp(1rem,5vw,4rem);
+  }
+  .hero-inner{max-width:1450px;margin:auto}
+  .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;font-weight:750;opacity:.85}
+  h1{font-size:clamp(2rem,5vw,3.8rem);line-height:1.07;margin:.45rem 0 .8rem}
+  .hero p{max-width:850px;margin:.5rem 0;color:#e8f4f7;font-size:1.08rem}
+  .hero-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.1rem}
+  .hero-pills span{
+    border:1px solid rgba(255,255,255,.36);border-radius:99px;
+    padding:.25rem .65rem;font-size:.86rem;background:rgba(255,255,255,.08)
+  }
+  .layout{
+    max-width:1500px;margin:0 auto;padding:1.25rem;
+    display:grid;grid-template-columns:265px minmax(0,1fr);gap:1.25rem;align-items:start;
+  }
+  .toc{
+    position:sticky;top:76px;max-height:calc(100vh - 92px);overflow:auto;
+    padding:1rem;background:var(--paper);border:1px solid var(--line);
+    border-radius:12px;box-shadow:var(--shadow);
+  }
+  .toc h2{font-size:1rem;margin:0 0 .6rem;color:var(--navy)}
+  .toc ul{list-style:none;padding:0;margin:0}
+  .toc li{margin:.2rem 0}
+  .toc a{display:block;padding:.24rem .4rem;border-radius:6px;font-size:.88rem;color:#315166}
+  .toc a:hover{background:var(--pale);text-decoration:none}
+  .toc .toc-chapter{font-weight:750;color:var(--navy);margin-top:.75rem}
+  main{min-width:0}
+  .intro-card,.chapter,.reference,.question-bank{
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);margin-bottom:1.2rem;
+  }
+  .intro-card{padding:1.15rem 1.3rem}
+  .chapter{padding:clamp(1rem,2.6vw,2rem)}
+  .chapter-title{
+    display:flex;align-items:flex-start;gap:.85rem;
+    border-bottom:2px solid var(--line);padding-bottom:.9rem;margin-bottom:1.1rem;
+  }
+  .chapter-no{
+    flex:0 0 auto;display:grid;place-items:center;
+    width:2.8rem;height:2.8rem;border-radius:9px;
+    color:#fff;background:var(--blue);font-weight:800;font-size:1.05rem;
+  }
+  h2{font-size:clamp(1.45rem,2.5vw,2rem);line-height:1.2;margin:0;color:var(--navy)}
+  h3{font-size:1.22rem;line-height:1.3;color:var(--blue);margin:1.7rem 0 .55rem}
+  h4{font-size:1.02rem;color:var(--navy);margin:1.2rem 0 .4rem}
+  p{margin:.55rem 0}
+  ul,ol{padding-left:1.35rem;margin:.45rem 0 .8rem}
+  li{margin:.22rem 0}
+  .lead{font-size:1.06rem;color:#2a4659}
+  .definition,.note,.important,.example,.warning,.exam-tip{
+    border-left:4px solid;padding:.75rem .9rem;margin:.8rem 0;border-radius:0 8px 8px 0;
+  }
+  .definition{background:#edf7fa;border-color:var(--blue)}
+  .note{background:#f1f5f7;border-color:#8094a2}
+  .important{background:var(--green-bg);border-color:var(--green)}
+  .example{background:#f1f7fb;border-color:#4580a0}
+  .warning{background:var(--orange-bg);border-color:var(--orange)}
+  .exam-tip{background:#f3f1fb;border-color:#7461a8}
+  .definition strong,.important strong,.warning strong,.exam-tip strong{color:var(--navy)}
+  .formula{
+    margin:.65rem 0;padding:.7rem .85rem;
+    background:#f5f9fb;border:1px solid var(--line);border-radius:8px;
+    text-align:center;font-family:Georgia,"Times New Roman",serif;
+    font-size:1.06rem;line-height:1.65;overflow-wrap:anywhere;
+  }
+  .formula.compact{padding:.4rem .65rem;margin:.35rem 0}
+  .formula.left{text-align:left}
+  .formula strong{color:var(--navy)}
+  .small{font-size:.9rem;color:var(--muted)}
+  .muted{color:var(--muted)}
+  .tag{
+    display:inline-block;border-radius:99px;background:#e7f2f5;color:#28586d;
+    padding:.12rem .52rem;font-size:.78rem;font-weight:700;vertical-align:middle
+  }
+  .table-wrap{overflow-x:auto;margin:.8rem 0}
+  table{width:100%;border-collapse:collapse;min-width:550px;font-size:.94rem}
+  caption{text-align:left;font-weight:750;color:var(--navy);padding:.45rem 0}
+  th,td{padding:.58rem .65rem;text-align:left;vertical-align:top;border:1px solid var(--line)}
+  th{background:#eaf3f6;color:#183d53}
+  tr:nth-child(even) td{background:#fbfdfe}
+  .process-table td:first-child,.process-table th:first-child{font-weight:700;white-space:nowrap}
+  .two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+  .three-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8rem}
+  .mini-card{padding:.8rem;border:1px solid var(--line);border-radius:9px;background:#fbfdfe}
+  .mini-card h4{margin:.05rem 0 .35rem}
+  .diagram{
+    margin:1rem 0;padding:.7rem;background:#fbfdfe;border:1px solid var(--line);border-radius:10px;
+    overflow-x:auto
+  }
+  .diagram svg{display:block;width:100%;height:auto;max-height:340px}
+  .diagram figcaption{font-size:.88rem;color:var(--muted);margin:.45rem .2rem 0}
+  details{
+    margin:.65rem 0;border:1px solid var(--line);border-radius:9px;background:#fff;
+  }
+  details summary{
+    cursor:pointer;list-style:none;padding:.72rem .9rem;
+    font-weight:720;color:var(--navy);background:#f6fafb;border-radius:9px;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"＋";float:right;color:var(--blue);font-weight:800}
+  details[open] summary::after{content:"−"}
+  details .details-body{padding:.15rem .9rem .85rem}
+  .worked-list{padding-left:1.55rem}
+  .worked-list li{padding:.2rem 0 .4rem}
+  .worked-list strong{color:var(--navy)}
+  .step-list{counter-reset:step;list-style:none;padding:0}
+  .step-list li{counter-increment:step;position:relative;padding-left:2.4rem;margin:.75rem 0}
+  .step-list li::before{
+    content:counter(step);position:absolute;left:0;top:0;
+    width:1.65rem;height:1.65rem;border-radius:50%;display:grid;place-items:center;
+    color:#fff;background:var(--teal);font-size:.83rem;font-weight:800
+  }
+  .answer{border-top:1px dashed var(--line);padding-top:.65rem;margin-top:.65rem}
+  .footer{max-width:1500px;margin:0 auto;padding:0 1.25rem 2rem;color:var(--muted);font-size:.9rem}
+  .back-top{display:inline-block;margin-top:.7rem;font-weight:700}
+  @media(max-width:980px){
+    .layout{grid-template-columns:1fr}
+    .toc{position:relative;top:auto;max-height:none}
+    .toc ul{columns:2}
+  }
+  @media(max-width:620px){
+    body{font-size:15px}
+    .layout{padding:.65rem;gap:.7rem}
+    .chapter{padding:1rem}
+    .two-col,.three-col{grid-template-columns:1fr}
+    .toc ul{columns:1}
+    .topbar{align-items:flex-start;flex-direction:column}
+    table{min-width:490px}
+    .chapter-title{gap:.6rem}
+  }
+  @media print{
+    body{background:white;color:#000;font-size:11pt}
+    .topbar,.toc,.top-actions,.back-top{display:none!important}
+    .layout{display:block;padding:0}
+    .chapter,.reference,.question-bank,.intro-card{box-shadow:none;border:0;padding:0;margin:0 0 1rem}
+    details{break-inside:avoid}
+    details:not([open])>.details-body{display:block}
+    details summary::after{display:none}
+    a{color:#000}
+  }
+</style>
+</head>
+<body>
+<a id="top"></a>
+<header class="topbar">
+  <div class="brand">Thermodynamics · Complete Study Guide</div>
+  <div class="top-actions">
+    <button type="button" id="expandAll">Expand all</button>
+    <button type="button" id="collapseAll">Collapse details</button>
+    <button type="button" onclick="window.print()">Print / save PDF</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Physical chemistry · Chapters 7–9</div>
+    <h1>Thermodynamics</h1>
+    <p>A compact but comprehensive guide to energy, heat, work, thermochemistry, entropy, and spontaneity. Definitions, derivations, comparison tables, worked examples, and the supplied written-question bank are all included.</p>
+    <div class="hero-pills">
+      <span>First law</span><span>Thermochemistry</span><span>Second & third laws</span>
+      <span>Ideal-gas relations</span><span>Exam revision</span>
+    </div>
+  </div>
+</section>
+
+<div class="layout">
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Quick navigation</h2>
+    <ul>
+      <li class="toc-chapter">Chapter 7 · First law</li>
+      <li><a href="#scope">Scope and limits</a></li>
+      <li><a href="#systems">Systems and phases</a></li>
+      <li><a href="#properties">Properties and state</a></li>
+      <li><a href="#equilibrium">Equilibrium</a></li>
+      <li><a href="#processes">Processes</a></li>
+      <li><a href="#reversible">Reversible / irreversible</a></li>
+      <li><a href="#heat-work">Heat, work, units</a></li>
+      <li><a href="#pv-work">PV work and maximum work</a></li>
+      <li><a href="#internal-energy">Internal energy and first law</a></li>
+      <li><a href="#enthalpy">Enthalpy and ΔH–ΔE</a></li>
+      <li><a href="#heat-capacity">Molar heat capacities</a></li>
+      <li><a href="#joule-thomson">Joule–Thomson effect</a></li>
+      <li><a href="#adiabatic">Adiabatic ideal gas</a></li>
+      <li><a href="#examples7">Chapter 7 example index</a></li>
+
+      <li class="toc-chapter">Chapter 8 · Thermochemistry</li>
+      <li><a href="#thermochemistry-intro">Meaning and history</a></li>
+      <li><a href="#exo-endo">Exothermic / endothermic</a></li>
+      <li><a href="#thermochemical-equations">Thermochemical equations</a></li>
+      <li><a href="#delta-h-e">ΔH and ΔE</a></li>
+      <li><a href="#kirchhoff">Kirchhoff equations</a></li>
+      <li><a href="#reaction-heats">Types of reaction heat</a></li>
+      <li><a href="#hess">Hess’s and Lavoisier–Laplace laws</a></li>
+      <li><a href="#bond-energy">Bond energy</a></li>
+      <li><a href="#calorimetry">Calorimetry</a></li>
+      <li><a href="#examples8">Chapter 8 example index</a></li>
+
+      <li class="toc-chapter">Chapter 9 · Second law</li>
+      <li><a href="#spontaneity">Spontaneity</a></li>
+      <li><a href="#entropy">Entropy and the second law</a></li>
+      <li><a href="#third-law">Third law and standard entropy</a></li>
+      <li><a href="#carnot">Heat engines and Carnot cycle</a></li>
+      <li><a href="#entropy-ideal-gas">Entropy changes</a></li>
+      <li><a href="#free-energy">Gibbs and Helmholtz functions</a></li>
+      <li><a href="#spontaneity-criteria">Spontaneity criteria</a></li>
+      <li><a href="#clapeyron">Clapeyron equations</a></li>
+      <li><a href="#vanthoff">Van’t Hoff isotherm</a></li>
+      <li><a href="#chemical-potential">Fugacity, activity, chemical potential</a></li>
+      <li><a href="#examples9">Chapter 9 example index</a></li>
+      <li class="toc-chapter"><a href="#written-qb">Supplied written-question bank</a></li>
+      <li><a href="#formula-sheet">Final formula sheet</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="intro-card" aria-label="Sign convention">
+      <h2>Start here: one consistent sign convention</h2>
+      <p>Use <strong>Q</strong> for heat transferred to the system and <strong>W<sub>by</sub></strong> for work done by the system. This makes expansion work positive as an output.</p>
+      <div class="formula"><strong>ΔE = Q − W<sub>by</sub></strong> &nbsp; = &nbsp; <strong>Q + w<sub>on</sub></strong>, where <strong>w<sub>on</sub> = −W<sub>by</sub></strong></div>
+      <ul>
+        <li><strong>Heat:</strong> Q &gt; 0 enters the system; Q &lt; 0 leaves it.</li>
+        <li><strong>Work:</strong> W<sub>by</sub> &gt; 0 when the system does work; w<sub>on</sub> &gt; 0 when surroundings do work on it.</li>
+        <li>Thus, expansion has W<sub>by</sub> &gt; 0 and w<sub>on</sub> &lt; 0; compression has the opposite signs.</li>
+      </ul>
+      <div class="warning"><strong>Notation alert.</strong> The supplied textbook extraction switches between “work by the system” and “work on the system” in some equations and contains a few OCR/arithmetic errors. This guide states both conventions explicitly and uses the consistent equation <strong>ΔE = Q − W<sub>by</sub></strong>. If your teacher uses the chemistry convention w = work on the system, use <strong>ΔE = Q + w</strong>.</div>
+    </section>
+
+    <!-- CHAPTER 7 -->
+    <section class="chapter" id="ch7">
+      <div class="chapter-title">
+        <div class="chapter-no">7</div>
+        <div><h2>First Law of Thermodynamics — Basic Concepts</h2><div class="muted">Energy accounting, systems, processes, work, internal energy, enthalpy, and heat capacity</div></div>
+      </div>
+
+      <h3 id="thermo-intro">1. What thermodynamics studies</h3>
+      <p class="lead"><strong>Thermodynamics</strong> studies heat and other forms of energy entering or leaving a system as it undergoes a physical or chemical change. Changes in measurable properties—temperature, pressure, volume, and composition—help us determine energy changes, heat, and work.</p>
+      <p>The subject is based on broad empirical generalizations called the <strong>first, second, and third laws</strong>. They are supported by experiment and do not depend on a particular theory of atomic or molecular structure.</p>
+
+      <h3 id="scope">2. Scope and limitations</h3>
+      <div class="two-col">
+        <div class="mini-card">
+          <h4>Scope</h4>
+          <ol>
+            <li>Many physical-chemistry laws (including the van ’t Hoff law of lowering of vapour pressure, the Phase Rule, and the Distribution Law) can be derived from thermodynamics.</li>
+            <li>It predicts whether a physical or chemical change is possible under stated temperature, pressure, and concentration conditions.</li>
+            <li>It predicts how far a change proceeds before equilibrium is reached.</li>
+          </ol>
+        </div>
+        <div class="mini-card">
+          <h4>Limitations</h4>
+          <ol>
+            <li>It treats <strong>macroscopic bulk systems</strong>; it does not describe individual atoms or molecules or their internal structure.</li>
+            <li>It does not give the <strong>rate</strong> of a physical change or reaction. It mainly compares initial and final equilibrium states.</li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 id="systems">3. System, boundary, surroundings, and phases</h3>
+      <div class="definition"><strong>System:</strong> the part of the universe selected for study. <strong>Surroundings:</strong> everything outside it. <strong>Boundary:</strong> the real or imaginary surface separating the two.</div>
+      <p>Examples: water in a beaker is the system; the beaker and nearby air are surroundings. Oxygen in a piston-cylinder is the system; the cylinder, piston, and outside objects are surroundings.</p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 760 185" role="img" aria-label="Thermodynamic system and surrounding boundary">
+          <rect x="25" y="24" width="205" height="132" rx="18" fill="#fff5df" stroke="#d9ad4e" stroke-width="2"/>
+          <rect x="78" y="58" width="100" height="67" rx="8" fill="#d9f1e6" stroke="#138477" stroke-width="3"/>
+          <text x="128" y="98" text-anchor="middle" font-size="17" fill="#14324b">System</text>
+          <text x="128" y="145" text-anchor="middle" font-size="14" fill="#536779">boundary surrounds it</text>
+          <text x="128" y="43" text-anchor="middle" font-size="14" fill="#536779">Surroundings</text>
+          <text x="298" y="97" font-size="25" fill="#176b87">↔</text>
+          <rect x="365" y="24" width="360" height="132" rx="14" fill="#f5f9fb" stroke="#b9cbd4" stroke-width="2"/>
+          <rect x="408" y="58" width="120" height="67" rx="8" fill="#d9f1e6" stroke="#138477" stroke-width="3"/>
+          <text x="468" y="98" text-anchor="middle" font-size="17" fill="#14324b">System</text>
+          <text x="575" y="72" font-size="14" fill="#536779">Matter and/or energy</text>
+          <text x="575" y="96" font-size="14" fill="#536779">may cross the boundary,</text>
+          <text x="575" y="120" font-size="14" fill="#536779">depending on system type.</text>
+        </svg>
+        <figcaption>System boundaries can be physical or imaginary; their exchange rules define the system type.</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Three thermodynamic system types</caption>
+          <thead><tr><th>System</th><th>Matter crosses?</th><th>Energy crosses?</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Isolated</strong></td><td>No</td><td>No</td><td>Ideal insulated, sealed vessel; a thermos is an approximate example.</td></tr>
+            <tr><td><strong>Closed</strong></td><td>No</td><td>Yes (heat, work, radiation)</td><td>Hot water in a sealed tube; gas in a closed piston-cylinder.</td></tr>
+            <tr><td><strong>Open</strong></td><td>Yes</td><td>Yes</td><td>Water in an open beaker; zinc reacting with acid in an open beaker, where hydrogen escapes.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="definition"><strong>Adiabatic system/process:</strong> no thermal energy (heat) passes into or out of the system: <strong>Q = 0</strong>. An adiabatic system need not be isolated: it may still do work, and an open adiabatic system may exchange matter.</div>
+
+      <h4>Homogeneous and heterogeneous systems</h4>
+      <ul>
+        <li><strong>Homogeneous:</strong> uniform throughout and consists of one phase. Examples: a pure solid, liquid, or gas; a gas mixture; a true solution of a solid in a liquid.</li>
+        <li><strong>Phase:</strong> a homogeneous, physically distinct, mechanically separable part of a system.</li>
+        <li><strong>Heterogeneous:</strong> nonuniform and contains two or more phases. Ice–water has two phases; ice–water–vapour has three.</li>
+      </ul>
+
+      <h3 id="properties">4. Properties and state of a system</h3>
+      <div class="table-wrap">
+        <table>
+          <caption>Intensive versus extensive properties</caption>
+          <thead><tr><th>Intensive — independent of amount</th><th>Extensive — depends on amount and is additive</th></tr></thead>
+          <tbody>
+            <tr><td>Temperature, pressure, density, concentration</td><td>Mass, volume, number of moles</td></tr>
+            <tr><td>Boiling point, freezing point, surface tension</td><td>Internal energy, enthalpy, entropy</td></tr>
+            <tr><td>Refractive index, viscosity</td><td>Gibbs free energy</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Doubling the amount of a system doubles an extensive property such as volume or internal energy; it does not double an intensive property such as temperature or density.</p>
+
+      <div class="definition"><strong>State:</strong> the condition of a system when its properties are fixed. Pressure (P), temperature (T), volume (V), mass, and composition are state variables (also called state functions or thermodynamic parameters).</div>
+      <p>For one mole of a pure ideal gas, the equation of state is <strong>PV = RT</strong>; for n moles, <strong>PV = nRT</strong>. If composition is fixed and two independent variables are specified, the equation of state fixes the third. For example, specifying P and T fixes V.</p>
+      <ul>
+        <li><strong>Independent state variables:</strong> the variables chosen to define the state.</li>
+        <li><strong>Dependent state variable:</strong> a variable determined from the independent ones and the equation of state.</li>
+        <li>A state function’s change depends only on the initial and final states, not on the route. For example, heating water from 273.15 K to 298.15 K gives ΔT = 25.00 K by any route.</li>
+      </ul>
+      <div class="note"><strong>State versus path:</strong> internal energy, enthalpy, and entropy are state functions. Heat and work depend on the process and are path functions.</div>
+
+      <h3 id="equilibrium">5. Equilibrium and non-equilibrium</h3>
+      <ul>
+        <li><strong>Thermodynamic equilibrium:</strong> state variables have uniform, constant values throughout each phase.</li>
+        <li><strong>Non-equilibrium:</strong> state variables differ from one part of the system to another. Rapidly compressing a gas can heat the region near the piston while the far end remains cooler.</li>
+      </ul>
+      <p>Thermodynamics describes equilibrium states; a rapid process may pass through non-equilibrium states that cannot be assigned one uniform P and T.</p>
+      <div class="important"><strong>Equilibrium criteria:</strong> (1) uniform system temperature, equal to the surroundings at thermal equilibrium; (2) uniform mechanical properties, with no internal region doing net work on another; (3) uniform chemical composition and no net chemical change. In a heterogeneous system, each phase has constant state variables.</div>
+
+      <h3 id="processes">6. Thermodynamic processes</h3>
+      <p>A <strong>process</strong> is a change of a system from one state to another.</p>
+      <div class="table-wrap">
+        <table class="process-table">
+          <caption>Common process types</caption>
+          <thead><tr><th>Process</th><th>Held constant</th><th>Useful condition / example</th></tr></thead>
+          <tbody>
+            <tr><td>Isothermal</td><td>Temperature</td><td>dT = 0; often maintained by contact with a thermostat.</td></tr>
+            <tr><td>Adiabatic</td><td>No heat exchange</td><td>Q = 0; approached with insulation, a thermos, vacuum insulation, or polished surfaces.</td></tr>
+            <tr><td>Isobaric</td><td>Pressure</td><td>dP = 0; heating and boiling water at atmospheric pressure.</td></tr>
+            <tr><td>Isochoric (isometric)</td><td>Volume</td><td>dV = 0; heating in a rigid, non-expanding chamber.</td></tr>
+            <tr><td>Cyclic</td><td>Returns to initial state</td><td>Overall ΔE = 0 and ΔH = 0; all state functions return to their starting values.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="reversible">7. Reversible and irreversible processes</h3>
+      <div class="definition"><strong>Reversible process:</strong> an ideal limiting process carried out through infinitely many infinitesimal steps, with the system in equilibrium at every stage. An infinitesimal change in conditions can reverse its direction.</div>
+      <p>For gas expansion, the external and internal pressures are almost equal at every step. Lowering the external pressure by an infinitesimal dP allows an infinitesimal expansion; raising it by dP reverses the process. The ideal model assumes a weightless, frictionless piston.</p>
+      <div class="definition"><strong>Irreversible process:</strong> a real process that proceeds through finite differences (often in one rapid step). The system is generally in equilibrium only before and after the change, not at intermediate points.</div>
+      <div class="table-wrap">
+        <table>
+          <caption>Comparison of reversible and irreversible processes</caption>
+          <thead><tr><th>Reversible</th><th>Irreversible</th></tr></thead>
+          <tbody>
+            <tr><td>Infinitely slow; infinitely many infinitesimal stages.</td><td>Finite, measurable speed; often a sudden change.</td></tr>
+            <tr><td>Idealized and not exactly attainable; no friction or dissipative effects.</td><td>Real and occurs in nature or laboratory.</td></tr>
+            <tr><td>System remains in equilibrium throughout.</td><td>System is generally at equilibrium only initially and finally.</td></tr>
+            <tr><td>Can be reversed by an infinitesimal change; the surroundings can also be restored ideally.</td><td>Does not reverse by itself; restoring all changes requires external intervention.</td></tr>
+            <tr><td>Gives the greatest work output for the same initial and final states in an expansion.</td><td>Gives less work output than the corresponding reversible expansion.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 id="heat-work">8. Heat, work, units, and signs</h3>
+      <p>When a system changes state, energy may cross the boundary as <strong>heat</strong> or as mechanical <strong>work</strong>. Mechanical work is force × distance. In elementary thermodynamics, the most common work is pressure–volume (PV) expansion or compression work.</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Units and conversions</caption>
+          <thead><tr><th>Quantity</th><th>Definition / conversion</th></tr></thead>
+          <tbody>
+            <tr><td>Work</td><td>1 erg = 1 dyne·cm; 1 J = 10<sup>7</sup> erg; 1 erg = 10<sup>−7</sup> J; 1 kJ = 1000 J.</td></tr>
+            <tr><td>Heat</td><td>1 calorie is the heat needed to raise 1 g of water by 1°C near 15°C. 1 cal = 4.184 J; 1 J ≈ 0.2390 cal; 1 kcal = 4.184 kJ.</td></tr>
+            <tr><td>PV units</td><td>1 Pa·m³ = 1 J; 1 L·atm = 101.325 J.</td></tr>
+            <tr><td>Gas constant</td><td>R = 8.314 J mol<sup>−1</sup> K<sup>−1</sup> ≈ 1.987 cal mol<sup>−1</sup> K<sup>−1</sup>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="two-col">
+        <div class="mini-card"><h4>Heat sign</h4><p>Q &gt; 0: heat enters the system. Q &lt; 0: heat leaves it.</p></div>
+        <div class="mini-card"><h4>Work sign</h4><p>W<sub>by</sub> &gt; 0: system does work. w<sub>on</sub> &gt; 0: surroundings do work on the system.</p></div>
+      </div>
+
+      <h3 id="pv-work">9. Pressure–volume work</h3>
+      <p>Work is evaluated using the <strong>external pressure</strong>, P<sub>ext</sub>, against which the system moves. For a piston of area A moving a distance l, ΔV = A·l.</p>
+      <div class="formula">W<sub>by</sub> = ∫<sub>V₁</sub><sup>V₂</sup> P<sub>ext</sub> dV &nbsp; ; &nbsp; w<sub>on</sub> = −∫<sub>V₁</sub><sup>V₂</sup> P<sub>ext</sub> dV<br>
+      Constant external pressure: &nbsp; W<sub>by</sub> = P<sub>ext</sub>(V₂ − V₁), &nbsp; w<sub>on</sub> = −P<sub>ext</sub>ΔV</div>
+      <p>Expansion gives positive work <em>by</em> the gas, and compression gives negative work by the gas. The work is path-dependent, not a state function.</p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 760 290" role="img" aria-label="Pressure-volume diagram showing greater area and work for reversible expansion">
+          <line x1="85" y1="235" x2="700" y2="235" stroke="#334c5d" stroke-width="2"/>
+          <line x1="85" y1="235" x2="85" y2="28" stroke="#334c5d" stroke-width="2"/>
+          <text x="703" y="242" font-size="17" fill="#14324b">V</text>
+          <text x="63" y="30" font-size="17" fill="#14324b">P</text>
+          <path d="M150 55 C245 75, 390 130, 620 190 L620 235 L150 235 Z" fill="#bfe6dc" opacity=".72"/>
+          <path d="M150 55 C245 75, 390 130, 620 190" fill="none" stroke="#176b87" stroke-width="5"/>
+          <line x1="150" y1="190" x2="620" y2="190" stroke="#a65a19" stroke-width="4"/>
+          <line x1="150" y1="55" x2="150" y2="235" stroke="#8497a2" stroke-width="1.5"/>
+          <line x1="620" y1="190" x2="620" y2="235" stroke="#8497a2" stroke-width="1.5"/>
+          <text x="169" y="48" font-size="15" fill="#14324b">Initial state</text>
+          <text x="533" y="178" font-size="15" fill="#14324b">Final P₂</text>
+          <text x="280" y="105" font-size="16" fill="#176b87">Reversible: area under P(V)</text>
+          <text x="300" y="216" font-size="15" fill="#a65a19">Irreversible: P₂ΔV rectangle</text>
+          <text x="140" y="258" font-size="14" fill="#536779">V₁</text>
+          <text x="612" y="258" font-size="14" fill="#536779">V₂</text>
+        </svg>
+        <figcaption>For the same endpoints, the reversible expansion area—and therefore work output—is greater.</figcaption>
+      </figure>
+
+      <h4>Isothermal reversible expansion of an ideal gas</h4>
+      <p>At each infinitesimal reversible step, P<sub>ext</sub> ≈ P<sub>gas</sub> = P. For n moles at constant T, P = nRT/V.</p>
+      <div class="formula">W<sub>by,rev</sub> = ∫P dV = nRT ln(V₂/V₁) = nRT ln(P₁/P₂)<br>
+      w<sub>on,rev</sub> = −nRT ln(V₂/V₁) = −nRT ln(P₁/P₂)<br>
+      log<sub>10</sub> form: ln x = 2.303 log<sub>10</sub>x</div>
+      <p>Use absolute temperature in kelvin. The units of R determine the work units. For an ideal gas, an isothermal change has ΔE = 0, so Q = W<sub>by</sub>.</p>
+
+      <h4>Isothermal irreversible expansion</h4>
+      <p>If the external pressure is dropped suddenly and remains constant at P<sub>ext</sub> during expansion:</p>
+      <div class="formula">W<sub>by,irr</sub> = P<sub>ext</sub>(V₂ − V₁)<br>
+      If P<sub>ext</sub> = P₂, then W<sub>by,irr</sub> = P₂(V₂ − V₁)</div>
+
+      <h4>Why reversible expansion gives maximum work</h4>
+      <ol>
+        <li>Work depends on the external pressure at each volume change.</li>
+        <li>The greatest opposing external pressure that still permits expansion is infinitesimally below the gas pressure.</li>
+        <li>A reversible expansion keeps those pressures almost equal at each step, so the gas pushes against the largest possible pressure throughout.</li>
+      </ol>
+      <div class="important"><strong>Result:</strong> for identical initial and final states, W<sub>by,rev</sub> &gt; W<sub>by,irr</sub>. With the “work on the system” convention, w<sub>on,rev</sub> is more negative.</div>
+
+      <h3 id="internal-energy">10. Internal energy and the first law</h3>
+      <div class="definition"><strong>Internal energy, E (also written U):</strong> the total microscopic energy of the system, including molecular translational, rotational, and vibrational energies and the kinetic and potential energies of nuclei and electrons.</div>
+      <p>Internal energy is a state function and an extensive property. Its absolute value is not normally needed; changes are used:</p>
+      <div class="formula">ΔE = E<sub>final</sub> − E<sub>initial</sub></div>
+      <p>ΔE is positive if the final energy is higher and negative if it is lower. Its SI unit is the joule; 1 cal = 4.184 J.</p>
+
+      <div class="definition"><strong>First law:</strong> energy is conserved. The total energy of an isolated system remains constant, although energy can change form. Equivalently, energy cannot be created or destroyed.</div>
+      <div class="formula"><strong>ΔE = Q − W<sub>by</sub></strong> &nbsp; (or <strong>ΔE = Q + w<sub>on</sub></strong>)</div>
+      <p>The internal-energy change of a closed system equals heat supplied to it minus work it does. The surroundings and system together conserve energy.</p>
+      <ul>
+        <li>Whenever one form of energy disappears, an equivalent amount of another form is produced.</li>
+        <li>The energy of system plus surroundings is conserved.</li>
+        <li>A perpetual-motion machine that produces work without an energy input is impossible.</li>
+      </ul>
+      <div class="table-wrap">
+        <table>
+          <caption>Useful first-law special cases</caption>
+          <thead><tr><th>Condition</th><th>Result</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Cyclic</td><td>ΔE = 0; Q<sub>net</sub> = W<sub>by,net</sub></td><td>Energy returns to its initial value.</td></tr>
+            <tr><td>Constant volume</td><td>W<sub>by</sub> = 0; Q<sub>v</sub> = ΔE</td><td>No PV expansion work.</td></tr>
+            <tr><td>Adiabatic</td><td>Q = 0; ΔE = −W<sub>by</sub></td><td>Work comes at the expense of internal energy during expansion.</td></tr>
+            <tr><td>Constant pressure, PV work only</td><td>ΔE = Q<sub>p</sub> − PΔV</td><td>Heat and expansion work both affect E.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>For an ideal gas, internal energy depends only on temperature. An isothermal ideal-gas process therefore has ΔE = 0. In free expansion into a vacuum, Q = 0 and W = 0; hence ΔE = 0 and the ideal gas temperature does not change.</p>
+
+      <h3 id="enthalpy">11. Enthalpy and the relation between ΔH and ΔE</h3>
+      <div class="definition"><strong>Enthalpy:</strong> a state function defined by <strong>H = E + PV</strong>. At constant pressure it is convenient for describing heat changes because it includes the internal energy and the PV term.</div>
+      <div class="formula">ΔH = H₂ − H₁ = ΔE + Δ(PV)<br>
+      At constant pressure: &nbsp; ΔH = ΔE + PΔV</div>
+      <p>For a process at constant pressure involving only PV work, W<sub>by</sub> = PΔV. From the first law, ΔE = Q<sub>p</sub> − PΔV; substituting into ΔH gives:</p>
+      <div class="formula"><strong>ΔH = Q<sub>p</sub></strong></div>
+      <p>Thus constant-pressure heat equals enthalpy change when only PV work is involved. At constant volume, Q<sub>v</sub> = ΔE. Positive ΔH means heat absorbed (endothermic); negative ΔH means heat released (exothermic). For reactions of only liquids and solids, ΔV is usually tiny, so ΔH ≈ ΔE.</p>
+
+      <h4>Gas-reaction relation: ΔH = ΔE + Δn<sub>g</sub>RT</h4>
+      <p>For ideal-gas reactants and products, the gas volume change at constant T and P is:</p>
+      <div class="formula">PΔV = (n<sub>products,g</sub> − n<sub>reactants,g</sub>)RT = Δn<sub>g</sub>RT<br>
+      <strong>ΔH = ΔE + Δn<sub>g</sub>RT</strong></div>
+      <p>Count <strong>only gaseous</strong> species when finding Δn<sub>g</sub>; use stoichiometric coefficients in the balanced equation. R and energy units must match.</p>
+
+      <h3 id="heat-capacity">12. Molar heat capacity; C<sub>V</sub>, C<sub>P</sub>, and Mayer’s relation</h3>
+      <div class="definition"><strong>Heat capacity:</strong> heat required to raise a system’s temperature by one degree under a specified process. <strong>Molar heat capacity:</strong> heat needed to raise one mole by 1 K.</div>
+      <div class="formula">For a finite temperature interval: C = Q/(T₂ − T₁); for a small change: C = δQ/dT<br>
+      For n moles with nearly constant C: Q = nCΔT</div>
+      <p>Because heat is path-dependent, the heating condition must be specified. Units for molar heat capacity include J mol<sup>−1</sup> K<sup>−1</sup> and cal mol<sup>−1</sup> K<sup>−1</sup>.</p>
+
+      <h4>Derivation at constant volume</h4>
+      <p>For reversible PV work, δQ = dE + P dV. At constant volume dV = 0, so δQ<sub>v</sub> = dE:</p>
+      <div class="formula"><strong>C<sub>V</sub> = (∂E/∂T)<sub>V</sub></strong> &nbsp; per mole<br>
+      For n moles: &nbsp; C<sub>V,total</sub> = (∂E/∂T)<sub>V</sub>, with dE = nC<sub>V</sub>dT</div>
+      <p>Thus constant-volume heat raises internal energy; no PV expansion work is done.</p>
+
+      <h4>Derivation at constant pressure</h4>
+      <p>Since H = E + PV, differentiating at constant pressure gives dH/dT = dE/dT + P(dV/dT). The first law shows that this is the heat capacity at constant pressure:</p>
+      <div class="formula"><strong>C<sub>P</sub> = (∂H/∂T)<sub>P</sub></strong> &nbsp; per mole</div>
+      <p>At constant pressure some supplied heat raises internal energy and some supplies expansion work. For the same temperature increase, generally C<sub>P</sub> &gt; C<sub>V</sub>.</p>
+
+      <h4>Derive C<sub>P</sub> − C<sub>V</sub> = R for one mole of an ideal gas</h4>
+      <div class="step-list">
+        <li>H = E + PV, and for one mole PV = RT; therefore H = E + RT.</li>
+        <li>Differentiate with respect to T: dH/dT = dE/dT + R.</li>
+        <li>Use C<sub>P</sub> = dH/dT and C<sub>V</sub> = dE/dT.</li>
+      </div>
+      <div class="formula"><strong>C<sub>P</sub> − C<sub>V</sub> = R</strong> &nbsp; (molar ideal-gas heat capacities)</div>
+
+      <h4>Energy and enthalpy changes when heat capacities are constant</h4>
+      <div class="formula">For n moles of an ideal gas:<br>
+      ΔE = nC<sub>V</sub>(T₂ − T₁)<br>
+      ΔH = nC<sub>P</sub>(T₂ − T₁) = ΔE + nR(T₂ − T₁)</div>
+
+      <h3 id="joule-thomson">13. Joule–Thomson (Joule–Kelvin) effect</h3>
+      <p>When a compressed real gas is forced from high pressure through a porous plug into a lower-pressure region in an insulated apparatus, its temperature often changes. This is the <strong>Joule–Thomson effect</strong>.</p>
+      <h4>Experiment and result</h4>
+      <p>An insulated tube has a porous plug in the middle, pistons on each side, and thermometers. Gas at P₁ is pushed through the plug and emerges at P₂. Most gases cool; hydrogen and helium can warm at ordinary room temperature.</p>
+      <p>The throttling process is adiabatic. The pushing work at the high-pressure side and expansion work at the low-pressure side give the energy balance:</p>
+      <div class="formula">E₁ + P₁V₁ = E₂ + P₂V₂<br>
+      H₁ = H₂; &nbsp; <strong>ΔH = 0</strong></div>
+      <div class="definition"><strong>Joule–Thomson coefficient:</strong> μ<sub>JT</sub> = (∂T/∂P)<sub>H</sub>, the temperature change per pressure change in an isenthalpic throttling process.</div>
+      <ul>
+        <li>μ<sub>JT</sub> &gt; 0: reducing pressure (dP &lt; 0) cools the gas.</li>
+        <li>μ<sub>JT</sub> &lt; 0: reducing pressure warms the gas.</li>
+        <li>The <strong>inversion temperature</strong> is where the coefficient changes sign. Most gases cool at room temperature; hydrogen and helium must first be cooled below their inversion region to be liquefied by further throttling.</li>
+      </ul>
+      <p>At constant H, a rise in PV must be balanced by a fall in E, often causing cooling. The effect is a real-gas effect; an ideal gas has enthalpy dependent only on T and has no Joule–Thomson temperature change in an ideal throttle.</p>
+
+      <h3 id="adiabatic">14. Reversible adiabatic expansion of an ideal gas</h3>
+      <p>In an adiabatic process Q = 0. From the first law, ΔE = −W<sub>by</sub>. During expansion, the gas uses internal energy to do work, so its temperature falls.</p>
+      <h4>Derive TV<sup>γ−1</sup> = constant</h4>
+      <div class="step-list">
+        <li>For one mole during a small reversible expansion, dE = C<sub>V</sub>dT and dE = −P dV.</li>
+        <li>Use P = RT/V: C<sub>V</sub>dT = −RT(dV/V).</li>
+        <li>Divide by T and integrate from state 1 to state 2: C<sub>V</sub> ln(T₂/T₁) = −R ln(V₂/V₁).</li>
+        <li>For an ideal gas, C<sub>P</sub> − C<sub>V</sub> = R; define γ = C<sub>P</sub>/C<sub>V</sub>, so R/C<sub>V</sub> = γ − 1.</li>
+      </div>
+      <div class="formula">ln(T₂/T₁) = −(γ − 1)ln(V₂/V₁)<br>
+      <strong>TV<sup>γ−1</sup> = constant</strong><br>
+      <strong>PV<sup>γ</sup> = constant</strong><br>
+      T₂/T₁ = (V₁/V₂)<sup>γ−1</sup> = (P₂/P₁)<sup>(γ−1)/γ</sup><br>
+      P₂/P₁ = (V₁/V₂)<sup>γ</sup></div>
+      <p>γ = C<sub>P</sub>/C<sub>V</sub>; for a monatomic ideal gas γ ≈ 1.67. An isothermal ideal gas follows PV = constant, while an adiabatic ideal gas follows PV<sup>γ</sup> = constant. The adiabatic P–V curve is steeper: in an isothermal expansion heat enters to replace work; in an adiabatic expansion the gas cools.</p>
+
+      <h4>Work in a reversible adiabatic change</h4>
+      <div class="formula">W<sub>by</sub> = nC<sub>V</sub>(T₁ − T₂) = nR(T₁ − T₂)/(γ − 1)<br>
+      w<sub>on</sub> = nC<sub>V</sub>(T₂ − T₁)</div>
+      <p>For expansion T₂ &lt; T₁, so W<sub>by</sub> is positive. For compression T₂ &gt; T₁, work is done on the gas.</p>
+
+      <h3 id="examples7">15. Chapter 7 worked-example index</h3>
+      <p class="small">The listed results use the sign convention defined at the top. “Work output” means W<sub>by</sub>; work done on the gas is its negative. Numbers are rounded to the precision useful for revision.</p>
+      <details>
+        <summary>Open the Chapter 7 numerical examples (Problems 1–18)</summary>
+        <div class="details-body">
+          <ol class="worked-list">
+            <li><strong>Constant-pressure expansion:</strong> V₁ = 0.001 m³, V₂ = 0.002 m³, P<sub>ext</sub> = 1,013,250 Pa. W<sub>by</sub> = PΔV = <strong>1013.25 J</strong> = 242.2 cal.</li>
+            <li><strong>Isothermal reversible expansion:</strong> 1 mol, 298 K, 0.01→0.02 m³. W<sub>by</sub> = nRT ln 2 ≈ <strong>1.717 kJ</strong> (about 410.5 cal).</li>
+            <li><strong>Pressure form of the same equation:</strong> 1 mol, 298 K, 5→1 atm. W<sub>by</sub> = nRT ln 5 ≈ <strong>3.988 kJ</strong>.</li>
+            <li><strong>First-law isothermal example:</strong> 2 mol H₂ at 323 K, 3 atm→1 atm. W<sub>by</sub> ≈ 5.903 kJ; since ΔE = 0, Q = W<sub>by</sub> ≈ <strong>+5.903 kJ</strong>.</li>
+            <li><strong>Water vaporization at 373 K:</strong> using the supplied heat of vaporization, the textbook’s per-kilogram result is ΔE ≈ <strong>2.089 × 10⁶ J kg⁻¹</strong>. Use ΔE = Q − W<sub>by</sub> and account for expansion against 1 atm.</li>
+            <li><strong>Expansion with heat absorbed:</strong> P<sub>ext</sub> = 101,325 Pa, 0.005→0.010 m³, Q = +400 J. W<sub>by</sub> = 506.625 J; ΔE = Q − W<sub>by</sub> = <strong>−106.625 J</strong>.</li>
+            <li><strong>Maximum isothermal work for H₂:</strong> 0.01 kg H₂ = 5 mol, 273 K, 20→1 atm. W<sub>by</sub> ≈ <strong>34.0 kJ</strong>; ΔE = 0 and Q ≈ +34.0 kJ.</li>
+            <li><strong>ΔH from ΔE:</strong> H₂F₂(g) → H₂(g) + F₂(g), ΔE = −59.4526 kJ mol⁻¹ at 298 K; Δn<sub>g</sub> = +1. ΔH = ΔE + RT ≈ <strong>−56.98 kJ mol⁻¹</strong>.</li>
+            <li><strong>Heating oxygen:</strong> 0.064 kg O₂ is 2 mol; 273→373 K, C<sub>V</sub> = 20.93 and C<sub>P</sub> = 29.31 J mol⁻¹ K⁻¹. ΔE = <strong>4.186 kJ</strong>; ΔH ≈ <strong>5.862 kJ</strong>.</li>
+            <li><strong>Heating water:</strong> 0.2135 kg water, 298→373 K, C<sub>P,m</sub> = 75.36 J mol⁻¹ K⁻¹. With about 11.85 mol, Q = nC<sub>P</sub>ΔT ≈ <strong>67.0 kJ</strong>.</li>
+            <li><strong>Heating an ideal gas:</strong> 3 mol, C<sub>V</sub> = 20.93 J mol⁻¹ K⁻¹, 273→323 K. ΔE = <strong>3139.5 J</strong>; using C<sub>P</sub> = C<sub>V</sub> + R, ΔH ≈ <strong>4386.6 J</strong>.</li>
+            <li><strong>Adiabatic reversible expansion:</strong> 2 mol, γ = 5/3, 273.2 K, pressure 20→2 atm. T₂ ≈ <strong>108.8 K</strong>; W<sub>by</sub> ≈ <strong>4.10 kJ</strong>.</li>
+            <li><strong>Benzene combustion, constant pressure to constant volume:</strong> ΔH = −3269.807 kJ at 298 K, Δn<sub>g</sub> = −1.5. ΔE = ΔH − ΔnRT ≈ <strong>−3266.09 kJ</strong>.</li>
+            <li><strong>Neon expansion:</strong> 0.044 kg Ne = 2.2 mol, 300 K, 10→2 atm. W<sub>by</sub> = nRT ln 5 ≈ <strong>8.90 kJ</strong>.</li>
+            <li><strong>Argon heating:</strong> 1 mol, 313→373 K. With C<sub>V</sub> = 12.56, C<sub>P</sub> = 20.93 J mol⁻¹ K⁻¹: Q<sub>v</sub> = <strong>753.6 J</strong> (≈180 cal); Q<sub>p</sub> = <strong>1256 J</strong> (≈300 cal).</li>
+            <li><strong>Second oxygen-heating example:</strong> 0.064 kg O₂ = 2 mol, 273→373 K, C<sub>V</sub> = 20.93, C<sub>P</sub> = 29.308. ΔE = <strong>4186 J</strong>; ΔH = <strong>5862 J</strong>.</li>
+            <li><strong>Nitrogen expansion:</strong> 2 mol, 298 K, 0.01→0.02 m³, reversible and isothermal. W<sub>by</sub> ≈ <strong>3435 J</strong>.</li>
+            <li><strong>Adiabatic compression:</strong> 5 mol, C<sub>V</sub> = 20.93 J mol⁻¹ K⁻¹, γ = 1.4, P₁ = 101,325 Pa, V₁ = 0.005 m³, P₂ = 10,132,500 Pa. V₂ ≈ <strong>0.00186 m³</strong>; T₂ ≈ <strong>453 K</strong>.</li>
+          </ol>
+          <p class="note"><strong>Calculation check:</strong> the extraction has a few inconsistent masses, work signs, and numerical results. For example, 0.064 kg of O₂ is 2 mol (molar mass 0.032 kg mol⁻¹), not 4 mol. The equations and corrected calculations above are internally consistent.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- CHAPTER 8 -->
+    <section class="chapter" id="ch8">
+      <div class="chapter-title">
+        <div class="chapter-no">8</div>
+        <div><h2>Thermochemistry</h2><div class="muted">Heat changes in reactions, phase changes, Hess’s law, and calorimetry</div></div>
+      </div>
+
+      <h3 id="thermochemistry-intro">1. Meaning, energy changes, and history</h3>
+      <div class="definition"><strong>Thermochemistry</strong> is the branch of physical chemistry concerned with heat changes caused by chemical reactions and physical transformations.</div>
+      <p>Internal energy cannot usually be measured absolutely, but its change can be measured. For a reaction, ΔE = E<sub>products</sub> − E<sub>reactants</sub>. Energy changes often reflect old bonds breaking and new bonds forming; thermochemistry therefore helps estimate bond energies.</p>
+      <ul>
+        <li><strong>1782–1783:</strong> Antoine Lavoisier and Pierre-Simon Laplace used an ice calorimeter and showed that heat evolved in a reaction is equal in magnitude to heat absorbed by its reverse reaction. They also studied specific and latent heats and combustion.</li>
+        <li><strong>1840:</strong> Germain Hess formulated the law that the total heat change is the same whether a change happens in one step or several. Hess’s law follows from conservation of energy.</li>
+      </ul>
+      <p>Common units are cal, kcal, J, and kJ; 1 kcal = 1000 cal, 1 cal ≈ 4.184 J, and 1 kcal ≈ 4.184 kJ.</p>
+
+      <h3 id="exo-endo">2. Exothermic and endothermic changes</h3>
+      <div class="two-col">
+        <div class="mini-card">
+          <h4>Exothermic</h4>
+          <p>Heat leaves the system; surroundings warm. Products have lower enthalpy than reactants.</p>
+          <div class="formula compact">ΔH &lt; 0</div>
+        </div>
+        <div class="mini-card">
+          <h4>Endothermic</h4>
+          <p>Heat enters the system; surroundings cool. Products have higher enthalpy than reactants.</p>
+          <div class="formula compact">ΔH &gt; 0</div>
+        </div>
+      </div>
+      <div class="formula">ΔH = H<sub>products</sub> − H<sub>reactants</sub><br>
+      Released heat: exothermic, negative ΔH (or ΔE at constant volume).<br>
+      Absorbed heat: endothermic, positive ΔH (or ΔE at constant volume).</div>
+      <div class="table-wrap">
+        <table>
+          <caption>Examples of exothermic and endothermic processes</caption>
+          <thead><tr><th>Exothermic: releases heat</th><th>Endothermic: absorbs heat</th></tr></thead>
+          <tbody>
+            <tr><td>Making ice cubes</td><td>Melting ice cubes</td></tr>
+            <tr><td>Snow formation in clouds</td><td>Conversion of frost to water vapour</td></tr>
+            <tr><td>Condensation of rain from water vapour</td><td>Evaporation of water</td></tr>
+            <tr><td>Mixing sodium sulfite and bleach</td><td>Baking bread</td></tr>
+            <tr><td>Rusting iron</td><td>Cooking an egg</td></tr>
+            <tr><td>Burning sugar</td><td>Making sugar by photosynthesis</td></tr>
+            <tr><td>Forming ion pairs</td><td>Separating ion pairs</td></tr>
+            <tr><td>Mixing water with strong acids</td><td>Mixing water with ammonium nitrate</td></tr>
+            <tr><td>Mixing water with an anhydrous salt</td><td>Making an anhydrous salt from a hydrate</td></tr>
+            <tr><td>Crystallizing liquid salts, such as sodium acetate in hand warmers</td><td>Melting solid salts</td></tr>
+            <tr><td>Nuclear fission</td><td>Barium hydroxide octahydrate crystals reacting with dry ammonium chloride</td></tr>
+            <tr><td>Mixing water with calcium chloride</td><td>Thionyl chloride, SOCl₂, reacting with cobalt(II) sulfate heptahydrate</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><strong>Hot and cold packs:</strong> a hot pack can mix water with a dry salt (commonly calcium chloride, magnesium sulfate, or sodium acetate); the exothermic process releases heat. A cold pack separates water from ammonium nitrate crystals until its inner sachet is broken; dissolution absorbs heat from the surroundings and cools the pack.</div>
+
+      <h3 id="thermochemical-equations">3. Thermochemical equations and heat of reaction</h3>
+      <p>A <strong>thermochemical equation</strong> gives the balanced chemical equation and its heat change. The heat amount applies to the quantities written in the equation. If the equation is multiplied by a factor, ΔH is multiplied by the same factor.</p>
+      <ul>
+        <li>Balance the equation.</li>
+        <li>Give ΔH or ΔE for the quantities shown.</li>
+        <li>State physical phases: (s), (l), (g), and (aq).</li>
+        <li>Temperature and pressure matter; state them when relevant.</li>
+      </ul>
+      <p>For example, formation of liquid water and water vapour have different enthalpy changes:</p>
+      <div class="formula">H₂(g) + ½O₂(g) → H₂O(l) &nbsp; ΔH ≈ −286.0 kJ mol⁻¹<br>
+      H₂(g) + ½O₂(g) → H₂O(g) &nbsp; ΔH ≈ −242.0 kJ mol⁻¹</div>
+      <p><strong>Heat of reaction</strong> is the heat absorbed or evolved when the reactants in the balanced equation react as written. At constant pressure it is ΔH; at constant volume it is ΔE. A standard reaction enthalpy, ΔH°, in this chapter is referenced to 298 K and 1 atm (101,325 Pa).</p>
+
+      <h3 id="delta-h-e">4. Relation between heat at constant pressure and volume</h3>
+      <p>At constant volume no PV expansion work is done, so Q<sub>v</sub> = ΔE. At constant pressure the system may expand or contract, so the heat is ΔH:</p>
+      <div class="formula">ΔH = ΔE + PΔV<br>
+      For ideal gases in a reaction: <strong>ΔH = ΔE + Δn<sub>g</sub>RT</strong></div>
+      <p>The gas-mole correction is usually important in reactions involving gases; liquid and solid volume changes are often negligible.</p>
+
+      <h3 id="kirchhoff">5. How reaction heat changes with temperature: Kirchhoff equations</h3>
+      <p>Reaction heat varies with temperature because reactants and products have different heat capacities. Let ΔC<sub>V</sub> = ΣC<sub>V,products</sub> − ΣC<sub>V,reactants</sub>, with stoichiometric coefficients included. Similarly define ΔC<sub>P</sub>.</p>
+      <div class="formula">(∂ΔE/∂T)<sub>V</sub> = ΔC<sub>V</sub><br>
+      ΔE₂ − ΔE₁ = ∫<sub>T₁</sub><sup>T₂</sup> ΔC<sub>V</sub>dT<br>
+      If ΔC<sub>V</sub> is constant: &nbsp; <strong>ΔE₂ = ΔE₁ + ΔC<sub>V</sub>(T₂ − T₁)</strong></div>
+      <div class="formula">(∂ΔH/∂T)<sub>P</sub> = ΔC<sub>P</sub><br>
+      ΔH₂ − ΔH₁ = ∫<sub>T₁</sub><sup>T₂</sup> ΔC<sub>P</sub>dT<br>
+      If ΔC<sub>P</sub> is constant: &nbsp; <strong>ΔH₂ = ΔH₁ + ΔC<sub>P</sub>(T₂ − T₁)</strong></div>
+      <p>These are <strong>Kirchhoff’s equations</strong>; they transfer known reaction heats to another temperature when the heat capacities are known.</p>
+
+      <h3 id="reaction-heats">6. Different types of reaction heat (enthalpy)</h3>
+
+      <h4>Heat of formation and standard heat of formation</h4>
+      <div class="definition"><strong>Heat of formation, ΔH<sub>f</sub>:</strong> enthalpy change when one mole of a compound forms from its elements in the stated forms.</div>
+      <p>Examples: Fe(s) + S(s) → FeS(s), ΔH<sub>f</sub> ≈ −100.48 kJ mol⁻¹; 2C(s) + H₂(g) → C₂H₂(g), ΔH<sub>f</sub> ≈ +222.49 kJ mol⁻¹. For HCl(g), the equation must form one mole: ½H₂(g) + ½Cl₂(g) → HCl(g), ΔH<sub>f</sub> ≈ −92.1 kJ mol⁻¹.</p>
+      <div class="definition"><strong>Standard heat of formation, ΔH°<sub>f</sub>:</strong> formation of one mole of compound from elements, all in their standard states (here, 298 K and 1 atm). By convention ΔH°<sub>f</sub> of an element in its standard state is zero.</div>
+      <div class="table-wrap">
+        <table>
+          <caption>Representative standard enthalpies of formation at 298 K</caption>
+          <thead><tr><th>Substance</th><th>ΔH°<sub>f</sub> (kJ mol⁻¹)</th><th>Substance</th><th>ΔH°<sub>f</sub> (kJ mol⁻¹)</th></tr></thead>
+          <tbody>
+            <tr><td>H₂O(g)</td><td>−242.16</td><td>CH₄(g)</td><td>−74.90</td></tr>
+            <tr><td>H₂O(l)</td><td>−286.20</td><td>C₂H₆(g)</td><td>−84.70</td></tr>
+            <tr><td>HCl(g)</td><td>−92.45</td><td>C₆H₆(g)</td><td>+49.66</td></tr>
+            <tr><td>HBr(g)</td><td>−36.43</td><td>C₂H₂(g)</td><td>+222.47</td></tr>
+            <tr><td>NH₃(g)</td><td>−46.14</td><td>CH₃OH(l)</td><td>−239.36</td></tr>
+            <tr><td>CO₂(g)</td><td>−394.10</td><td>C₂H₅OH(l)</td><td>−277.42</td></tr>
+            <tr><td>SO₂(g)</td><td>−297.26</td><td>CH₃COOH(l)</td><td>−484.96</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula">For aA + bB → cC + dD:<br>
+      <strong>ΔH°<sub>reaction</sub> = ΣνΔH°<sub>f</sub>(products) − ΣνΔH°<sub>f</sub>(reactants)</strong></div>
+      <p>Example: CO₂(g) + H₂(g) → CO(g) + H₂O(g), using ΔH°<sub>f</sub>(CO₂) = −393.5, CO = −111.31, H₂O(g) = −241.80, and H₂ = 0 kJ mol⁻¹ gives ΔH° = <strong>+40.4 kJ</strong>.</p>
+
+      <h4>Heat of combustion and its uses</h4>
+      <div class="definition"><strong>Heat of combustion, ΔH<sub>c</sub>:</strong> enthalpy change when one mole of a substance is completely burnt in excess oxygen or air. Combustion is exothermic, so ΔH<sub>c</sub> is negative.</div>
+      <p>Example: CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l), ΔH<sub>c</sub> ≈ −890.3 kJ mol⁻¹. Carbon’s complete combustion is C(s) + O₂(g) → CO₂(g), about −394 kJ mol⁻¹; forming CO instead is incomplete oxidation, not the full heat of combustion.</p>
+      <ol>
+        <li><strong>Find heats of formation:</strong> combustion data can be measured readily and combined with Hess’s law.</li>
+        <li><strong>Compare fuels and foods:</strong> calorific value is heat released when 1 g is completely burnt; units include cal g⁻¹, kcal g⁻¹, or kJ kg⁻¹. Methane gives about 890.3/16 = <strong>55.6 kJ g⁻¹</strong>; ethane gives about 1559.7/30 = <strong>52.0 kJ g⁻¹</strong>.</li>
+        <li><strong>Help determine constitution:</strong> approximate additivity of combustion heats and atom/linkage contributions can test likely structures. The chapter cites support for Kekulé’s alternating single/double-bond formula for benzene.</li>
+      </ol>
+      <p>In a homologous series, successive combustion heats differ by nearly a constant amount; the chapter gives about 661 J for the relevant series discussed.</p>
+
+      <h4>Heat of solution</h4>
+      <div class="definition"><strong>Heat of solution:</strong> enthalpy change when one mole of a substance dissolves in a specified amount of solvent at a stated temperature. For a value independent of solvent amount, define it at <strong>infinite dilution</strong>—further dilution causes no additional heat effect.</div>
+      <p>Dissolving an ionic solid involves separating ions (often absorbs heat) and hydrating them (often releases heat). The balance determines the net heat. The excerpt gives CuSO₄ dissolving to a 1 M solution as absorbing about 78.5 kJ, and lists KCl(aq) and MgSO₄(aq) examples with reported changes of −18.42 and −84.91 kJ; concentration and sign convention must be stated when using such values.</p>
+
+      <h4>Heat of neutralization and dissociation</h4>
+      <div class="definition"><strong>Heat of neutralization:</strong> enthalpy change when one gram-equivalent of acid reacts with one gram-equivalent of base in dilute solution.</div>
+      <p>For a strong acid and strong base, the net ionic reaction is H⁺(aq) + OH⁻(aq) → H₂O(l), with a typical heat near <strong>−57.3 kJ per mole of water formed</strong>. The values for different strong acid/strong base pairs in the chapter cluster around −57.3 to −58.1 kJ.</p>
+      <p>Weak acids or bases need energy to ionize, so their measured neutralization heat is usually less exothermic. The chapter lists examples near −51.50 kJ and −49.82 kJ. For NH₄OH neutralized by a strong acid, the difference from −57.36 kJ gives a dissociation heat of about <strong>+5.86 kJ mol⁻¹</strong>.</p>
+      <div class="definition"><strong>Heat of dissociation:</strong> enthalpy change when one mole of a weak acid or base dissociates into ions.</div>
+
+      <h4>Phase changes: fusion, vaporization, sublimation, transition</h4>
+      <p>Changing the state of matter changes intermolecular arrangement and enthalpy. Energy is usually absorbed when particles move to a less constrained state.</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Definitions and examples of phase-change enthalpies</caption>
+          <thead><tr><th>Quantity</th><th>Definition</th><th>Chapter example</th></tr></thead>
+          <tbody>
+            <tr><td>Heat of fusion, ΔH<sub>f</sub></td><td>Heat change when 1 mol solid becomes liquid at its melting point.</td><td>H₂O(s) → H₂O(l), ΔH ≈ +5.98 kJ mol⁻¹ at 273 K.</td></tr>
+            <tr><td>Heat of vaporization, ΔH<sub>v</sub></td><td>Heat change when 1 mol liquid becomes vapour at its boiling point.</td><td>H₂O(l) → H₂O(g), ΔH ≈ +40.65 kJ mol⁻¹ at 373 K; ethanol ≈30.52 and benzene ≈30.81 kJ mol⁻¹.</td></tr>
+            <tr><td>Heat of sublimation, ΔH<sub>sub</sub></td><td>Heat change when 1 mol solid changes directly to gas without becoming liquid, usually below its melting point.</td><td>I₂(s) → I₂(g), ΔH ≈ +62.47 kJ mol⁻¹.</td></tr>
+            <tr><td>Heat of transition, ΔH<sub>t</sub></td><td>Enthalpy change when 1 mol of an element changes from one allotropic form to another.</td><td>Diamond → amorphous carbon: +13.82 kJ; monoclinic S → rhombic S: −0.067 kJ; white P → red P: −4.30 kJ.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Fusion and vaporization enthalpies can be used to compare intermolecular attractions: a larger value generally indicates stronger attractions to overcome.</p>
+
+      <h3 id="hess">7. Hess’s law and Lavoisier–Laplace law</h3>
+      <div class="definition"><strong>Hess’s law of constant heat summation:</strong> if a chemical change can occur by different routes—one step or several steps—the total heat or enthalpy change is the same, provided the initial and final states are the same.</div>
+      <p>Because ΔE and ΔH are state functions, the route does not matter. If direct conversion A→Z releases Q₁ and a staged route A→B→C→Z releases q₁+q₂+q₃, then Q₁ = q₁+q₂+q₃. If not, repeating a cycle could produce energy indefinitely, violating the first law.</p>
+      <div class="definition"><strong>Lavoisier–Laplace law:</strong> the heat evolved in a chemical reaction equals the heat absorbed in the reverse reaction in magnitude; the signs are opposite. If A→B has ΔH = −x, then B→A has ΔH = +x.</div>
+
+      <h4>How to use Hess’s law</h4>
+      <ol>
+        <li>Write the target equation.</li>
+        <li>Reverse given equations if needed (reverse the sign of ΔH).</li>
+        <li>Multiply equations to match coefficients (multiply ΔH by the same factor).</li>
+        <li>Add equations and cancel species appearing on both sides; add their enthalpy changes.</li>
+      </ol>
+      <p>Thermochemical equations can therefore be added, subtracted, or multiplied like algebraic equations.</p>
+
+      <h4>Illustrations and applications</h4>
+      <ul>
+        <li><strong>Carbon to CO₂:</strong> direct C(s) + O₂(g) → CO₂(g), ΔH about −393.8 kJ; via C(s) + ½O₂(g) → CO(g), −110.62 kJ, then CO(g) + ½O₂(g) → CO₂(g), −283.49 kJ. The staged total is about −394.11 kJ, close to the direct value (experimental data differ slightly).</li>
+        <li><strong>NaOH formation:</strong> the chapter’s two routes give about −653.14 and −655.23 kJ for the same overall reaction; their 2.09 kJ difference is attributed to experimental error.</li>
+        <li><strong>Indirect heats of formation:</strong> useful when compounds such as methane, CO, or benzene cannot conveniently be made directly from their elements.</li>
+        <li><strong>Heat of transition:</strong> compare heats of combustion of two allotropes; the common product cancels.</li>
+        <li><strong>Heat of other reactions:</strong> combine known reactions to find an otherwise difficult-to-measure heat, e.g. NO₂ dimerization.</li>
+      </ul>
+
+      <h3 id="bond-energy">8. Bond energy</h3>
+      <div class="definition"><strong>Bond energy:</strong> average energy required to break all bonds of a particular type in one mole of a substance. Breaking a bond absorbs energy (positive); forming it releases the same energy (negative).</div>
+      <p>Bond energy measures bond strength and depends on factors such as atomic size, electronegativity, and bond length. It is especially useful for estimating gas-phase reaction enthalpies when direct data are unavailable.</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Representative bond energies</caption>
+          <thead><tr><th>Bond</th><th>Energy (kJ mol⁻¹)</th></tr></thead>
+          <tbody><tr><td>H–H</td><td>≈433</td></tr><tr><td>Cl–Cl</td><td>≈243</td></tr><tr><td>O=O</td><td>≈499</td></tr><tr><td>C–H</td><td>≈414</td></tr><tr><td>O–H</td><td>≈460</td></tr></tbody>
+        </table>
+      </div>
+      <div class="formula">Approximate reaction enthalpy: <strong>ΔH ≈ Σ(bonds broken) − Σ(bonds formed)</strong></div>
+      <p>In methane, the energy for four C–H bonds is about 1663.64 kJ mol⁻¹, so the mean C–H bond energy is about <strong>415.9 kJ mol⁻¹</strong>. Using H–H = 435.43, O=O = 494.04, and O–H = 464.73 kJ mol⁻¹ gives ΔH ≈ <strong>−247.0 kJ mol⁻¹</strong> for H₂(g) + ½O₂(g) → H₂O(g). The analogous HCl example gives an H–Cl bond energy near <strong>428.5 kJ mol⁻¹</strong>.</p>
+
+      <h3 id="calorimetry">9. Measuring reaction heat: calorimetry</h3>
+      <div class="definition"><strong>Calorimetry</strong> is experimental measurement of heat or enthalpy change using a <strong>calorimeter</strong>. Apparatus is chosen for the reaction being studied.</div>
+      <h4>Water calorimeter</h4>
+      <p>Used for reactions in solution. A thermally insulated water bath contains a known mass of water; a thermometer and stirrer pass through its lid. Reactants are mixed in a reaction chamber immersed in the bath. If W grams of water rises by t °C:</p>
+      <div class="formula">Q<sub>water</sub> = W × 1 cal g<sup>−1</sup> °C<sup>−1</sup> × t &nbsp; (in calories)<br>
+      In SI: Q<sub>water</sub> = m<sub>water</sub>c<sub>water</sub>ΔT<br>
+      Heat of reaction = − heat gained by water (with signed heat convention).</div>
+      <h4>Bomb calorimeter</h4>
+      <p>Used mainly for combustion of organic compounds. A weighed sample burns in oxygen in a sealed steel bomb, typically at about 2.03 MPa (20 atm). The bomb is immersed in a known amount of water in an insulated copper vessel with a stirrer and sensitive thermometer (the text specifies readings to 0.01°); ignition is electrical. The temperature rise and calorimeter heat capacity give the heat released. Because the bomb is rigid, the measurement gives Q<sub>v</sub> = ΔE.</p>
+
+      <h3 id="examples8">10. Chapter 8 worked-example index</h3>
+      <details>
+        <summary>Open the Chapter 8 numerical examples (Problems 1–18)</summary>
+        <div class="details-body">
+          <ol class="worked-list">
+            <li><strong>Ethylene combustion:</strong> ΔE = −1390.81 kJ at 290 K; C₂H₄ + 3O₂ → 2CO₂ + 2H₂O(l), Δn<sub>g</sub> = −2. ΔH = ΔE + ΔnRT ≈ <strong>−1395.7 kJ</strong>.</li>
+            <li><strong>CO combustion:</strong> CO + ½O₂ → CO₂, ΔE = −283.3 kJ at 290 K, Δn<sub>g</sub> = −½. ΔH ≈ <strong>−284.5 kJ</strong>.</li>
+            <li><strong>Methane formation at 298 K:</strong> C(s) + 2H₂(g) → CH₄(g), ΔH = −74.902 kJ, Δn<sub>g</sub> = −1. ΔE = ΔH − ΔnRT ≈ <strong>−72.42 kJ</strong>.</li>
+            <li><strong>Kirchhoff, HCl formation:</strong> ½H₂ + ½Cl₂ → HCl, ΔH₃₀₀ = −92.53 kJ, ΔC<sub>P</sub> = −1.925 J K⁻¹. At 350 K, ΔH ≈ <strong>−92.63 kJ</strong>.</li>
+            <li><strong>Kirchhoff, ammonia:</strong> N₂ + 3H₂ → 2NH₃, ΔH₃₀₀ = −92.009 kJ, ΔC<sub>P</sub> = −39.3 J K⁻¹. At 323 K, ΔH ≈ <strong>−92.91 kJ</strong>.</li>
+            <li><strong>Standard reaction enthalpy:</strong> CO₂ + H₂ → CO + H₂O(g), using formation enthalpies gives <strong>+40.4 kJ</strong>.</li>
+            <li><strong>Ethanol combustion:</strong> formation enthalpies for ethanol, CO₂, and H₂O give ΔH° ≈ <strong>−1366.5 kJ</strong> for the balanced combustion reaction.</li>
+            <li><strong>Propane formation from combustion data:</strong> ΔH°<sub>f</sub>(C₃H₈) ≈ <strong>−103.5 kJ mol⁻¹</strong>.</li>
+            <li><strong>KOH formation by Hess’s law:</strong> the supplied equations combine to ΔH<sub>f</sub>(KOH) ≈ <strong>−429.15 kJ</strong>.</li>
+            <li><strong>Ethyl alcohol formation:</strong> combustion data for ethanol, carbon, and hydrogen give ΔH<sub>f</sub> ≈ <strong>−268.37 kJ</strong>.</li>
+            <li><strong>Methane formation by Hess’s law:</strong> the supplied combustion equations give approximately <strong>−74.8 kJ mol⁻¹</strong>.</li>
+            <li><strong>Water vapour from bond energies:</strong> H₂ + ½O₂ → H₂O(g), using the bond values given above, ΔH ≈ <strong>−247.02 kJ mol⁻¹</strong>.</li>
+            <li><strong>HCl bond energy:</strong> H₂ and Cl₂ bond data plus ΔH<sub>f</sub>(HCl) = −91 kJ mol⁻¹ give D(H–Cl) ≈ <strong>428.5 kJ mol⁻¹</strong>.</li>
+            <li><strong>Ethylene hydrogenation:</strong> combustion heats for C₂H₄, H₂, and C₂H₆ are combined by Hess’s law; the extracted example reports about <strong>−136.91 kJ</strong> for C₂H₄ + H₂ → C₂H₆.</li>
+            <li><strong>Benzene formation:</strong> combustion data give ΔH<sub>f</sub>(C₆H₆) ≈ <strong>+49.07 kJ mol⁻¹</strong>.</li>
+            <li><strong>Convert methane formation ΔH to ΔE:</strong> at 300 K, ΔH = −80.81 kJ, Δn<sub>g</sub> = −1; applying ΔE = ΔH − ΔnRT gives about <strong>−78.32 kJ</strong>. The extracted worked solution gives a conflicting sign/arithmetic result.</li>
+            <li><strong>F–Cl bond example:</strong> use ΔH = ΣD(bonds broken) − ΣD(bonds formed). The OCR-extracted Cl–Cl value (2428.34 kJ mol⁻¹) is not physically plausible and should be checked against the original print; the method, not that corrupted number, is the reliable point.</li>
+            <li><strong>Bomb calorimeter methane:</strong> 0.16 g sample, calorimeter capacity 17.7 kJ K⁻¹, rise 0.5 K gives ΔE ≈ <strong>−885 kJ mol⁻¹</strong>. With Δn<sub>g</sub> = −2 at 300 K, ΔH ≈ <strong>−890.0 kJ mol⁻¹</strong>.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <!-- CHAPTER 9 -->
+    <section class="chapter" id="ch9">
+      <div class="chapter-title">
+        <div class="chapter-no">9</div>
+        <div><h2>Second Law of Thermodynamics</h2><div class="muted">Spontaneity, entropy, heat engines, free energy, phase equilibria, and chemical potential</div></div>
+      </div>
+
+      <h3 id="spontaneity">1. Spontaneous processes</h3>
+      <div class="definition"><strong>Spontaneous (natural) process:</strong> a process that proceeds by itself under the stated conditions, without continuous outside assistance. The reverse direction is nonspontaneous unless work is supplied. The tendency to occur naturally is spontaneity.</div>
+      <div class="table-wrap">
+        <table>
+          <caption>Everyday examples and what they show</caption>
+          <thead><tr><th>Spontaneous direction</th><th>Reverse direction</th></tr></thead>
+          <tbody>
+            <tr><td>A person falls from a cliff.</td><td>Climbing back up requires work.</td></tr>
+            <tr><td>Heat flows from a hot metal object to a cold one.</td><td>Moving heat from cold to hot needs work, as in a refrigerator.</td></tr>
+            <tr><td>Gas spreads into an evacuated vessel.</td><td>Compressing it back into the original vessel requires work.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li>A spontaneous change is directional; reversing it requires work.</li>
+        <li>Spontaneity does not predict speed: a spontaneous reaction may be fast or very slow.</li>
+        <li>An unstable, nonequilibrium system tends to change until equilibrium is reached.</li>
+        <li>An undisturbed equilibrium system has no net spontaneous change.</li>
+        <li>A fall in enthalpy often favours spontaneity, but it is not the only factor: melting ice and evaporation can be spontaneous even though they absorb heat.</li>
+      </ul>
+      <p>The missing factor is <strong>entropy</strong>, associated with energy dispersal, molecular disorder, and the number of accessible arrangements.</p>
+
+      <h3 id="entropy">2. Entropy and the second law</h3>
+      <div class="definition"><strong>Entropy, S:</strong> a thermodynamic state function that measures the dispersal, randomness, or disorder of a system’s molecular arrangements. Its change is ΔS = S<sub>final</sub> − S<sub>initial</sub>.</div>
+      <p>Ice has a relatively ordered crystal arrangement; liquid water is less ordered; water vapour has much greater molecular freedom. Melting and evaporation increase the water’s entropy. A shuffled deck has many possible random arrangements, while only one arrangement is perfectly ordered—disordered states are overwhelmingly more probable.</p>
+      <div class="important"><strong>Useful tendency:</strong> an increase in entropy often favours a process. But the exact criterion is for the <strong>system plus surroundings</strong>, not necessarily the system alone.</div>
+
+      <div class="definition"><strong>Second law:</strong> every spontaneous, irreversible change increases the total entropy of the universe (system + surroundings).</div>
+      <div class="formula"><strong>ΔS<sub>univ</sub> = ΔS<sub>sys</sub> + ΔS<sub>surr</sub></strong><br>
+      Spontaneous irreversible change: ΔS<sub>univ</sub> &gt; 0<br>
+      Reversible change / equilibrium limit: ΔS<sub>univ</sub> = 0</div>
+      <p>The extraction’s phrase “increase in total energy” is a transcription error: the second law concerns <strong>entropy</strong>; energy is conserved by the first law. The entropy of the universe tends toward a maximum. This law explains why heat naturally flows hot→cold, why engines cannot be 100% efficient, and why many natural and biochemical processes have a preferred direction.</p>
+
+      <h3 id="third-law">3. Third law, entropy units, and standard entropy</h3>
+      <div class="definition"><strong>Third law:</strong> the entropy of a perfect pure crystal is zero at absolute zero: <strong>S = 0 at T = 0 K</strong>.</div>
+      <p>As temperature falls, molecular motion and the number of accessible arrangements usually decrease. Gas → liquid → solid generally lowers entropy; at 0 K, a perfect crystal is in its unique, perfectly ordered state.</p>
+
+      <h4>Numerical definition and units</h4>
+      <p>For a reversible change, Clausius defined entropy change by the heat transferred reversibly divided by absolute temperature:</p>
+      <div class="formula">dS = δQ<sub>rev</sub>/T<br>
+      At fixed T: &nbsp; <strong>ΔS = Q<sub>rev</sub>/T</strong></div>
+      <p>Heat absorbed gives a positive entropy change; heat released gives a negative one. Units are J mol⁻¹ K⁻¹ (SI) or cal mol⁻¹ K⁻¹. One entropy unit, 1 eu = 1 cal mol⁻¹ K⁻¹ = 4.184 J mol⁻¹ K⁻¹.</p>
+
+      <h4>Absolute and standard entropy</h4>
+      <p>The third law allows absolute entropies to be calculated from 0 K upward. <strong>Standard entropy, S°</strong>, is the absolute entropy at the standard state; the chapter uses 298 K and 1 atm. Unlike standard enthalpy of formation, elemental standard entropies at 298 K are generally <strong>not zero</strong>; they are positive.</p>
+      <div class="table-wrap">
+        <table>
+          <caption>Representative standard molar entropies at 298 K</caption>
+          <thead><tr><th>Substance</th><th>S° (J mol⁻¹ K⁻¹)</th><th>Substance</th><th>S° (J mol⁻¹ K⁻¹)</th></tr></thead>
+          <tbody>
+            <tr><td>H₂(g)</td><td>130.6</td><td>H₂O(l)</td><td>69.96</td></tr>
+            <tr><td>O₂(g)</td><td>205.0</td><td>H₂O(g)</td><td>188.7</td></tr>
+            <tr><td>N₂(g)</td><td>191.5</td><td>CO(g)</td><td>197.9</td></tr>
+            <tr><td>Cl₂(g)</td><td>223.0</td><td>CO₂(g)</td><td>213.6</td></tr>
+            <tr><td>NH₃(g)</td><td>192.5</td><td>CH₄(g)</td><td>186.2</td></tr>
+            <tr><td>HCl(g)</td><td>186.7</td><td>SO₂(g)</td><td>248.5</td></tr>
+            <tr><td>C(graphite)</td><td>2.4</td><td>NaCl(s)</td><td>72.88</td></tr>
+            <tr><td>CaCO₃(s)</td><td>92.9</td><td>KCl(s)</td><td>239.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="formula">ΔS°<sub>reaction</sub> = ΣνS°(products) − ΣνS°(reactants)<br>
+      ΔS°<sub>f</sub>(compound) = S°(compound) − ΣνS°(elements in their standard states)</div>
+      <p>Examples from the chapter: urea hydrolysis, CO(NH₂)₂(aq) + H₂O(l) → CO₂(g) + 2NH₃(g), gives ΔS° ≈ <strong>+355.08 J K⁻¹</strong> using the stated values. The standard entropy of formation calculation for CO₂(g) from C(graphite) and O₂(g) is 213.6 − (5.740 + 205.0) ≈ <strong>+2.86 J mol⁻¹ K⁻¹</strong>.</p>
+
+      <h3 id="carnot">4. Cycles, heat engines, and the Carnot cycle</h3>
+      <h4>Cyclic process and heat engine</h4>
+      <p>A <strong>cycle</strong> is a sequence of processes that returns a system to its starting state. Since E is a state function, ΔE = 0 over a cycle, so net heat equals net work output.</p>
+      <div class="formula">ΔE<sub>cycle</sub> = 0; &nbsp; Q<sub>net</sub> = W<sub>by,net</sub></div>
+      <p>A <strong>heat engine</strong> takes heat Q<sub>h</sub> from a hot reservoir, converts some to work, and rejects the rest Q<sub>c</sub> to a cooler sink. It runs cyclically. Its efficiency is:</p>
+      <div class="formula">η = W<sub>by</sub>/Q<sub>h</sub> = (Q<sub>h</sub> − |Q<sub>c</sub>|)/Q<sub>h</sub></div>
+      <p>No cyclic heat engine can turn all heat from one reservoir into work; some heat must be rejected to a cooler sink.</p>
+
+      <h4>Carnot cycle: four reversible operations</h4>
+      <ol>
+        <li>Isothermal reversible expansion at hot temperature T<sub>h</sub> (T₂): heat Q<sub>h</sub> enters; the ideal gas expands.</li>
+        <li>Adiabatic reversible expansion: Q = 0; temperature falls from T<sub>h</sub> to T<sub>c</sub> (T₁).</li>
+        <li>Isothermal reversible compression at T<sub>c</sub>: heat is rejected to the cold reservoir.</li>
+        <li>Adiabatic reversible compression: Q = 0; temperature rises back to T<sub>h</sub>, returning the system to its starting state.</li>
+      </ol>
+      <figure class="diagram">
+        <svg viewBox="0 0 650 300" role="img" aria-label="Pressure volume schematic of the four-step Carnot cycle">
+          <line x1="70" y1="245" x2="600" y2="245" stroke="#334c5d" stroke-width="2"/>
+          <line x1="70" y1="245" x2="70" y2="30" stroke="#334c5d" stroke-width="2"/>
+          <text x="607" y="251" font-size="16" fill="#14324b">V</text>
+          <text x="47" y="32" font-size="16" fill="#14324b">P</text>
+          <path d="M155 60 C250 58 345 83 440 108" fill="none" stroke="#176b87" stroke-width="5"/>
+          <path d="M440 108 C485 130 510 175 520 206" fill="none" stroke="#138477" stroke-width="5"/>
+          <path d="M520 206 C420 225 310 224 205 205" fill="none" stroke="#a65a19" stroke-width="5"/>
+          <path d="M205 205 C165 175 145 115 155 60" fill="none" stroke="#138477" stroke-width="5"/>
+          <text x="260" y="52" font-size="14" fill="#176b87">Isothermal, Tₕ</text>
+          <text x="465" y="157" font-size="14" fill="#138477" transform="rotate(57 465 157)">Adiabatic</text>
+          <text x="310" y="242" font-size="14" fill="#a65a19">Isothermal, Tᶜ</text>
+          <text x="116" y="138" font-size="14" fill="#138477" transform="rotate(-73 116 138)">Adiabatic</text>
+          <text x="144" y="56" font-size="15" fill="#14324b">A</text>
+          <text x="442" y="106" font-size="15" fill="#14324b">B</text>
+          <text x="522" y="210" font-size="15" fill="#14324b">C</text>
+          <text x="189" y="210" font-size="15" fill="#14324b">D</text>
+        </svg>
+        <figcaption>The loop encloses net work output on a pressure–volume diagram.</figcaption>
+      </figure>
+
+      <h4>Work and efficiency of a reversible Carnot engine</h4>
+      <p>For one mole, the hot isothermal expansion absorbs Q<sub>h</sub> = RT<sub>h</sub> ln(V₂/V₁). The cold isothermal compression rejects heat. The adiabatic legs exchange no heat; their work contributions cancel in the cycle’s net-work expression. The adiabatic relation makes V₂/V₁ = V₃/V₄.</p>
+      <div class="formula">W<sub>net</sub> = Q<sub>h</sub> − |Q<sub>c</sub>| = R(T<sub>h</sub> − T<sub>c</sub>) ln(V₂/V₁)<br>
+      <strong>η<sub>Carnot</sub> = W<sub>net</sub>/Q<sub>h</sub> = (T<sub>h</sub> − T<sub>c</sub>)/T<sub>h</sub> = 1 − T<sub>c</sub>/T<sub>h</sub></strong></div>
+      <p>Temperatures must be in kelvin. A larger hot–cold temperature difference gives greater theoretical efficiency. <strong>Carnot theorem:</strong> every reversible engine working between the same two temperatures has the same efficiency, independent of the working substance.</p>
+
+      <h4>Equivalent statements of the second law</h4>
+      <ul>
+        <li><strong>Kelvin–Planck:</strong> no cyclic engine can take heat from a single hot reservoir and convert it completely into work; some heat must go to a cooler reservoir.</li>
+        <li><strong>Clausius:</strong> heat cannot be transferred in a cycle from a colder body to a hotter body without work being supplied.</li>
+      </ul>
+
+      <h3 id="entropy-cycle">5. Entropy from the Carnot cycle</h3>
+      <p>For a reversible Carnot cycle, the signed heat transfers at the two temperatures obey:</p>
+      <div class="formula">Q<sub>h</sub>/T<sub>h</sub> + Q<sub>c</sub>/T<sub>c</sub> = 0<br>
+      For any reversible cycle: &nbsp; ∮ δQ<sub>rev</sub>/T = 0</div>
+      <p>Any reversible cycle can be built from many small Carnot cycles; internal paths cancel. Therefore ∫δQ<sub>rev</sub>/T between two equilibrium states is independent of path and defines a state function, entropy:</p>
+      <div class="formula">ΔS = S₂ − S₁ = ∫<sub>1</sub><sup>2</sup> δQ<sub>rev</sub>/T; &nbsp; dS = δQ<sub>rev</sub>/T</div>
+
+      <h3 id="entropy-ideal-gas">6. Entropy change in irreversible processes and ideal gases</h3>
+      <p>For an irreversible cycle, the Clausius inequality applies: ∮δQ/T &lt; 0. In nature, spontaneous changes are irreversible and increase the entropy of the universe. An isolated system undergoing a spontaneous change has ΔS &gt; 0.</p>
+
+      <h4>Derive ideal-gas entropy change</h4>
+      <p>For n moles of an ideal gas, δQ<sub>rev</sub> = dE + P dV, dE = nC<sub>V</sub>dT, and P = nRT/V. Dividing by T gives:</p>
+      <div class="formula">dS = nC<sub>V</sub>(dT/T) + nR(dV/V)<br>
+      <strong>ΔS = nC<sub>V</sub> ln(T₂/T₁) + nR ln(V₂/V₁)</strong></div>
+      <p>Using the ideal-gas equation to express volume in terms of P and T:</p>
+      <div class="formula"><strong>ΔS = nC<sub>P</sub> ln(T₂/T₁) + nR ln(P₁/P₂)</strong><br>
+      = nC<sub>P</sub> ln(T₂/T₁) − nR ln(P₂/P₁)</div>
+      <div class="table-wrap">
+        <table>
+          <caption>Useful ideal-gas entropy formulas</caption>
+          <thead><tr><th>Path</th><th>Entropy change</th></tr></thead>
+          <tbody>
+            <tr><td>Isothermal (T₁ = T₂)</td><td>ΔS = nR ln(V₂/V₁) = nR ln(P₁/P₂)</td></tr>
+            <tr><td>Isobaric (P₁ = P₂)</td><td>ΔS = nC<sub>P</sub> ln(T₂/T₁)</td></tr>
+            <tr><td>Isochoric (V₁ = V₂)</td><td>ΔS = nC<sub>V</sub> ln(T₂/T₁)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Free expansion into a vacuum: an important entropy example</h4>
+      <p>For an ideal gas expanding freely into a vacuum inside a perfectly insulated box, Q = 0 and W = 0, so ΔE = 0 and the gas temperature is unchanged. Yet entropy <strong>increases</strong>: calculate it using an imagined reversible isothermal path between the same states:</p>
+      <div class="formula">ΔS<sub>gas</sub> = nR ln(V₂/V₁) &gt; 0 when V₂ &gt; V₁</div>
+      <p>The actual irreversible free expansion has no heat transfer, so do <em>not</em> use Q<sub>actual</sub>/T to find its entropy change. Entropy is a state function; use a reversible path. The isolated surroundings do not change, so ΔS<sub>univ</sub> = ΔS<sub>gas</sub> &gt; 0.</p>
+
+      <h3 id="phase-entropy">7. Entropy change accompanying phase changes</h3>
+      <p>A reversible phase change occurs at constant temperature while the two phases are in equilibrium. For one mole:</p>
+      <div class="formula">Melting: &nbsp; ΔS<sub>f</sub> = ΔH<sub>f</sub>/T<sub>f</sub><br>
+      Vaporization: &nbsp; ΔS<sub>v</sub> = ΔH<sub>v</sub>/T<sub>b</sub><br>
+      Allotropic transition: &nbsp; ΔS<sub>t</sub> = ΔH<sub>t</sub>/T<sub>t</sub><br>
+      Sublimation: &nbsp; ΔS<sub>sub</sub> = ΔH<sub>sub</sub>/T<sub>sub</sub></div>
+      <p>Examples: vaporizing one mole of water at 373 K with latent heat 40,402.62 J mol⁻¹ gives ΔS ≈ <strong>108.31 J mol⁻¹ K⁻¹</strong>. Melting one mole of ice at 273 K, using 334.94 J g⁻¹ × 18 g mol⁻¹, gives about <strong>22.09 J mol⁻¹ K⁻¹</strong>.</p>
+
+      <h3 id="free-energy">8. Gibbs free energy and Helmholtz work function</h3>
+      <div class="definition"><strong>Gibbs free energy:</strong> G = H − TS = E + PV − TS. It is a state function and an extensive property.</div>
+      <div class="definition"><strong>Helmholtz work function:</strong> A = E − TS. It is also a state function.</div>
+      <p>For a change at constant temperature:</p>
+      <div class="formula">ΔG = ΔH − TΔS<br>
+      ΔA = ΔE − TΔS<br>
+      Since H = E + PV: &nbsp; ΔG = ΔA + PΔV (for constant P and T)</div>
+      <ul>
+        <li>At constant T and P, −ΔG is the maximum useful <strong>non-PV</strong> work obtainable from a reversible process.</li>
+        <li>At constant T and V, −ΔA is the maximum work obtainable from a reversible process.</li>
+      </ul>
+      <p>For a simple compressible system with PV work only:</p>
+      <div class="formula">dG = VdP − SdT<br>
+      At constant P: (∂G/∂T)<sub>P</sub> = −S<br>
+      At constant T: (∂G/∂P)<sub>T</sub> = V</div>
+      <p>For n moles of an ideal gas in an isothermal change:</p>
+      <div class="formula">ΔG = nRT ln(P₂/P₁) = nRT ln(V₁/V₂)</div>
+      <p>An ideal-gas expansion has P₂ &lt; P₁, so ΔG is negative.</p>
+
+      <h3 id="gibbs-helmholtz">9. Gibbs–Helmholtz equations</h3>
+      <p>These equations connect free-energy changes with enthalpy or internal-energy changes, and can be used when free energies at different temperatures are known.</p>
+      <div class="formula">At constant pressure: &nbsp; <strong>ΔG = ΔH + T(∂ΔG/∂T)<sub>P</sub></strong><br>
+      Equivalent standard form: &nbsp; (∂(ΔG/T)/∂T)<sub>P</sub> = −ΔH/T²</div>
+      <div class="formula">At constant volume: &nbsp; <strong>ΔA = ΔE + T(∂ΔA/∂T)<sub>V</sub></strong><br>
+      Equivalent standard form: &nbsp; (∂(ΔA/T)/∂T)<sub>V</sub> = −ΔE/T²</div>
+      <p>These identities follow from G = H − TS, A = E − TS, and the temperature dependence of G and A. Keep the sign and the held-constant condition clear.</p>
+
+      <h3 id="spontaneity-criteria">10. Conditions for spontaneity and equilibrium</h3>
+      <p>The general entropy criterion can be written for a simple system with PV work as:</p>
+      <div class="formula">dS<sub>sys</sub> + dS<sub>surr</sub> ≥ 0<br>
+      TdS − dE − P dV ≥ 0</div>
+      <div class="table-wrap">
+        <table>
+          <caption>Spontaneity and equilibrium criteria</caption>
+          <thead><tr><th>Constraints</th><th>Spontaneous irreversible change</th><th>Equilibrium / reversible limit</th></tr></thead>
+          <tbody>
+            <tr><td>Constant E, V</td><td>dS &gt; 0</td><td>dS = 0 (maximum S)</td></tr>
+            <tr><td>Constant S, V</td><td>dE &lt; 0 (−dE &gt; 0)</td><td>dE = 0 (minimum E)</td></tr>
+            <tr><td>Constant S, P</td><td>dH &lt; 0</td><td>dH = 0 (minimum H)</td></tr>
+            <tr><td>Constant T, P</td><td>dG &lt; 0</td><td>dG = 0 (minimum G)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The most commonly used chemical criterion is <strong>ΔG &lt; 0 for spontaneity</strong> at constant temperature and pressure; ΔG = 0 at equilibrium.</p>
+
+      <h3 id="clapeyron">11. Clapeyron equation</h3>
+      <p>The Clapeyron equation describes equilibrium between two phases of a pure substance. During reversible liquid–vapour change at temperature T and equilibrium pressure p, the work is pΔV; combining this with the first law and the Gibbs–Helmholtz relation gives:</p>
+      <div class="formula"><strong>dp/dT = ΔH/[T(V₂ − V₁)] = ΔH/(TΔV)</strong></div>
+      <p>Here ΔH is the molar enthalpy of transition and ΔV is the molar volume change from phase 1 to phase 2. The equation applies generally to phase boundaries (fusion, vaporization, sublimation, and other transitions).</p>
+
+      <h3 id="clausius">12. Clausius–Clapeyron equation</h3>
+      <p>For liquid–vapour equilibrium, the liquid volume is usually negligible compared with the vapour volume. If the vapour behaves ideally, V ≈ RT/p. The Clapeyron equation becomes:</p>
+      <div class="formula">d(ln p)/dT = ΔH<sub>v</sub>/(RT²)<br>
+      If ΔH<sub>v</sub> is approximately constant:<br>
+      <strong>ln(p₂/p₁) = (ΔH<sub>v</sub>/R)(1/T₁ − 1/T₂)</strong><br>
+      <strong>log₁₀(p₂/p₁) = [ΔH<sub>v</sub>/(2.303R)](1/T₁ − 1/T₂)</strong></div>
+      <p>This approximate relation connects vapour pressure and temperature. A similar treatment can be used for solid–liquid equilibrium when the relevant volume and enthalpy data are known.</p>
+
+      <h3 id="clapeyron-applications">13. Applications of the Clausius–Clapeyron equation</h3>
+      <ol>
+        <li><strong>Find latent heat:</strong> use vapour pressures p₁ and p₂ at temperatures T₁ and T₂. The chapter example for water at 368 K (634 mm) and 373 K (760 mm) gives ΔH<sub>v</sub> ≈ <strong>41.39 kJ mol⁻¹</strong>.</li>
+        <li><strong>Find boiling or freezing temperature at a new pressure:</strong> the chapter example predicts water boils at about <strong>374 K</strong> at 787 mm pressure, using a latent heat of vaporization near 2.244 × 10⁶ J kg⁻¹.</li>
+        <li><strong>Find vapour pressure at another temperature:</strong> use the known pressure at one temperature and the mean ΔH<sub>v</sub>. The extracted water example gives a pressure near <strong>70.5 kPa at 363 K</strong> from a pressure near 1 atm at 373 K (the source’s printed pressure conversion is inconsistent).</li>
+        <li><strong>Find the molal boiling-point elevation constant:</strong> see the derivation below.</li>
+      </ol>
+
+      <h4>Molal elevation constant K<sub>b</sub></h4>
+      <div class="definition"><strong>K<sub>b</sub>:</strong> the boiling-point elevation produced, in the dilute-solution limit, by one mole of solute in 1 kg of solvent. Thus ΔT<sub>b</sub> = K<sub>b</sub>m.</div>
+      <p>If w grams of a solute of molar mass M grams per mole are dissolved in 1 kg solvent:</p>
+      <div class="formula">m = w/M mol kg⁻¹; &nbsp; <strong>K<sub>b</sub> = MΔT<sub>b</sub>/w</strong><br>
+      Also: &nbsp; <strong>K<sub>b</sub> = R T<sub>b</sub>² M<sub>solvent</sub>/(1000ΔH<sub>v</sub>)</strong></div>
+      <p>In the second equation, M<sub>solvent</sub> is in g mol⁻¹ and ΔH<sub>v</sub> is the molar heat of vaporization in J mol⁻¹, giving K<sub>b</sub> in K kg mol⁻¹. The derivation combines the Clausius–Clapeyron relation for the small boiling-point rise with Raoult’s law, which makes relative vapour-pressure lowering equal to the solute mole fraction in a dilute solution.</p>
+
+      <h3 id="vanthoff">14. Van’t Hoff reaction isotherm</h3>
+      <p>The chapter contents list the Van’t Hoff isotherm. It relates free-energy change to reaction composition at a fixed temperature. For a reaction quotient Q:</p>
+      <div class="formula"><strong>ΔG = ΔG° + RT ln Q</strong><br>
+      At equilibrium, ΔG = 0 and Q = K:<br>
+      <strong>ΔG° = −RT ln K = −2.303RT log₁₀K</strong></div>
+      <p>Here K is the equilibrium constant in the chosen standard-state convention. A related temperature relation is the van’t Hoff equation:</p>
+      <div class="formula">d(ln K)/dT = ΔH°/(RT²)<br>
+      If ΔH° is nearly constant: ln(K₂/K₁) = −(ΔH°/R)(1/T₂ − 1/T₁)</div>
+
+      <h3 id="chemical-potential">15. Fugacity, activity, and chemical potential</h3>
+      <p>These terms appear in the chapter contents and extend the free-energy treatment to real gases and non-ideal solutions.</p>
+      <div class="two-col">
+        <div class="mini-card">
+          <h4>Fugacity, f</h4>
+          <p>An effective pressure that corrects for non-ideal gas behaviour. For an ideal gas, f ≈ P. Chemical potential of a gas can be written:</p>
+          <div class="formula compact">μ = μ° + RT ln(f/f°)</div>
+        </div>
+        <div class="mini-card">
+          <h4>Activity, a</h4>
+          <p>An effective concentration or “escaping tendency” that corrects for non-ideality. For a gas, a = f/f°; in a solution, activity is often written as an activity coefficient times a concentration or mole-fraction scale.</p>
+          <div class="formula compact">μ = μ° + RT ln a</div>
+        </div>
+      </div>
+      <div class="definition"><strong>Chemical potential, μᵢ:</strong> the partial molar Gibbs free energy of component i—the change in G when a small amount of i is added at fixed T, P, and amounts of other components.</div>
+      <div class="formula">μᵢ = (∂G/∂nᵢ)<sub>T,P,nⱼ</sub><br>
+      dG = Σμᵢdnᵢ &nbsp; (at fixed T and P)</div>
+      <p>At equilibrium, each component has the same chemical potential in phases that can exchange it. A chemical reaction or transport tends to proceed in the direction that lowers the appropriate total Gibbs energy.</p>
+
+      <h3 id="examples9">16. Chapter 9 worked-example index</h3>
+      <details>
+        <summary>Open the Chapter 9 numerical examples (Problems 1–18)</summary>
+        <div class="details-body">
+          <ol class="worked-list">
+            <li><strong>Urea hydrolysis entropy:</strong> CO(NH₂)₂(aq) + H₂O(l) → CO₂(g) + 2NH₃(g); using the stated standard entropies gives ΔS° = <strong>+355.08 J K⁻¹</strong>.</li>
+            <li><strong>CO₂ entropy of formation:</strong> 213.6 − (5.740 + 205.0) = <strong>+2.86 J mol⁻¹ K⁻¹</strong>.</li>
+            <li><strong>Engine work:</strong> T<sub>h</sub> = 423 K, T<sub>c</sub> = 298 K, Q<sub>h</sub> = 500 J. W = ηQ<sub>h</sub> = [(423−298)/423]×500 ≈ <strong>147.75 J</strong>.</li>
+            <li><strong>Steam-engine efficiency:</strong> (373−308)/373 ≈ <strong>0.174</strong> at 1 atm; (538−308)/538 ≈ <strong>0.428</strong> at 50 atm.</li>
+            <li><strong>Carnot engine:</strong> 500 K and 300 K, Q<sub>h</sub> = 4186.80 J. η = 0.4; W = <strong>1674.72 J</strong>; heat rejected = <strong>2512.08 J</strong>.</li>
+            <li><strong>Water evaporation entropy:</strong> 40,402.62 J mol⁻¹ at 373 K gives <strong>108.31 J mol⁻¹ K⁻¹</strong>.</li>
+            <li><strong>Ice melting entropy:</strong> 334.94 J g⁻¹ × 18 g mol⁻¹ at 273 K gives <strong>22.09 J mol⁻¹ K⁻¹</strong>.</li>
+            <li><strong>Isothermal gas expansion:</strong> 2 mol, V ratio 10, 303 K. ΔS = nR ln 10 ≈ <strong>38.29 J K⁻¹</strong>.</li>
+            <li><strong>Pressure-form gas entropy:</strong> 2 mol, isothermal 10→2 atm at 293 K. ΔS = nR ln(10/2) ≈ <strong>26.77 J K⁻¹</strong>.</li>
+            <li><strong>Ethanol vaporization:</strong> 39.84 kJ mol⁻¹ at 351 K gives ΔS ≈ <strong>113.5 J mol⁻¹ K⁻¹</strong>.</li>
+            <li><strong>NaCl melting point:</strong> ΔH<sub>f</sub> = 30.4 kJ mol⁻¹, ΔS<sub>f</sub> = 28.4 J mol⁻¹ K⁻¹. T<sub>f</sub> = ΔH/ΔS ≈ <strong>1070 K</strong>.</li>
+            <li><strong>Isothermal ideal-gas free energy:</strong> 4 mol, 300 K, 1→10 L. ΔG = nRT ln(V₁/V₂) ≈ <strong>−22.98 kJ</strong>.</li>
+            <li><strong>Gibbs energy on expansion:</strong> 2 mol, 300 K, 1→0.1 atm. ΔG = nRT ln(P₂/P₁) ≈ <strong>−11.49 kJ</strong>.</li>
+            <li><strong>Water-formation free energy and temperature:</strong> using ΔH = −286.04 kJ mol⁻¹ and ΔG at 298 K = −237.35 kJ mol⁻¹ gives a local slope about 0.163 kJ mol⁻¹ K⁻¹; the chapter estimates ΔG at 303 K ≈ <strong>−236.6 kJ mol⁻¹</strong>.</li>
+            <li><strong>Ammonia free-energy temperature data:</strong> for N₂ + 3H₂ → 2NH₃, the supplied ΔG values are −33.089 kJ at 298 K and −28.018 kJ at 308 K. Their slope is about +0.507 kJ K⁻¹. Use ΔH = ΔG − T(∂ΔG/∂T)<sub>P</sub>; the extracted worked solution’s stated final sign is inconsistent with this relation and the supplied values.</li>
+            <li><strong>Latent heat from vapour pressure:</strong> water at 368 K and 373 K, 634 and 760 mm: ΔH<sub>v</sub> ≈ <strong>41.39 kJ mol⁻¹</strong>.</li>
+            <li><strong>Boiling point at a new pressure:</strong> water at 787 mm, using the stated latent heat: approximately <strong>374 K</strong>.</li>
+            <li><strong>Vapour pressure at 363 K:</strong> Clausius–Clapeyron with the stated mean vaporization heat gives approximately <strong>70.5 kPa</strong>; the extracted original pressure units contain a conversion error.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <!-- SUPPLIED QB -->
+    <section class="question-bank" id="written-qb" style="padding:clamp(1rem,2.6vw,2rem)">
+      <div class="chapter-title">
+        <div class="chapter-no" style="background:#a65a19">Q</div>
+        <div><h2>Supplied written-question bank: concise model answers</h2><div class="muted">The answers below map directly to the 17 thermodynamics prompts supplied with the chapter.</div></div>
+      </div>
+
+      <details><summary>1. Hess’s law and Lavoisier–Laplace law, with an example</summary><div class="details-body">
+        <p><strong>Hess:</strong> total heat change is independent of route, because enthalpy is a state function. Example: C → CO₂ directly has approximately the same ΔH as C → CO followed by CO → CO₂; the two step enthalpies add. <strong>Lavoisier–Laplace:</strong> forward and reverse reactions have equal heat magnitudes and opposite signs: if A→B has ΔH = −x, B→A has +x.</p>
+      </div></details>
+
+      <details><summary>2. Define an adiabatic system and show TV<sup>γ−1</sup> = constant</summary><div class="details-body">
+        <p>An adiabatic system exchanges no heat, Q = 0. For a reversible ideal-gas change, dE = −P dV and dE = nC<sub>V</sub>dT. With P = nRT/V, integrate C<sub>V</sub>dT/T = −R dV/V. Using γ = C<sub>P</sub>/C<sub>V</sub> and C<sub>P</sub>−C<sub>V</sub>=R gives <strong>TV<sup>γ−1</sup> = constant</strong>; also PV<sup>γ</sup> = constant.</p>
+      </div></details>
+
+      <details><summary>3. Show ΔH = heat at constant pressure; derive C<sub>V</sub></summary><div class="details-body">
+        <p>H = E + PV, so at constant P, ΔH = ΔE + PΔV. From the first law ΔE = Q<sub>p</sub> − PΔV for PV work only; hence <strong>ΔH = Q<sub>p</sub></strong>. At constant volume dV = 0, so δQ<sub>v</sub> = dE and <strong>C<sub>V</sub> = (∂E/∂T)<sub>V</sub></strong> per mole.</p>
+      </div></details>
+
+      <details><summary>4. Heat of transition, heat of sublimation, and entropy/spontaneity</summary><div class="details-body">
+        <p><strong>Heat of transition:</strong> enthalpy change when one mole of an element changes between allotropes. <strong>Heat of sublimation:</strong> enthalpy change when one mole of solid changes directly into gas. An entropy increase often favours spontaneity because more disordered arrangements are more probable; the exact criterion is ΔS<sub>univ</sub> &gt; 0, not necessarily ΔS<sub>system</sub> &gt; 0 by itself.</p>
+      </div></details>
+
+      <details><summary>5. Define thermodynamics; state its scope and limitations</summary><div class="details-body">
+        <p>Thermodynamics studies heat and other energy transfers during physical and chemical changes. It predicts feasibility and equilibrium extent under stated conditions and supports laws such as the Phase Rule. It is a macroscopic treatment, does not resolve individual molecular structure, and does not predict reaction rates.</p>
+      </div></details>
+
+      <details><summary>6. Define C<sub>V</sub> and C<sub>P</sub>; show C<sub>P</sub> − C<sub>V</sub> = R</summary><div class="details-body">
+        <p>C<sub>V</sub> = (∂E/∂T)<sub>V</sub>; C<sub>P</sub> = (∂H/∂T)<sub>P</sub>, per mole. For an ideal gas H = E + RT, so differentiating gives <strong>C<sub>P</sub> = C<sub>V</sub> + R</strong>. C<sub>P</sub> exceeds C<sub>V</sub> because constant-pressure heating also supplies expansion work.</p>
+      </div></details>
+
+      <details><summary>7. State the second law and its significance</summary><div class="details-body">
+        <p>For a spontaneous irreversible change, <strong>ΔS<sub>univ</sub> = ΔS<sub>sys</sub> + ΔS<sub>surr</sub> &gt; 0</strong>; at reversible equilibrium it is zero. It predicts natural direction, explains why heat flows hot→cold, and proves that no cyclic heat engine can be 100% efficient.</p>
+      </div></details>
+
+      <details><summary>8. Define molar heat capacity and isothermal process; prove reversible work is maximum</summary><div class="details-body">
+        <p>Molar heat capacity is heat needed to raise one mole by 1 K under a specified process. Isothermal means constant temperature. In a reversible expansion, P<sub>ext</sub> is kept infinitesimally below P<sub>gas</sub>, the largest pressure opposing expansion without causing compression; integrating this pressure over volume gives the greatest possible work output.</p>
+      </div></details>
+
+      <details><summary>9. Compare reversible/irreversible, adiabatic/isothermal, open/closed</summary><div class="details-body">
+        <ul>
+          <li><strong>Reversible:</strong> infinitely slow, equilibrium at every stage, ideal and maximum work; <strong>irreversible:</strong> finite-rate, real, equilibrium mainly at endpoints, less work.</li>
+          <li><strong>Adiabatic:</strong> Q = 0; temperature may change. <strong>Isothermal:</strong> T constant; heat may flow to keep T constant.</li>
+          <li><strong>Open system:</strong> exchanges matter and energy. <strong>Closed system:</strong> exchanges energy but not matter.</li>
+        </ul>
+      </div></details>
+
+      <details><summary>10. Show reversible isothermal work exceeds irreversible work</summary><div class="details-body">
+        <p>W<sub>by,rev</sub> = ∫<sub>V₁</sub><sup>V₂</sup>P<sub>gas</sub>dV. An irreversible expansion against final pressure P₂ gives W<sub>by,irr</sub> = P₂(V₂−V₁). Since during expansion P<sub>gas</sub> is above P₂ until the endpoint, the reversible area under the P–V curve is larger: <strong>W<sub>by,rev</sub> &gt; W<sub>by,irr</sub></strong>.</p>
+      </div></details>
+
+      <details><summary>11. Relate ΔH to ΔE and derive heat capacities</summary><div class="details-body">
+        <p>At constant pressure ΔH = ΔE + PΔV; for ideal-gas reactions ΔH = ΔE + Δn<sub>g</sub>RT. Heat capacities are C<sub>V</sub> = (∂E/∂T)<sub>V</sub> and C<sub>P</sub> = (∂H/∂T)<sub>P</sub>; for an ideal gas C<sub>P</sub> − C<sub>V</sub> = R.</p>
+      </div></details>
+
+      <details><summary>12. Define an adiabatic system</summary><div class="details-body">
+        <p>A system whose boundary allows no heat transfer into or out of it: <strong>Q = 0</strong>. It may still exchange work; only an isolated system exchanges neither matter nor energy.</p>
+      </div></details>
+
+      <details><summary>13. Define enthalpy; calculate reversible expansion work, 1 mol, 25°C, 10→20 L</summary><div class="details-body">
+        <p>Enthalpy is H = E + PV. At 25°C ≈ 298 K, W<sub>by</sub> = nRT ln(V₂/V₁) = 1×8.314×298×ln2 ≈ <strong>+1.717 kJ</strong> = <strong>+410.5 cal</strong>. The signed work on the system is −1.717 kJ.</p>
+      </div></details>
+
+      <details><summary>14. Water vaporization at 100°C: find Q, W, and ΔE</summary><div class="details-body">
+        <p>For 1 mol, Q = +9720 cal = <strong>+40.67 kJ</strong>. Steam volume is approximately RT/P ≈ 30.62 L; liquid volume is 0.018 L. Thus W<sub>by</sub> = PΔV ≈ <strong>+3.10 kJ</strong> (work on system ≈ −3.10 kJ). Therefore ΔE = Q − W<sub>by</sub> ≈ <strong>+37.57 kJ</strong> (about 8980 cal).</p>
+      </div></details>
+
+      <details><summary>15. Insulated free expansion into a vacuum: entropy? Define heat of transition</summary><div class="details-body">
+        <p>Q = 0 and W = 0, so ΔE = 0; for an ideal gas, T stays constant. Entropy <strong>increases</strong>: ΔS = nR ln(V₂/V₁) &gt; 0, calculated along a reversible path between the same states. Heat of transition is the enthalpy change when one mole of an element changes allotrope.</p>
+      </div></details>
+
+      <details><summary>16. Distinguish reversible and irreversible processes</summary><div class="details-body">
+        <p>A reversible process is an ideal infinitely slow sequence of equilibrium states and can be reversed by an infinitesimal change; it gives maximum expansion work. An irreversible process is real, proceeds through finite gradients or rates, is not in equilibrium throughout, and gives less work in expansion.</p>
+      </div></details>
+
+      <details><summary>17. One mole gas, reversible isothermal expansion 5 atm→1 atm at 25°C</summary><div class="details-body">
+        <p>W<sub>by</sub> = nRT ln(P₁/P₂) = 1×8.314×298×ln5 ≈ <strong>+3.988 kJ</strong>. With the “work on system” sign convention, w<sub>on</sub> ≈ <strong>−3.988 kJ</strong>.</p>
+      </div></details>
+    </section>
+
+    <section class="reference" id="formula-sheet" style="padding:clamp(1rem,2.6vw,2rem)">
+      <h2>Final formula sheet</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Topic</th><th>Key relation</th></tr></thead>
+          <tbody>
+            <tr><td>Ideal gas</td><td>PV = nRT</td></tr>
+            <tr><td>First law</td><td>ΔE = Q − W<sub>by</sub> = Q + w<sub>on</sub></td></tr>
+            <tr><td>Constant external pressure PV work</td><td>W<sub>by</sub> = P<sub>ext</sub>ΔV; w<sub>on</sub> = −P<sub>ext</sub>ΔV</td></tr>
+            <tr><td>Reversible isothermal ideal-gas work</td><td>W<sub>by</sub> = nRT ln(V₂/V₁) = nRT ln(P₁/P₂)</td></tr>
+            <tr><td>Enthalpy</td><td>H = E + PV; at constant P and PV work only, Q<sub>p</sub> = ΔH</td></tr>
+            <tr><td>Reaction enthalpy / energy</td><td>ΔH = ΔE + PΔV = ΔE + Δn<sub>g</sub>RT</td></tr>
+            <tr><td>Molar heat capacities</td><td>C<sub>V</sub> = (∂E/∂T)<sub>V</sub>; C<sub>P</sub> = (∂H/∂T)<sub>P</sub>; ideal gas C<sub>P</sub>−C<sub>V</sub>=R</td></tr>
+            <tr><td>Ideal-gas temperature change</td><td>ΔE = nC<sub>V</sub>ΔT; ΔH = nC<sub>P</sub>ΔT</td></tr>
+            <tr><td>Reversible adiabatic ideal gas</td><td>TV<sup>γ−1</sup>=constant; PV<sup>γ</sup>=constant; γ=C<sub>P</sub>/C<sub>V</sub></td></tr>
+            <tr><td>Adiabatic work output</td><td>W<sub>by</sub> = nC<sub>V</sub>(T₁−T₂) = nR(T₁−T₂)/(γ−1)</td></tr>
+            <tr><td>Formation enthalpies</td><td>ΔH° = ΣνΔH°<sub>f</sub>(products) − ΣνΔH°<sub>f</sub>(reactants)</td></tr>
+            <tr><td>Kirchhoff, constant capacities</td><td>ΔH₂ = ΔH₁ + ΔC<sub>P</sub>(T₂−T₁); ΔE₂ = ΔE₁ + ΔC<sub>V</sub>(T₂−T₁)</td></tr>
+            <tr><td>Entropy, reversible</td><td>dS = δQ<sub>rev</sub>/T; ΔS = ∫δQ<sub>rev</sub>/T</td></tr>
+            <tr><td>Entropy of ideal gas</td><td>ΔS = nC<sub>V</sub>ln(T₂/T₁)+nRln(V₂/V₁)</td></tr>
+            <tr><td>Entropy of a phase change</td><td>ΔS = ΔH<sub>transition</sub>/T<sub>transition</sub></td></tr>
+            <tr><td>Second law</td><td>ΔS<sub>univ</sub> = ΔS<sub>sys</sub> + ΔS<sub>surr</sub>; spontaneous: &gt;0</td></tr>
+            <tr><td>Carnot efficiency</td><td>η = 1 − T<sub>c</sub>/T<sub>h</sub></td></tr>
+            <tr><td>Gibbs energy</td><td>G = H−TS; ΔG = ΔH−TΔS; at T,P, spontaneous if ΔG&lt;0</td></tr>
+            <tr><td>Isothermal ideal-gas free energy</td><td>ΔG = nRT ln(P₂/P₁) = nRT ln(V₁/V₂)</td></tr>
+            <tr><td>Clapeyron</td><td>dp/dT = ΔH/(TΔV)</td></tr>
+            <tr><td>Clausius–Clapeyron</td><td>ln(p₂/p₁) = (ΔH<sub>v</sub>/R)(1/T₁−1/T₂)</td></tr>
+            <tr><td>Reaction isotherm</td><td>ΔG = ΔG° + RT ln Q; ΔG° = −RT ln K</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="exam-tip"><strong>Exam habit:</strong> write the balanced equation and physical phases; identify the constraint; choose the matching equation; convert temperature to kelvin; count only gaseous moles for Δn<sub>g</sub>; keep R and energy units consistent; state whether work is “by” or “on” the system.</div>
+    </section>
+  </main>
+</div>
+
+<footer class="footer">
+  <p>This standalone page covers the supplied material from Chapters 7–9 and the accompanying written-question list. Formulae are presented with a consistent work sign convention; check any printed source values that appear inconsistent with the governing equations.</p>
+  <a class="back-top" href="#top">Back to top ↑</a>
+</footer>
+
+<script>
+  const detailBlocks = () => Array.from(document.querySelectorAll('details'));
+  document.getElementById('expandAll').addEventListener('click', () => {
+    detailBlocks().forEach(d => d.open = true);
+  });
+  document.getElementById('collapseAll').addEventListener('click', () => {
+    detailBlocks().forEach(d => d.open = false);
+  });
+</script>
+</body>
+</html>
